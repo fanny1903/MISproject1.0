@@ -32,7 +32,6 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
         
         addPersonPanel.setPerson(doctor.getIdperson());
         inamiTextField.setText(doctor.getInami());
-        specialityTextField.setText(doctor.getSpeciality());
     }
     
     public Doctor getDoctor(){
@@ -48,7 +47,6 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
         
         doctor.setIdperson(addPersonPanel.getPerson());
         doctor.setInami(inamiTextField.getText());
-        doctor.setSpeciality(specialityTextField.getText());
     }
 
     /**
@@ -63,9 +61,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         addPersonPanel = new ulb.mis.view.AddPersonPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         inamiTextField = new javax.swing.JTextField();
-        specialityTextField = new javax.swing.JTextField();
         saveDoctorButton = new javax.swing.JButton();
         cancelDoctorButton = new javax.swing.JButton();
 
@@ -78,8 +74,6 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
         jLabel1.setText("AddDoctor");
 
         jLabel2.setText("INAMI");
-
-        jLabel3.setText("Speciality");
 
         inamiTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,15 +101,10 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(specialityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(inamiTextField)
-                                .addGap(98, 98, 98))))))
+                        .addComponent(inamiTextField)
+                        .addGap(98, 98, 98))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -138,15 +127,11 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(inamiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(specialityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,9 +152,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     private javax.swing.JTextField inamiTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton saveDoctorButton;
-    private javax.swing.JTextField specialityTextField;
     // End of variables declaration//GEN-END:variables
 
     void setDoctor(Doctor selected) {
