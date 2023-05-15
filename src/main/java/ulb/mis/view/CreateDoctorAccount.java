@@ -79,7 +79,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Inami");
+        jLabel2.setText("INAMI");
 
         saveButton.setBackground(new java.awt.Color(255, 204, 102));
         saveButton.setText("Save");
