@@ -32,9 +32,10 @@ public class AddPersonPanel extends javax.swing.JPanel {
     public void setPerson(Person person){
         this.person = person;
         
-        familynameTextField.setText(person.getFamilyname());
+        familynameTextField.setText(person.getLastname());
         firstnameTextField.setText(person.getFirstname());
         dateofbirthTextField.setText(fmt.format(person.getDateofbirth()));
+        //passwordTextField.setText(person.getPassword);
     }
     
     public Person getPerson(){
@@ -42,7 +43,7 @@ public class AddPersonPanel extends javax.swing.JPanel {
             person = new Person();
         }
         
-        person.setFamilyname(familynameTextField.getText());
+        person.setLastname(familynameTextField.getText());
         person.setFirstname(firstnameTextField.getText());
         try {
             person.setDateofbirth(fmt.parse(dateofbirthTextField.getText()));
@@ -68,6 +69,8 @@ public class AddPersonPanel extends javax.swing.JPanel {
         familynameTextField = new javax.swing.JTextField();
         firstnameTextField = new javax.swing.JTextField();
         dateofbirthTextField = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        passwordTextField = new javax.swing.JTextField();
 
         jLabel1.setText("Family Name:");
 
@@ -83,6 +86,8 @@ public class AddPersonPanel extends javax.swing.JPanel {
 
         dateofbirthTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
+        jLabel4.setText("Password: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,16 +97,19 @@ public class AddPersonPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(familynameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(firstnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(dateofbirthTextField))))
+                            .addComponent(firstnameTextField)
+                            .addComponent(dateofbirthTextField)
+                            .addComponent(passwordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,7 +127,11 @@ public class AddPersonPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(dateofbirthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,5 +147,7 @@ public class AddPersonPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField passwordTextField;
     // End of variables declaration//GEN-END:variables
 }

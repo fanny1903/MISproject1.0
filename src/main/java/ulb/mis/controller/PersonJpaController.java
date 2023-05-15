@@ -256,7 +256,7 @@ public class PersonJpaController implements Serializable {
     
     public Person findDuplicate(Person p){
         EntityManager em = getEntityManager(); 
-        List<Person> res = em.createNamedQuery("Person.findDuplicate").setParameter("firstname", p.getFirstname()).setParameter("familyname", p.getFamilyname()).setParameter("dateofbirth", p.getDateofbirth()).getResultList();
+        List<Person> res = em.createNamedQuery("Person.findDuplicate").setParameter("firstname", p.getFirstname()).setParameter("familyname", p.getLastname()).setParameter("dateofbirth", p.getDateofbirth()).getResultList();
         if (res.isEmpty())
             return null;
         return res.get(0);

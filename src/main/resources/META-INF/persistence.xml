@@ -6,7 +6,11 @@
     <class>ulb.mis.model.Person</class>
     <class>ulb.mis.model.Doctor</class>
     <properties>
+<<<<<<< HEAD
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/MISproject?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=Europe/Brussels"/>
+=======
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=Europe/Brussels"/>
+>>>>>>> 63419745ad41201affe9d1a14c974268509e912f
       <property name="javax.persistence.jdbc.user" value="userproject"/>
       <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
       <property name="javax.persistence.jdbc.password" value="1234"/>

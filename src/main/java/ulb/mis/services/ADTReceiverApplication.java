@@ -31,7 +31,7 @@ public class ADTReceiverApplication implements ReceivingApplication<Message> {
         ADT_A01 message = (ADT_A01) t ; //message de la classe Message
         PID pid = message.getPID();
         Person p = new Person();
-        p.setFamilyname(pid.getPatientName(0).getFamilyName().getValue());
+        p.setLastname(pid.getPatientName(0).getFamilyName().getValue());
         p.setFirstname(pid.getPatientName(0).getGivenName().getValue());
         p.setDateofbirth(pid.getDateOfBirth().getTimeOfAnEvent().getValueAsDate());
         
@@ -44,7 +44,6 @@ public class ADTReceiverApplication implements ReceivingApplication<Message> {
             personCtrl.create(p);
             Patient pat = new Patient();
             pat.setIdperson(p);
-            pat.setStatus("active");
             patientCtrl.create(pat);
         }
         

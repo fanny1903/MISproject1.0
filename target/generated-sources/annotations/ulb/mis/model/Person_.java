@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-14T09:54:01")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-15T14:16:00")
 @StaticMetamodel(Person.class)
 public class Person_ { 
 
@@ -16,7 +16,8 @@ public class Person_ {
     public static volatile SingularAttribute<Person, String> firstname;
     public static volatile ListAttribute<Person, Patient> patientList;
     public static volatile ListAttribute<Person, Doctor> doctorList;
-    public static volatile SingularAttribute<Person, String> familyname;
+    public static volatile SingularAttribute<Person, String> personpassword;
     public static volatile SingularAttribute<Person, Integer> idperson;
+    public static volatile SingularAttribute<Person, String> lastname;
 
 }

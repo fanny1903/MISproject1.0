@@ -36,9 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByIdperson", query = "SELECT p FROM Person p WHERE p.idperson = :idperson"),
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
-    @NamedQuery(name = "Person.findByFamilyname", query = "SELECT p FROM Person p WHERE p.familyname = :familyname"),
+    @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname"),
     @NamedQuery(name = "Person.findByDateofbirth", query = "SELECT p FROM Person p WHERE p.dateofbirth = :dateofbirth"),
-    @NamedQuery(name = "Person.findDuplicate", query = "SELECT p FROM Person p WHERE p.firstname = :firstname AND p.familyname = :familyname AND p.dateofbirth = :dateofbirth")})
+    @NamedQuery(name = "Person.findByPersonpassword", query = "SELECT p FROM Person p WHERE p.personpassword = :personpassword"),
+    @NamedQuery(name = "Person.findDuplicate", query = "SELECT p FROM Person p WHERE p.firstname = :firstname AND p.lastname = :lastname AND p.dateofbirth = :dateofbirth AND p.personpassword = :personpassword")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,11 +50,13 @@ public class Person implements Serializable {
     private Integer idperson;
     @Column(name = "firstname")
     private String firstname;
-    @Column(name = "familyname")
-    private String familyname;
+    @Column(name = "lastname")
+    private String lastname;
     @Column(name = "dateofbirth")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
+    private String personpassword;
+    @Column(name = "personpassword")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
     private List<Doctor> doctorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
@@ -82,12 +85,20 @@ public class Person implements Serializable {
         this.firstname = firstname;
     }
 
-    public String getFamilyname() {
-        return familyname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setFamilyname(String familyname) {
-        this.familyname = familyname;
+    public void setLastname(String familyname) {
+        this.lastname = familyname;
+    }
+    
+    public String getPersonPassword() {
+        return personpassword;
+    }
+
+    public void setPersonPassword(String personpassword) {
+        this.personpassword = personpassword;
     }
 
     public Date getDateofbirth() {
@@ -139,7 +150,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        return familyname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")";
+        return lastname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")";
     }
     
 }

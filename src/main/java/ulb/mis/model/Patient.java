@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p"),
     @NamedQuery(name = "Patient.findByIdpatient", query = "SELECT p FROM Patient p WHERE p.idpatient = :idpatient"),
-    @NamedQuery(name = "Patient.findByPhonenumber", query = "SELECT p FROM Patient p WHERE p.phonenumber = :phonenumber"),
-    @NamedQuery(name = "Patient.findByStatus", query = "SELECT p FROM Patient p WHERE p.status = :status")})
+    @NamedQuery(name = "Patient.findByIddesignateddoctor", query = "SELECT p FROM Patient p WHERE p.iddesignateddoctor = :iddesignateddoctor"),
+    @NamedQuery(name = "Patient.findByIddesignatedsickness", query = "SELECT p FROM Patient p WHERE p.iddesignatedsickness = :iddesignatedsickness")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +43,11 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpatient")
     private Integer idpatient;
-    @Column(name = "phonenumber")
-    private String phonenumber;
     @Basic(optional = false)
-    @Column(name = "status")
-    private String status;
+    @Column(name = "iddesignateddoctor")
+    private String iddesignateddoctor;
+    @Column(name = "iddesignatedsickness")
+    private String iddesignatedsickness;
     @OneToMany(mappedBy = "idpatient")
     @ManyToOne(optional = false)
     private Person idperson;
@@ -59,11 +59,6 @@ public class Patient implements Serializable {
         this.idpatient = idpatient;
     }
 
-    public Patient(Integer idpatient, String status) {
-        this.idpatient = idpatient;
-        this.status = status;
-    }
-
     public Integer getIdpatient() {
         return idpatient;
     }
@@ -71,21 +66,21 @@ public class Patient implements Serializable {
     public void setIdpatient(Integer idpatient) {
         this.idpatient = idpatient;
     }
-
-    public String getPhonenumber() {
-        return phonenumber;
+    
+    public String getIddesignateddoctor() {
+        return iddesignateddoctor;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setIddesignateddoctor(String iddesignateddoctor) {
+        this.iddesignateddoctor = iddesignateddoctor;
+    }
+    
+    public String getIddesignatedsickness() {
+        return iddesignatedsickness;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIddesignatedsickness(String iddesignatedsickness) {
+        this.iddesignatedsickness = iddesignatedsickness;
     }
 
     public Person getIdperson() {

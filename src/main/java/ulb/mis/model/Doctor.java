@@ -78,7 +78,6 @@ public class Doctor implements Serializable {
     }
 
 
-
     public Person getIdperson() {
         return idperson;
     }

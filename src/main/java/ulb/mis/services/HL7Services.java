@@ -41,7 +41,7 @@ public class HL7Services {
             
             // Populate the PID Segment
             PID pid = adt.getPID();
-            pid.getPatientName(0).getFamilyName().setValue(patient.getIdperson().getFamilyname());
+            pid.getPatientName(0).getFamilyName().setValue(patient.getIdperson().getLastname());
             pid.getPatientName(0).getGivenName().setValue(patient.getIdperson().getFirstname());   
             pid.getPatientIDInternalID(0).getID().setValue("123456");
         } catch (HL7Exception ex) {
