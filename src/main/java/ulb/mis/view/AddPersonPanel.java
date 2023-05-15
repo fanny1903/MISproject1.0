@@ -35,7 +35,7 @@ public class AddPersonPanel extends javax.swing.JPanel {
         familynameTextField.setText(person.getLastname());
         firstnameTextField.setText(person.getFirstname());
         dateofbirthTextField.setText(fmt.format(person.getDateofbirth()));
-        //passwordTextField.setText(person.getPassword);
+        passwordTextField.setText(person.getPersonPassword());
     }
     
     public Person getPerson(){
@@ -45,6 +45,7 @@ public class AddPersonPanel extends javax.swing.JPanel {
         
         person.setLastname(familynameTextField.getText());
         person.setFirstname(firstnameTextField.getText());
+        person.setPersonPassword(passwordTextField.getText());
         try {
             person.setDateofbirth(fmt.parse(dateofbirthTextField.getText()));
         } catch (ParseException ex) {
