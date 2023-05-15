@@ -46,8 +46,6 @@ public class Doctor implements Serializable {
     @Basic(optional = false)
     @Column(name = "inami")
     private String inami;
-    @Column(name = "specialty")
-    private String specialty;
     @JoinColumn(name = "idperson", referencedColumnName = "idperson")
     @ManyToOne(optional = false)
     private Person idperson;
@@ -78,14 +76,6 @@ public class Doctor implements Serializable {
 
     public void setInami(String inami) {
         this.inami = inami;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
     }
 
     public Person getIdperson() {
