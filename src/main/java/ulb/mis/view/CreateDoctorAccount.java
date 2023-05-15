@@ -6,49 +6,24 @@ package ulb.mis.view;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import ulb.mis.controller.DoctorJpaController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
-import ulb.mis.model.Doctor;
-
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Patient;
 /**
  *
  * @author fanny
  */
 public class CreateDoctorAccount extends javax.swing.JFrame {
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
-    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
-    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
-    
-    private Doctor doctor = null;
+
     /**
-     * Creates new form AddDoctorWindow
+     * Creates new form CreateDoctorAccount1
      */
     public CreateDoctorAccount() {
         initComponents();
-    }
-    
-    public void setPatient(Doctor doctor){
-        this.doctor = doctor;
-        
-        addPersonPanel1.setPerson(doctor.getIdperson());
-        inamiTextField.setText(doctor.getInami());
-        //specialityTextField.setText(doctor.getSpeciality());
-    }
-    
-    public Doctor getDoctor(){
-        updateDoctor();
-                
-        return doctor;
-    }
-    
-    public void updateDoctor(){
-        if( doctor == null ){
-            doctor = new Doctor();
-        }
-        
-        doctor.setIdperson(addPersonPanel1.getPerson());
-        doctor.setInami(inamiTextField.getText());
-        //doctor.setSpeciality(specialityTextField.getText());
     }
 
     /**
@@ -60,103 +35,96 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inamiTextField = new javax.swing.JTextField();
-        saveDoctorButton = new javax.swing.JButton();
-        cancelDoctorButton = new javax.swing.JButton();
+        phonenumberTextField = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         addPersonPanel1 = new ulb.mis.view.AddPersonPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Password");
+
+        saveButton.setBackground(new java.awt.Color(255, 204, 102));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setBackground(new java.awt.Color(255, 204, 102));
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AddDoctor");
-
-        jLabel2.setText("INAMI");
-
-        inamiTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inamiTextFieldActionPerformed(evt);
-            }
-        });
-
-        saveDoctorButton.setBackground(new java.awt.Color(255, 204, 102));
-        saveDoctorButton.setText("Save");
-        saveDoctorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveDoctorButtonActionPerformed(evt);
-            }
-        });
-
-        cancelDoctorButton.setBackground(new java.awt.Color(255, 204, 102));
-        cancelDoctorButton.setText("Cancel");
+        jLabel1.setText("Create Patient Account");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(saveDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cancelDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(inamiTextField)))
-                            .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(108, 108, 108)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(36, 36, 36)
+                        .addComponent(phonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inamiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(phonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inamiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inamiTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inamiTextFieldActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
-    private void saveDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDoctorButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveDoctorButtonActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ulb.mis.view.AddPersonPanel addPersonPanel1;
-    private javax.swing.JButton cancelDoctorButton;
-    private javax.swing.JTextField inamiTextField;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton saveDoctorButton;
+    private javax.swing.JTextField phonenumberTextField;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
-
-    void setDoctor(Doctor selected) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
