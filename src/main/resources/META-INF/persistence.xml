@@ -5,6 +5,7 @@
     <class>ulb.mis.model.Patient</class>
     <class>ulb.mis.model.Person</class>
     <class>ulb.mis.model.Doctor</class>
+    <class>ulb.mis.model.Sickness</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=Europe/Brussels"/>
       <property name="javax.persistence.jdbc.user" value="userproject"/>

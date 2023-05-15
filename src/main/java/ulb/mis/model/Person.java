@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.JoinColumn;
 
 /**
  *
@@ -46,17 +47,17 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idperson")
+    @JoinColumn(name = "idperson")
     private Integer idperson;
-    @Column(name = "firstname")
+    @JoinColumn(name = "firstname")
     private String firstname;
-    @Column(name = "lastname")
+    @JoinColumn(name = "lastname")
     private String lastname;
-    @Column(name = "dateofbirth")
+    @JoinColumn(name = "dateofbirth")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
     private String personpassword;
-    @Column(name = "personpassword")
+    @JoinColumn(name = "personpassword")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
     private List<Doctor> doctorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")

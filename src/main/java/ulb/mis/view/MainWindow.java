@@ -196,11 +196,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
-        
+        CreatePatientAccount patientAddPopup = new CreatePatientAccount();
+        patientAddPopup.setVisible(true);
     }//GEN-LAST:event_addPatientButtonActionPerformed
 
     private void addDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorButtonActionPerformed
-        // TODO add your handling code here:
+        CreateDoctorAccount doctorAddPopup = new CreateDoctorAccount();
+        doctorAddPopup.setVisible(true);
     }//GEN-LAST:event_addDoctorButtonActionPerformed
 
     private void loginDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginDoctorButtonActionPerformed

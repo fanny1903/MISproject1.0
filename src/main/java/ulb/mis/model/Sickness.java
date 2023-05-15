@@ -52,7 +52,7 @@ public class Sickness implements Serializable{
     private String symptom3;
     @Column(name = "symptom4")
     private String symptom4;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsickness")
+    //@ManyToMany(cascade = CascadeType.ALL, mappedBy = "idsickness")
     private List<Sickness> sicknessList;
     
     

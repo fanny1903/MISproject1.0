@@ -128,8 +128,12 @@ public class SicknessJpaController implements Serializable {
         }
     }
     
-    public int getSicknessCount() {
+    /*public int getSicknessCount() {
         EntityManager em = getEntityManager();
         try {
             javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             javax.persistence.criteria.Root<S
+            }
+    }*/
+    
+}
