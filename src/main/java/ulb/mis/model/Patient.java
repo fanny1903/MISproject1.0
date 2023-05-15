@@ -49,8 +49,10 @@ public class Patient implements Serializable {
     @Column(name = "iddesignatedsickness")
     private String iddesignatedsickness;
     @OneToMany(mappedBy = "idpatient")
+    @JoinColumn(name = "idperson", referencedColumnName = "idperson")
     @ManyToOne(optional = false)
     private Person idperson;
+    
 
     public Patient() {
     }
@@ -82,7 +84,8 @@ public class Patient implements Serializable {
     public void setIddesignatedsickness(String iddesignatedsickness) {
         this.iddesignatedsickness = iddesignatedsickness;
     }
-
+    
+    @XmlTransient
     public Person getIdperson() {
         return idperson;
     }
