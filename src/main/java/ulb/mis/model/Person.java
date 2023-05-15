@@ -47,17 +47,17 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @JoinColumn(name = "idperson")
+    @Column(name = "idperson")
     private Integer idperson;
-    @JoinColumn(name = "firstname")
+    @Column(name = "firstname")
     private String firstname;
-    @JoinColumn(name = "lastname")
+    @Column(name = "lastname")
     private String lastname;
-    @JoinColumn(name = "dateofbirth")
+    @Column(name = "dateofbirth")
+    private String personpassword;
+    @Column(name = "personpassword")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
-    private String personpassword;
-    @JoinColumn(name = "personpassword")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
     private List<Doctor> doctorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
