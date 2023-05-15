@@ -8,22 +8,57 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
 /**
  *
  * @author fanny
  */
 public class CreateDoctorAccount extends javax.swing.JFrame {
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
+    
+    private static final Logger LOGGER = LogManager.getLogger(CreateDoctorAccount.class.getName());
+    private Doctor doctor = null;
+
 
     /**
      * Creates new form CreateDoctorAccount1
      */
     public CreateDoctorAccount() {
         initComponents();
+    }
+    
+    
+    
+    public void setDoctor(Doctor doctor){
+        this.doctor = doctor;
+        
+        addPersonPanel1.setPerson(doctor.getIdperson());
+        inamiTextField.setText(doctor.getInami());
+        
+    }
+    
+     public Doctor getDoctor(){
+        updateDoctor();
+                
+        return doctor;
+    }
+    
+    public void updateDoctor(){
+        if( doctor == null ){
+            doctor = new Doctor();
+        }
+        
+        doctor.setIdperson(addPersonPanel1.getPerson());
+        doctor.setInami(inamiTextField.getText());
+        
     }
 
     /**
@@ -36,7 +71,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        phonenumberTextField = new javax.swing.JTextField();
+        inamiTextField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         addPersonPanel1 = new ulb.mis.view.AddPersonPanel();
@@ -44,7 +79,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Password");
+        jLabel2.setText("Inami");
 
         saveButton.setBackground(new java.awt.Color(255, 204, 102));
         saveButton.setText("Save");
@@ -66,7 +101,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create Patient Account");
+        jLabel1.setText("Create Doctor Account");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +119,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(36, 36, 36)
-                        .addComponent(phonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inamiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -99,7 +134,7 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(phonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inamiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,7 +146,27 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        updateDoctor();
+        if (doctor.getIdperson().getIdperson() == null) {
+            personCtrl.create(doctor.getIdperson());
+        }
+        // Create patient if necessary:
+        if (doctor.getIddoctor() == null) {
+            doctorCtrl.create(doctor);
+        }
 
+        // Save changes to person & patient.
+        try {
+            personCtrl.edit(doctor.getIdperson());
+            doctorCtrl.edit(doctor);
+            //LOGGER.debug("Edited patient (id = %d)".formatted(patient.getIdpatient()));
+        } catch (NonexistentEntityException | IllegalOrphanException ex) {
+            LOGGER.error("Couldn't edit doctor", ex);
+        } catch (Exception ex) {
+            LOGGER.error("Couldn't edit doctor", ex);  
+                    
+        }
+        this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -122,9 +177,9 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ulb.mis.view.AddPersonPanel addPersonPanel1;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField inamiTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField phonenumberTextField;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
