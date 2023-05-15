@@ -82,7 +82,8 @@ public class PatientChoices extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SickButtonActionPerformed
-        // TODO add your handling code here:
+        SymptomsWindow symptomAddPopup = new SymptomsWindow();
+        symptomAddPopup.setVisible(true);
     }//GEN-LAST:event_SickButtonActionPerformed
 
     private void AppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointmentButtonActionPerformed
