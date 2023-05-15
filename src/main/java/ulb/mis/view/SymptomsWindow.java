@@ -45,7 +45,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
         jCheckBox16 = new javax.swing.JCheckBox();
         jCheckBox17 = new javax.swing.JCheckBox();
         jCheckBox18 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        validateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,11 +106,11 @@ public class SymptomsWindow extends javax.swing.JFrame {
         jCheckBox18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jCheckBox18.setText("nausée");
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Validate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        validateButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        validateButton.setText("Validate");
+        validateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                validateButtonActionPerformed(evt);
             }
         });
 
@@ -151,7 +151,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
                         .addGap(315, 315, 315))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(363, 363, 363)
-                .addComponent(jButton1)
+                .addComponent(validateButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -198,16 +198,16 @@ public class SymptomsWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
-                .addComponent(jButton1)
+                .addComponent(validateButton)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_validateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,7 +245,6 @@ public class SymptomsWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
@@ -265,5 +264,6 @@ public class SymptomsWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton validateButton;
     // End of variables declaration//GEN-END:variables
 }
