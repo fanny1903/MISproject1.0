@@ -58,8 +58,6 @@ public class MainWindow extends javax.swing.JFrame {
         doctorTextLabel = new javax.swing.JLabel();
         patientImage = new javax.swing.JLabel();
         loginPatientsButton = new javax.swing.JButton();
-        addPatientButton = new javax.swing.JButton();
-        addDoctorButton = new javax.swing.JButton();
         loginDoctorButton = new javax.swing.JButton();
 
         doctorTextLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -102,24 +100,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        addPatientButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        addPatientButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/noun_add_3029252.png"))); // NOI18N
-        addPatientButton.setText("New patient");
-        addPatientButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPatientButtonActionPerformed(evt);
-            }
-        });
-
-        addDoctorButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        addDoctorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/noun_add_3029252.png"))); // NOI18N
-        addDoctorButton.setText("New doctor");
-        addDoctorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDoctorButtonActionPerformed(evt);
-            }
-        });
-
         loginDoctorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/noun_edit_3029255.png"))); // NOI18N
         loginDoctorButton.setText("Login");
         loginDoctorButton.addActionListener(new java.awt.event.ActionListener() {
@@ -149,14 +129,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(doctorImage))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(189, 189, 189)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addPatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(loginPatientsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(549, 549, 549)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addDoctorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(loginDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(loginPatientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(214, 214, 214)
+                        .addComponent(loginDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,17 +146,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(patientImage, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(doctorImage, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginPatientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                    .addComponent(loginPatientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,16 +165,6 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_loginPatientsButtonActionPerformed
 
     
-    private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
-        CreatePatientAccount patientAddPopup = new CreatePatientAccount();
-        patientAddPopup.setVisible(true);
-    }//GEN-LAST:event_addPatientButtonActionPerformed
-
-    private void addDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorButtonActionPerformed
-        CreateDoctorAccount doctorAddPopup = new CreateDoctorAccount();
-        doctorAddPopup.setVisible(true);
-    }//GEN-LAST:event_addDoctorButtonActionPerformed
-
     private void loginDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginDoctorButtonActionPerformed
         LoginDoctor loginDoctorAddPopup = new LoginDoctor();
         loginDoctorAddPopup.setVisible(true);
@@ -249,8 +208,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addDoctorButton;
-    private javax.swing.JButton addPatientButton;
     private javax.swing.JLabel doctorImage;
     private javax.swing.JLabel doctorImageLabel1;
     private javax.swing.JLabel doctorTextLabel;

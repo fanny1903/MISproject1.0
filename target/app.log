@@ -1,137 +1,110 @@
-[INFO ] 2023-05-15 13:35:26.740 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 13:35:27.666 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 13:39:31.685 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 13:39:32.558 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:15:18.988 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:15:33.715 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:19:33.745 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:20:30.798 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:21:02.007 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:23:24.071 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:29:18.603 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:31:16.557 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:33:00.903 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:33:52.633 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:35:55.200 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:44:18.892 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:44:19.220 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:44:47.246 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:44:57.398 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:45:13.762 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:45:14.061 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:46:30.157 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:46:30.469 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:47:12.774 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:47:13.080 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:48:00.494 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:48:00.798 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:49:42.307 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:49:42.600 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:58:33.153 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 15:58:34.244 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:32:25.161 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:32:25.647 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:33:50.357 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:33:57.617 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:36:24.312 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:36:24.726 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:37:41.195 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:37:41.559 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:43:03.277 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:43:03.646 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:44:25.163 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:44:25.529 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:44:50.089 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:44:50.412 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:48:32.565 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:48:33.261 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:55:45.957 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 16:55:46.666 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:00:31.118 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:00:31.420 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:11:31.014 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:11:31.314 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:13:37.871 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:13:38.165 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:13:49.887 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:13:50.254 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:20:48.779 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:20:49.081 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:23:29.191 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:23:29.492 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:24:11.808 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:24:12.125 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:44:57.946 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:44:58.293 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:53:44.604 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:53:45.075 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:56:29.144 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:56:29.662 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:57:48.666 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 17:57:49.136 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:00:12.194 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:00:12.995 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:07:28.356 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:07:28.827 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:11:55.403 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:11:55.939 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:19:03.658 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:19:04.038 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:20:54.769 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:21:20.894 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:21:21.228 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:22:53.289 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 18:22:53.655 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:39:26.644 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:39:27.356 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:41:37.270 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:41:37.806 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:43:35.313 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:43:35.845 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:44:16.326 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:44:46.384 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:44:46.818 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:45:12.644 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:45:13.251 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:47:40.644 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:47:40.962 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:53:31.303 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 20:53:31.961 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:01:52.555 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:01:53.276 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:03:32.023 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:03:32.385 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:04:34.302 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:04:34.643 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:04:48.023 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:04:48.525 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:06:20.832 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:06:21.432 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:07:20.844 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:07:21.350 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:09:25.970 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:09:26.413 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:09:32.920 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:09:33.438 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:12:22.664 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:12:23.129 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:20:47.370 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:20:47.734 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:21:46.216 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:21:46.612 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:22:54.610 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:22:55.009 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:24:28.528 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:24:29.015 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:25:37.381 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:25:37.869 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:28:32.333 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:28:32.701 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:33:18.656 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:33:19.182 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:36:20.453 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:36:21.181 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:44:04.014 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:44:04.907 [AWT-EventQueue-0] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:46:49.392 [main] MainWindow - Displaying main window
-[INFO ] 2023-05-15 21:46:50.033 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:35:16.424 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:35:16.866 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:35:33.243 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:35:33.629 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:43:40.382 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 16:43:40.843 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:03:03.479 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:03:03.940 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:04:32.986 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:04:33.381 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:23:35.616 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:23:36.083 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:32:12.486 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:32:12.929 [AWT-EventQueue-0] MainWindow - Displaying main window
+[ERROR] 2023-05-16 19:32:27.140 [AWT-EventQueue-0] AddPersonPanel - Error setting person date of birth
+java.text.ParseException: Unparseable date: ""
+	at java.text.DateFormat.parse(DateFormat.java:399) ~[?:?]
+	at ulb.mis.view.AddPersonPanel.getPerson(AddPersonPanel.java:50) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.updatePatient(CreatePatientAccount.java:55) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.saveButtonActionPerformed(CreatePatientAccount.java:134) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.access$000(CreatePatientAccount.java:22) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount$1.actionPerformed(CreatePatientAccount.java:84) ~[classes/:?]
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972) ~[?:?]
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2313) ~[?:?]
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405) ~[?:?]
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262) ~[?:?]
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279) ~[?:?]
+	at java.awt.Component.processMouseEvent(Component.java:6620) ~[?:?]
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3398) ~[?:?]
+	at java.awt.Component.processEvent(Component.java:6385) ~[?:?]
+	at java.awt.Container.processEvent(Container.java:2266) ~[?:?]
+	at java.awt.Component.dispatchEventImpl(Component.java:4995) ~[?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2324) ~[?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4827) ~[?:?]
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948) ~[?:?]
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575) ~[?:?]
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516) ~[?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2310) ~[?:?]
+	at java.awt.Window.dispatchEventImpl(Window.java:2780) ~[?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4827) ~[?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:720) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:714) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:97) ~[?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:747) ~[?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:745) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86) [?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:744) [?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]
+[INFO ] 2023-05-16 19:36:13.490 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:36:14.033 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:38:22.104 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:38:22.467 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:39:19.457 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 19:39:19.895 [AWT-EventQueue-0] MainWindow - Displaying main window
+[ERROR] 2023-05-16 19:39:54.538 [AWT-EventQueue-0] AddPersonPanel - Error setting person date of birth
+java.text.ParseException: Unparseable date: ""
+	at java.text.DateFormat.parse(DateFormat.java:399) ~[?:?]
+	at ulb.mis.view.AddPersonPanel.getPerson(AddPersonPanel.java:50) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.updatePatient(CreatePatientAccount.java:55) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.saveButtonActionPerformed(CreatePatientAccount.java:134) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount.access$000(CreatePatientAccount.java:22) ~[classes/:?]
+	at ulb.mis.view.CreatePatientAccount$1.actionPerformed(CreatePatientAccount.java:84) ~[classes/:?]
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972) ~[?:?]
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2313) ~[?:?]
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405) ~[?:?]
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262) ~[?:?]
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279) ~[?:?]
+	at java.awt.Component.processMouseEvent(Component.java:6620) ~[?:?]
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3398) ~[?:?]
+	at java.awt.Component.processEvent(Component.java:6385) ~[?:?]
+	at java.awt.Container.processEvent(Container.java:2266) ~[?:?]
+	at java.awt.Component.dispatchEventImpl(Component.java:4995) ~[?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2324) ~[?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4827) ~[?:?]
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948) ~[?:?]
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575) ~[?:?]
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516) ~[?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2310) ~[?:?]
+	at java.awt.Window.dispatchEventImpl(Window.java:2780) ~[?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4827) ~[?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:720) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:714) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:97) ~[?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:747) ~[?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:745) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86) [?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:744) [?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]
+[INFO ] 2023-05-16 20:03:50.493 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 20:03:50.981 [AWT-EventQueue-0] MainWindow - Displaying main window
+[INFO ] 2023-05-16 20:05:59.171 [main] MainWindow - Displaying main window
+[INFO ] 2023-05-16 20:05:59.829 [AWT-EventQueue-0] MainWindow - Displaying main window
