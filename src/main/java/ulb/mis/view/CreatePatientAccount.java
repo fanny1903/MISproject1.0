@@ -5,10 +5,14 @@
  */
 package ulb.mis.view;
 
+import java.text.ParseException;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
@@ -16,15 +20,22 @@ import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Doctor;
+//import static ulb.mis.model.Patient_.iddesignateddoctor;
 
 /**
  *
- * @author Adrien Foucart
+ * @author Liya
  */
 public class CreatePatientAccount extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     private final PersonJpaController personCtrl = new PersonJpaController(emfac);
+    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
+    
+   
+    
+    
     
     private static final Logger LOGGER = LogManager.getLogger(CreatePatientAccount.class.getName());
     
@@ -41,6 +52,7 @@ public class CreatePatientAccount extends javax.swing.JFrame {
         this.patient = patient;
         
         addPersonPanel1.setPerson(patient.getIdperson());
+        iddesignatedDoctorTextField.setText(patient.getIddesignateddoctor().getIdperson().getLastname());
     }
     
     public Patient getPatient(){
@@ -49,13 +61,34 @@ public class CreatePatientAccount extends javax.swing.JFrame {
         return patient;
     }
     
+    
     public void updatePatient(){
         if( patient == null ){
             patient = new Patient();
         }
         
         patient.setIdperson(addPersonPanel1.getPerson());
+        List<Doctor> doctors = doctorCtrl.findDoctorEntities();
+        
+        for(int i =0; i < doctors.size(); i++){
+            if((doctors.get(i).getIdperson().getLastname()).equals(iddesignatedDoctorTextField.getText())){
+                patient.setIddesignateddoctor(doctors.get(i));
+                System.out.println("ouiiiii");
+            }
+            else {
+            // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
+            JOptionPane.showMessageDialog(this, "Invalid designated doctor credentials. Please try again.", "Account creation Error", JOptionPane.ERROR_MESSAGE);
+    }   
+        }
+        
+        
+        
+        
+       
     }
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +103,8 @@ public class CreatePatientAccount extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         addPersonPanel1 = new ulb.mis.view.AddPersonPanel();
+        jLabel2 = new javax.swing.JLabel();
+        iddesignatedDoctorTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,22 +130,35 @@ public class CreatePatientAccount extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Designated Doctor");
+
+        iddesignatedDoctorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iddesignatedDoctorTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(iddesignatedDoctorTextField))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +166,11 @@ public class CreatePatientAccount extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(iddesignatedDoctorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,10 +212,16 @@ public class CreatePatientAccount extends javax.swing.JFrame {
         this.dispose();   
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void iddesignatedDoctorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iddesignatedDoctorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_iddesignatedDoctorTextFieldActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ulb.mis.view.AddPersonPanel addPersonPanel1;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField iddesignatedDoctorTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
