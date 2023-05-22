@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.view;
 
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author fanny
+ * @author indra
  */
 public class LoginPatient extends javax.swing.JFrame {
 
@@ -159,7 +159,7 @@ public class LoginPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameTextFieldActionPerformed
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-                String firstName = FirstNameTextField.getText();
+            String firstName = FirstNameTextField.getText();
         String password = PasswordTextField.getText();
         boolean loginSuccessful = validateCredentials(firstName, password);
 
@@ -173,7 +173,7 @@ public class LoginPatient extends javax.swing.JFrame {
         } else {
             // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
             JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
-    }   
+    }
 
     }//GEN-LAST:event_OkButtonActionPerformed
 

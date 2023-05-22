@@ -1,4 +1,5 @@
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/PatientChoices.java
+/Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/model/Appointment.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/CreateDoctorAccount.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/controller/SicknessJpaController.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/DoctorChoices.java
@@ -17,6 +18,7 @@
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/controller/exceptions/PreexistingEntityException.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/model/Sickness.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/AddPersonPanel.java
+/Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/controller/AppointmentJpaController.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/services/ADTReceiverApplication.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/controller/PatientJpaController.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/EntityListModel.java

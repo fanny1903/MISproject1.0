@@ -2,6 +2,7 @@ ulb/mis/model/Sickness.class
 ulb/mis/view/LoginPatient.class
 ulb/mis/view/HL7SendWindow$1.class
 ulb/mis/view/EntityListModel.class
+ulb/mis/model/Appointment_.class
 ulb/mis/model/Sickness_.class
 ulb/mis/controller/DoctorJpaController.class
 ulb/mis/view/DoctorChoices.class
@@ -22,6 +23,7 @@ ulb/mis/services/ADTReceiverApplication.class
 ulb/mis/view/LoginPatient$3.class
 ulb/mis/controller/exceptions/IllegalOrphanException.class
 ulb/mis/model/Patient.class
+ulb/mis/model/Appointment.class
 ulb/mis/view/MainWindow$2.class
 ulb/mis/controller/PersonJpaController.class
 ulb/mis/view/AddPersonPanel$1.class
@@ -37,6 +39,7 @@ ulb/mis/view/MainWindow.class
 ulb/mis/view/PatientChoices$2.class
 ulb/mis/model/Person_.class
 ulb/mis/services/DatabaseServices.class
+ulb/mis/controller/AppointmentJpaController.class
 ulb/mis/controller/PatientJpaController.class
 ulb/mis/view/CreatePatientAccount$1.class
 ulb/mis/view/PatientChoices$1.class
