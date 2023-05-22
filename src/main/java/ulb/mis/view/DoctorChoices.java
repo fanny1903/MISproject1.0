@@ -12,11 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
+//import ulb.mis.view.PatientChoices
 
 
 /**
@@ -25,11 +27,13 @@ import ulb.mis.model.Patient;
  */
 public class DoctorChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
-    private final PatientJpaController doctorCtrl = new PatientJpaController(emfac);
+    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
+    private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     
     private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
     
     Doctor doctor = null;
+    //Patient patient = null;
     /**
      * Creates new form DoctorChoices
      */
@@ -49,11 +53,11 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
-        AddSicknessButton = new javax.swing.JButton();
         deleteDoctorAccountButton = new javax.swing.JButton();
         doctorActivePatients = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        itemsList = new javax.swing.JList<>();
+        AddSicknessButton = new javax.swing.JButton();
 
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,13 +74,6 @@ public class DoctorChoices extends javax.swing.JFrame {
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
-        AddSicknessButton.setText("Add sickness");
-        AddSicknessButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddSicknessButtonActionPerformed(evt);
-            }
-        });
-
         deleteDoctorAccountButton.setBackground(new java.awt.Color(255, 153, 153));
         deleteDoctorAccountButton.setText("Delete my account");
         deleteDoctorAccountButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +89,14 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(itemsList);
+
+        AddSicknessButton.setText("add sickness");
+        AddSicknessButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddSicknessButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,9 +108,9 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
+                        .addGap(58, 58, 58)
+                        .addComponent(AddSicknessButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))
                     .addGroup(layout.createSequentialGroup()
@@ -123,8 +127,8 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddSicknessButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,13 +141,8 @@ public class DoctorChoices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ApprovalsActionPerformed
 
-    private void AddSicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSicknessButtonActionPerformed
-        addSickness addSicknessPopup = new addSickness();
-        addSicknessPopup.setVisible(true);
-    }//GEN-LAST:event_AddSicknessButtonActionPerformed
-
     private void refreshDoctorList(){
-        List doctors = doctorCtrl.findPatientEntities();
+        List doctors = doctorCtrl.findDoctorEntities();
         EntityListModel<Patient> model = new EntityListModel(doctors);
     }
     
@@ -163,16 +162,34 @@ public class DoctorChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
 
     private void doctorActivePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActivePatientsActionPerformed
-        // TODO add your handling code here:
+        
+        List<Patient> Patients = patientCtrl.findPatientEntities();
+        List<Patient> activePatients = null ; 
+        
+        //List patients = patientCtrl.findPatientEntities();
+        EntityListModel<Patient> model = new EntityListModel(activePatients);
+        
+        for(int i =0; i < Patients.size(); i++){
+            if((Patients.get(i).getIdsickness()) != null) {
+                activePatients.add(Patients.get(i));  
+                itemsList.setModel(model);
+            } 
+            
+        }
     }//GEN-LAST:event_doctorActivePatientsActionPerformed
+
+    private void AddSicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSicknessButtonActionPerformed
+        addSickness addSicknessPopup = new addSickness();
+        addSicknessPopup.setVisible(true);
+    }//GEN-LAST:event_AddSicknessButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
     private javax.swing.JButton deleteDoctorAccountButton;
     private javax.swing.JButton doctorActivePatients;
+    private javax.swing.JList<String> itemsList;
     private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
