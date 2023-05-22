@@ -47,6 +47,7 @@ ulb/mis/services/DatabaseServices.class
 ulb/mis/controller/AppointmentJpaController.class
 ulb/mis/controller/PatientJpaController.class
 ulb/mis/view/CreatePatientAccount$1.class
+ulb/mis/view/addSickness$4.class
 ulb/mis/view/PatientChoices$1.class
 ulb/mis/view/LoginPatient$1.class
 ulb/mis/model/Person.class

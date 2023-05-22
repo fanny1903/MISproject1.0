@@ -9,7 +9,7 @@ import ulb.mis.model.Doctor;
 import ulb.mis.model.Person;
 import ulb.mis.model.Sickness;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-22T19:09:08")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-22T18:48:10")
 @StaticMetamodel(Patient.class)
 public class Patient_ { 
 

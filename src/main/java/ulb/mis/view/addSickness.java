@@ -9,8 +9,6 @@ import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.SicknessJpaController;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
-import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Sickness;
 
 /**
@@ -56,12 +54,21 @@ public class addSickness extends javax.swing.JFrame {
             sickness = new Sickness();
         }
         
-        sickness.setNameofsickness(sicknessNameTextField.getText());
-        sickness.setSymptom1(s1TextField.getText());
-        sickness.setSymptom2(s2TextField.getText());
-        sickness.setSymptom3(s3TextField.getText());
-        sickness.setSymptom4(s4TextField.getText());
-                  
+        //sickness.setNameofsickness(sicknessNameTextField);
+                
+        /*patient.setIdperson(addPersonPanel1.getPerson());
+        List<Doctor> doctors = doctorCtrl.findDoctorEntities();
+        
+        for(int i =0; i < doctors.size(); i++){
+            if((doctors.get(i).getIdperson().getLastname()).equals(iddesignatedDoctorTextField.getText())){
+                patient.setIddesignateddoctor(doctors.get(i));
+                System.out.println("ouiiiii");
+            }
+            else {
+            // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
+            JOptionPane.showMessageDialog(this, "Invalid designated doctor credentials. Please try again.", "Account creation Error", JOptionPane.ERROR_MESSAGE);
+    
+        }   */
         }
     
     
@@ -203,26 +210,43 @@ public class addSickness extends javax.swing.JFrame {
     }//GEN-LAST:event_s2TextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        updateSickness();
-        
-        if (sickness.getIdsickness() == null){
-            sicknessCtrl.create(sickness);
-        }
-        // Save changes to person & patient.
-        try {
-            sicknessCtrl.edit(sickness);
-            //LOGGER.debug("Edited patient (id = %d)".formatted(patient.getIdpatient()));
-        } catch (NonexistentEntityException | IllegalOrphanException ex) {
-            LOGGER.error("Couldn't edit sickness", ex);
-        } catch (Exception ex){
-            LOGGER.error("Couldn't edit sickness", ex);
-            
-            
-        }
-        
-        this.dispose(); 
+        // TODO add your handling code here:
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(addSickness.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(addSickness.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(addSickness.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(addSickness.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new addSickness().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
