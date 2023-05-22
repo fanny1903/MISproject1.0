@@ -5,15 +5,31 @@
 package ulb.mis.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Doctor;
+import ulb.mis.model.Patient;
+
 
 /**
  *
  * @author fanny
  */
 public class DoctorChoices extends javax.swing.JFrame {
-
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
+    private final PatientJpaController doctorCtrl = new PatientJpaController(emfac);
+    
+    private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
+    
+    Doctor doctor = null;
     /**
      * Creates new form DoctorChoices
      */
@@ -34,7 +50,10 @@ public class DoctorChoices extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         AddSicknessButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deleteDoctorAccountButton = new javax.swing.JButton();
+        doctorActivePatients = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
 
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,25 +77,44 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 153));
-        jButton2.setText("Delete my account");
+        deleteDoctorAccountButton.setBackground(new java.awt.Color(255, 153, 153));
+        deleteDoctorAccountButton.setText("Delete my account");
+        deleteDoctorAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDoctorAccountButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        doctorActivePatients.setText("My active patients");
+        doctorActivePatients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorActivePatientsActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteDoctorAccountButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,11 +122,14 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteDoctorAccountButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -101,14 +142,38 @@ public class DoctorChoices extends javax.swing.JFrame {
         addSicknessPopup.setVisible(true);
     }//GEN-LAST:event_AddSicknessButtonActionPerformed
 
+    private void refreshDoctorList(){
+        List doctors = doctorCtrl.findPatientEntities();
+        EntityListModel<Patient> model = new EntityListModel(doctors);
+    }
+    
+    private void deleteDoctorAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorAccountButtonActionPerformed
+        this.doctor = doctor;
+        int selectedDoctorId = doctor.getIddoctor();
+        
+         try {
+            LOGGER.debug("Deleting patient with id: " + selectedDoctorId);
+            doctorCtrl.destroy(selectedDoctorId);
+        } catch (IllegalOrphanException | NonexistentEntityException ex) {
+            LOGGER.error("Failed to delete patient", ex);
+        }
+        
+        refreshDoctorList();
+        
+    }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
+
+    private void doctorActivePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActivePatientsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorActivePatientsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
-    private javax.swing.JButton ApprovalsButton;
+    private javax.swing.JButton deleteDoctorAccountButton;
+    private javax.swing.JButton doctorActivePatients;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 

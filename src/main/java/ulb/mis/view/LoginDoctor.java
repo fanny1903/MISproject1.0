@@ -178,7 +178,7 @@ public class LoginDoctor extends javax.swing.JFrame {
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
         DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
         doctorChoicesAddPopup.setVisible(true);
-        /*String Inami = InamiTextField.getText();
+    /*String Inami = InamiTextField.getText();
     String password = PasswordTextField.getText();
     boolean loginSuccessful = validateCredentials(Inami, password);
 

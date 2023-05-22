@@ -70,21 +70,18 @@ public class CreatePatientAccount extends javax.swing.JFrame {
         patient.setIdperson(addPersonPanel1.getPerson());
         List<Doctor> doctors = doctorCtrl.findDoctorEntities();
         
-        for(int i =0; i < doctors.size(); i++){
+        for(int i =0; i < doctors.size(); i++){ //FAnnyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
             if((doctors.get(i).getIdperson().getLastname()).equals(iddesignatedDoctorTextField.getText())){
                 patient.setIddesignateddoctor(doctors.get(i));
                 System.out.println("ouiiiii");
             }
-            else {
+            if(!(doctors.get(i).getIdperson().getLastname()).equals(iddesignatedDoctorTextField.getText())) {
+                System.out.println("noooo");
+                
             // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
-            JOptionPane.showMessageDialog(this, "Invalid designated doctor credentials. Please try again.", "Account creation Error", JOptionPane.ERROR_MESSAGE);
-    }   
-        }
-        
-        
-        
-        
-       
+                //JOptionPane.showMessageDialog(this, "Invalid designated doctor credentials. Please try again.", "Account creation Error", JOptionPane.ERROR_MESSAGE);  
+            }   
+        }   
     }
     
     
