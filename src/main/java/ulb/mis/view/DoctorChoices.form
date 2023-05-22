@@ -25,7 +25,7 @@
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="144" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="AppointmentButton" min="-2" pref="144" max="-2" attributes="0"/>
+              <Component id="SicknessButton" min="-2" pref="144" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -37,7 +37,7 @@
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton1" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="AppointmentButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="SicknessButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
@@ -70,12 +70,12 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AppointmentButton">
+    <Component class="javax.swing.JButton" name="SicknessButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Appointment"/>
+        <Property name="text" type="java.lang.String" value="Add sickness"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AppointmentButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SicknessButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

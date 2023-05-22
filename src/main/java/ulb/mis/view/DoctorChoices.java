@@ -33,7 +33,7 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
-        AppointmentButton = new javax.swing.JButton();
+        SicknessButton = new javax.swing.JButton();
 
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -50,10 +50,10 @@ public class DoctorChoices extends javax.swing.JFrame {
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
-        AppointmentButton.setText("Appointment");
-        AppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+        SicknessButton.setText("Add sickness");
+        SicknessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AppointmentButtonActionPerformed(evt);
+                SicknessButtonActionPerformed(evt);
             }
         });
 
@@ -69,7 +69,7 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -79,7 +79,7 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -88,14 +88,14 @@ public class DoctorChoices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ApprovalsActionPerformed
 
-    private void AppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointmentButtonActionPerformed
+    private void SicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SicknessButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AppointmentButtonActionPerformed
+    }//GEN-LAST:event_SicknessButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AppointmentButton;
     private javax.swing.JButton ApprovalsButton;
+    private javax.swing.JButton SicknessButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
