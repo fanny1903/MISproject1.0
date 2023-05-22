@@ -33,7 +33,8 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
-        SicknessButton = new javax.swing.JButton();
+        AddSicknessButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -46,16 +47,19 @@ public class DoctorChoices extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(102, 102, 102));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("What do you want?");
+        titleLabel.setText("Doctor interface");
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
-        SicknessButton.setText("Add sickness");
-        SicknessButton.addActionListener(new java.awt.event.ActionListener() {
+        AddSicknessButton.setText("Add sickness");
+        AddSicknessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SicknessButtonActionPerformed(evt);
+                AddSicknessButtonActionPerformed(evt);
             }
         });
+
+        jButton2.setBackground(new java.awt.Color(255, 153, 153));
+        jButton2.setText("Delete my account");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,11 +69,13 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -79,8 +85,10 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -88,15 +96,17 @@ public class DoctorChoices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ApprovalsActionPerformed
 
-    private void SicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SicknessButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SicknessButtonActionPerformed
+    private void AddSicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSicknessButtonActionPerformed
+        addSickness addSicknessPopup = new addSickness();
+        addSicknessPopup.setVisible(true);
+    }//GEN-LAST:event_AddSicknessButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddSicknessButton;
     private javax.swing.JButton ApprovalsButton;
-    private javax.swing.JButton SicknessButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel titleLabel;
