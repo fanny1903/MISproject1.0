@@ -5,6 +5,7 @@
 package ulb.mis.view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,11 @@ public class LoginDoctor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+        private class LoginDoctorListener {
 
+        public LoginDoctorListener() {
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +60,11 @@ public class LoginDoctor extends javax.swing.JFrame {
 
         OkButtondoctor.setBackground(new java.awt.Color(255, 204, 102));
         OkButtondoctor.setText("Login");
+        OkButtondoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtondoctorActionPerformed(evt);
+            }
+        });
 
         CanceldoctorButton.setBackground(new java.awt.Color(255, 204, 102));
         CanceldoctorButton.setText("Cancel");
@@ -165,6 +175,25 @@ public class LoginDoctor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabelcreatedoctoraccountMouseClicked
 
+    private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
+    String Inami = InamiTextField.getText();
+    String password = PasswordTextField.getText();
+    boolean loginSuccessful = validateCredentials(Inami, password);
+
+    if (loginSuccessful) {
+        // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
+        DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
+        doctorChoicesAddPopup.setVisible(true);
+        doctorChoicesAddPopup.pack();
+        doctorChoicesAddPopup.setLocationRelativeTo(null);
+        doctorChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         // Ferme la fenêtre de connexion
+    } else {
+        // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
+        JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
+    } 
+    }//GEN-LAST:event_OkButtondoctorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CanceldoctorButton;
@@ -178,4 +207,12 @@ public class LoginDoctor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelcreatedoctoraccount;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+private boolean validateCredentials(String Inami, String password) {
+        if (Inami.equals("01234") && password.equals("indrax")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+

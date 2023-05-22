@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.view;
 
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author fanny
+ * @author indra
  */
 public class LoginPatient extends javax.swing.JFrame {
 
