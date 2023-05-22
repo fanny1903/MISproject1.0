@@ -53,9 +53,9 @@ public class Person implements Serializable {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
-    @Column(name = "dateofbirth")
-    private String personpassword;
     @Column(name = "personpassword")
+    private String personpassword;
+    @Column(name = "dateofbirth")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
@@ -151,7 +151,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        return lastname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")";
+        return lastname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")"+personpassword;
     }
     
 }
