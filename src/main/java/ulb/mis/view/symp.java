@@ -7,45 +7,59 @@ package ulb.mis.view;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JCheckBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.SicknessJpaController;
+import ulb.mis.model.Sickness;
 
 /**
  *
  * @author fanny
  */
 public class symp extends javax.swing.JFrame {
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
+    private final SicknessJpaController sicknessCtrl = new SicknessJpaController(emfac);
+    
+    private static final Logger LOGGER = LogManager.getLogger(CreatePatientAccount.class.getName());
 
+    javax.swing.JCheckBox checkBox = new javax.swing.JCheckBox("Ma Checkbox");
     /**
      * Creates new form symp
      */
+    
     public symp() {
         initComponents();
+
+        java.util.List<Sickness> sicknesses = sicknessCtrl.findSicknessEntities();
+        
+        for(int i =0; i < sicknesses.size(); i++){
+            javax.swing.JCheckBox checkBox = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom1());           
+            checkBox.setBounds(10*i, 20*i, 150, 250); // Définissez les coordonnées et la taille de la checkbox
+            javax.swing.JCheckBox checkBox2 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom2());           
+            checkBox2.setBounds(10*(i+1), 20*(i+1), 150, 250);
+            javax.swing.JCheckBox checkBox3 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom3());           
+            checkBox3.setBounds(10*(i+2), 20*(i+2), 150, 250);
+            javax.swing.JCheckBox checkBox4 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom4());           
+            checkBox4.setBounds(10*(i+3), 20*(i+3), 150, 250);
+            add(checkBox);
+            add(checkBox2);
+            add(checkBox3);
+            add(checkBox4);
+        }
+        
+        
+        //javax.swing.JCheckBox checkBox = new javax.swing.JCheckBox("Ma Checkbox");
+        
+       
+        
+        pack();
     }
     
-     private ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
-
     
-    setTitle("Exemple de Checkbox");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    // Ajout de JCheckBox à la liste
-    JCheckBox checkBox1 = new JCheckBox("Checkbox 1");
-    checkBoxes.add(checkBox1);
-
-    JCheckBox checkBox2 = new JCheckBox("Checkbox 2");
-    checkBoxes.add(checkBox2);
-
-    // Configuration du gestionnaire de disposition (layout)
-    setLayout(new FlowLayout());
-
-    // Ajout des JCheckBox au JFrame
-    for (JCheckBox checkBox : checkBoxes) {
-        add(checkBox);
-    }
-
-    pack();
-    setVisible(true);
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,59 +69,50 @@ public class symp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(377, 377, 377)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jButton1)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        remove(checkBox);
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(symp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(symp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(symp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(symp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new symp().setVisible(true);
-            }
-        });
-    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

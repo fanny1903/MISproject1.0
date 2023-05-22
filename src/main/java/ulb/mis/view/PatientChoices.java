@@ -141,7 +141,7 @@ public class PatientChoices extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SickButtonActionPerformed
-        SymptomsWindow symptomAddPopup = new SymptomsWindow();
+        symp symptomAddPopup = new symp();
         symptomAddPopup.setVisible(true);
     }//GEN-LAST:event_SickButtonActionPerformed
 
