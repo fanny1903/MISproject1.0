@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Adrien Foucart
+ * @author Liya Rosenstein
  */
 @Entity
 @Table(name = "doctor")
@@ -48,6 +47,10 @@ public class Doctor implements Serializable {
     @JoinColumn(name = "idperson", referencedColumnName = "idperson")
     @ManyToOne(optional = false)
     private Person idperson;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddesignateddoctor")
+    private Collection<Patient> patientCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddoctor")
+    private Collection<Appointment> appointmentCollection;
 
     public Doctor() {
     }
@@ -85,6 +88,24 @@ public class Doctor implements Serializable {
         this.idperson = idperson;
     }
 
+    @XmlTransient
+    public Collection<Patient> getPatientCollection() {
+        return patientCollection;
+    }
+
+    public void setPatientCollection(Collection<Patient> patientCollection) {
+        this.patientCollection = patientCollection;
+    }
+
+    @XmlTransient
+    public Collection<Appointment> getAppointmentCollection() {
+        return appointmentCollection;
+    }
+
+    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
+        this.appointmentCollection = appointmentCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,8 +128,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return idperson.toString();
+        return "ulb.mis.model2.Doctor[ iddoctor=" + iddoctor + " ]";
     }
-
     
 }

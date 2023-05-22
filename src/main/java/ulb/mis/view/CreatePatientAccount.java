@@ -14,13 +14,15 @@ import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Adrien Foucart
  */
 public class CreatePatientAccount extends javax.swing.JFrame {
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     

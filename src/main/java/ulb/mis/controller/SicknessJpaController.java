@@ -4,20 +4,22 @@
  */
 package ulb.mis.controller;
 
+import ulb.mis.model.*;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
-import ulb.mis.model.Sickness;
 
 /**
  *
- * @author fanny
+ * @author Liya Rosenstein
  */
 public class SicknessJpaController implements Serializable {
 
@@ -31,11 +33,29 @@ public class SicknessJpaController implements Serializable {
     }
 
     public void create(Sickness sickness) {
+        if (sickness.getPatientCollection() == null) {
+            sickness.setPatientCollection(new ArrayList<Patient>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Collection<Patient> attachedPatientCollection = new ArrayList<Patient>();
+            for (Patient patientCollectionPatientToAttach : sickness.getPatientCollection()) {
+                patientCollectionPatientToAttach = em.getReference(patientCollectionPatientToAttach.getClass(), patientCollectionPatientToAttach.getIdpatient());
+                attachedPatientCollection.add(patientCollectionPatientToAttach);
+            }
+            sickness.setPatientCollection(attachedPatientCollection);
             em.persist(sickness);
+            for (Patient patientCollectionPatient : sickness.getPatientCollection()) {
+                Sickness oldIdsicknessOfPatientCollectionPatient = patientCollectionPatient.getIdsickness();
+                patientCollectionPatient.setIdsickness(sickness);
+                patientCollectionPatient = em.merge(patientCollectionPatient);
+                if (oldIdsicknessOfPatientCollectionPatient != null) {
+                    oldIdsicknessOfPatientCollectionPatient.getPatientCollection().remove(patientCollectionPatient);
+                    oldIdsicknessOfPatientCollectionPatient = em.merge(oldIdsicknessOfPatientCollectionPatient);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,7 +69,34 @@ public class SicknessJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Sickness persistentSickness = em.find(Sickness.class, sickness.getIdsickness());
+            Collection<Patient> patientCollectionOld = persistentSickness.getPatientCollection();
+            Collection<Patient> patientCollectionNew = sickness.getPatientCollection();
+            Collection<Patient> attachedPatientCollectionNew = new ArrayList<Patient>();
+            for (Patient patientCollectionNewPatientToAttach : patientCollectionNew) {
+                patientCollectionNewPatientToAttach = em.getReference(patientCollectionNewPatientToAttach.getClass(), patientCollectionNewPatientToAttach.getIdpatient());
+                attachedPatientCollectionNew.add(patientCollectionNewPatientToAttach);
+            }
+            patientCollectionNew = attachedPatientCollectionNew;
+            sickness.setPatientCollection(patientCollectionNew);
             sickness = em.merge(sickness);
+            for (Patient patientCollectionOldPatient : patientCollectionOld) {
+                if (!patientCollectionNew.contains(patientCollectionOldPatient)) {
+                    patientCollectionOldPatient.setIdsickness(null);
+                    patientCollectionOldPatient = em.merge(patientCollectionOldPatient);
+                }
+            }
+            for (Patient patientCollectionNewPatient : patientCollectionNew) {
+                if (!patientCollectionOld.contains(patientCollectionNewPatient)) {
+                    Sickness oldIdsicknessOfPatientCollectionNewPatient = patientCollectionNewPatient.getIdsickness();
+                    patientCollectionNewPatient.setIdsickness(sickness);
+                    patientCollectionNewPatient = em.merge(patientCollectionNewPatient);
+                    if (oldIdsicknessOfPatientCollectionNewPatient != null && !oldIdsicknessOfPatientCollectionNewPatient.equals(sickness)) {
+                        oldIdsicknessOfPatientCollectionNewPatient.getPatientCollection().remove(patientCollectionNewPatient);
+                        oldIdsicknessOfPatientCollectionNewPatient = em.merge(oldIdsicknessOfPatientCollectionNewPatient);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -78,6 +125,11 @@ public class SicknessJpaController implements Serializable {
                 sickness.getIdsickness();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The sickness with id " + id + " no longer exists.", enfe);
+            }
+            Collection<Patient> patientCollection = sickness.getPatientCollection();
+            for (Patient patientCollectionPatient : patientCollection) {
+                patientCollectionPatient.setIdsickness(null);
+                patientCollectionPatient = em.merge(patientCollectionPatient);
             }
             em.remove(sickness);
             em.getTransaction().commit();

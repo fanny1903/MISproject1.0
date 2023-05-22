@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,16 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Adrien Foucart
+ * @author Liya Rosenstein
  */
 @Entity
 @Table(name = "patient")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p"),
-    @NamedQuery(name = "Patient.findByIdpatient", query = "SELECT p FROM Patient p WHERE p.idpatient = :idpatient"),
-    @NamedQuery(name = "Patient.findByIddesignateddoctor", query = "SELECT p FROM Patient p WHERE p.iddesignateddoctor = :iddesignateddoctor"),
-    @NamedQuery(name = "Patient.findByIddesignatedsickness", query = "SELECT p FROM Patient p WHERE p.iddesignatedsickness = :iddesignatedsickness")})
+    @NamedQuery(name = "Patient.findByIdpatient", query = "SELECT p FROM Patient p WHERE p.idpatient = :idpatient")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,16 +40,17 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpatient")
     private Integer idpatient;
-    @Basic(optional = false)
-    @Column(name = "iddesignateddoctor")
-    private String iddesignateddoctor;
-    @Column(name = "iddesignatedsickness")
-    private String iddesignatedsickness;
-    @OneToMany(mappedBy = "idpatient")
     @JoinColumn(name = "idperson", referencedColumnName = "idperson")
     @ManyToOne(optional = false)
     private Person idperson;
-    
+    @JoinColumn(name = "iddesignateddoctor", referencedColumnName = "iddoctor")
+    @ManyToOne(optional = false)
+    private Doctor iddesignateddoctor;
+    @JoinColumn(name = "idsickness", referencedColumnName = "idsickness")
+    @ManyToOne
+    private Sickness idsickness;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpatient")
+    private Collection<Appointment> appointmentCollection;
 
     public Patient() {
     }
@@ -68,30 +66,38 @@ public class Patient implements Serializable {
     public void setIdpatient(Integer idpatient) {
         this.idpatient = idpatient;
     }
-    
-    public String getIddesignateddoctor() {
-        return iddesignateddoctor;
-    }
 
-    public void setIddesignateddoctor(String iddesignateddoctor) {
-        this.iddesignateddoctor = iddesignateddoctor;
-    }
-    
-    public String getIddesignatedsickness() {
-        return iddesignatedsickness;
-    }
-
-    public void setIddesignatedsickness(String iddesignatedsickness) {
-        this.iddesignatedsickness = iddesignatedsickness;
-    }
-    
-    @XmlTransient
     public Person getIdperson() {
         return idperson;
     }
 
     public void setIdperson(Person idperson) {
         this.idperson = idperson;
+    }
+
+    public Doctor getIddesignateddoctor() {
+        return iddesignateddoctor;
+    }
+
+    public void setIddesignateddoctor(Doctor iddesignateddoctor) {
+        this.iddesignateddoctor = iddesignateddoctor;
+    }
+
+    public Sickness getIdsickness() {
+        return idsickness;
+    }
+
+    public void setIdsickness(Sickness idsickness) {
+        this.idsickness = idsickness;
+    }
+
+    @XmlTransient
+    public Collection<Appointment> getAppointmentCollection() {
+        return appointmentCollection;
+    }
+
+    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
+        this.appointmentCollection = appointmentCollection;
     }
 
     @Override
@@ -116,7 +122,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return idperson.toString();
+        return "ulb.mis.model2.Patient[ idpatient=" + idpatient + " ]";
     }
     
 }

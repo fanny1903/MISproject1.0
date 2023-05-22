@@ -25,7 +25,7 @@ import ulb.mis.services.HL7Services;
  */
 public class MainWindow extends javax.swing.JFrame {
     
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
     

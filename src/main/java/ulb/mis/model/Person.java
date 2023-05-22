@@ -1,14 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,11 +22,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.persistence.JoinColumn;
 
 /**
  *
- * @author Adrien Foucart
+ * @author Liya Rosenstein
  */
 @Entity
 @Table(name = "person")
@@ -39,8 +36,7 @@ import javax.persistence.JoinColumn;
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
     @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname"),
     @NamedQuery(name = "Person.findByDateofbirth", query = "SELECT p FROM Person p WHERE p.dateofbirth = :dateofbirth"),
-    @NamedQuery(name = "Person.findByPersonpassword", query = "SELECT p FROM Person p WHERE p.personpassword = :personpassword"),
-    @NamedQuery(name = "Person.findDuplicate", query = "SELECT p FROM Person p WHERE p.firstname = :firstname AND p.lastname = :lastname AND p.dateofbirth = :dateofbirth AND p.personpassword = :personpassword")})
+    @NamedQuery(name = "Person.findByPersonpassword", query = "SELECT p FROM Person p WHERE p.personpassword = :personpassword")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,25 +45,37 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Column(name = "idperson")
     private Integer idperson;
+    @Basic(optional = false)
     @Column(name = "firstname")
     private String firstname;
+    @Basic(optional = false)
     @Column(name = "lastname")
     private String lastname;
-    @Column(name = "personpassword")
-    private String personpassword;
+    @Basic(optional = false)
     @Column(name = "dateofbirth")
     @Temporal(TemporalType.DATE)
     private Date dateofbirth;
+    @Basic(optional = false)
+    @Column(name = "personpassword")
+    private String personpassword;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
-    private List<Doctor> doctorList;
+    private Collection<Doctor> doctorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperson")
-    private List<Patient> patientList;
+    private Collection<Patient> patientCollection;
 
     public Person() {
     }
 
     public Person(Integer idperson) {
         this.idperson = idperson;
+    }
+
+    public Person(Integer idperson, String firstname, String lastname, Date dateofbirth, String personpassword) {
+        this.idperson = idperson;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateofbirth = dateofbirth;
+        this.personpassword = personpassword;
     }
 
     public Integer getIdperson() {
@@ -90,16 +98,8 @@ public class Person implements Serializable {
         return lastname;
     }
 
-    public void setLastname(String familyname) {
-        this.lastname = familyname;
-    }
-    
-    public String getPersonPassword() {
-        return personpassword;
-    }
-
-    public void setPersonPassword(String personpassword) {
-        this.personpassword = personpassword;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Date getDateofbirth() {
@@ -110,22 +110,30 @@ public class Person implements Serializable {
         this.dateofbirth = dateofbirth;
     }
 
+    public String getPersonpassword() {
+        return personpassword;
+    }
+
+    public void setPersonpassword(String personpassword) {
+        this.personpassword = personpassword;
+    }
+
     @XmlTransient
-    public List<Doctor> getDoctorList() {
-        return doctorList;
+    public Collection<Doctor> getDoctorCollection() {
+        return doctorCollection;
     }
 
-    public void setDoctorList(List<Doctor> doctorList) {
-        this.doctorList = doctorList;
+    public void setDoctorCollection(Collection<Doctor> doctorCollection) {
+        this.doctorCollection = doctorCollection;
     }
 
     @XmlTransient
-    public List<Patient> getPatientList() {
-        return patientList;
+    public Collection<Patient> getPatientCollection() {
+        return patientCollection;
     }
 
-    public void setPatientList(List<Patient> patientList) {
-        this.patientList = patientList;
+    public void setPatientCollection(Collection<Patient> patientCollection) {
+        this.patientCollection = patientCollection;
     }
 
     @Override
@@ -150,8 +158,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        return lastname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")"+personpassword;
+        return "ulb.mis.model2.Person[ idperson=" + idperson + " ]";
     }
     
 }

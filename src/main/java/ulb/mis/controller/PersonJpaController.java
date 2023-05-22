@@ -4,24 +4,23 @@
  */
 package ulb.mis.controller;
 
+import ulb.mis.model.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ulb.mis.model.Doctor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
-import ulb.mis.model.Patient;
-import ulb.mis.model.Person;
 
 /**
  *
- * @author fanny
+ * @author Liya Rosenstein
  */
 public class PersonJpaController implements Serializable {
 
@@ -35,45 +34,45 @@ public class PersonJpaController implements Serializable {
     }
 
     public void create(Person person) {
-        if (person.getDoctorList() == null) {
-            person.setDoctorList(new ArrayList<Doctor>());
+        if (person.getDoctorCollection() == null) {
+            person.setDoctorCollection(new ArrayList<Doctor>());
         }
-        if (person.getPatientList() == null) {
-            person.setPatientList(new ArrayList<Patient>());
+        if (person.getPatientCollection() == null) {
+            person.setPatientCollection(new ArrayList<Patient>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Doctor> attachedDoctorList = new ArrayList<Doctor>();
-            for (Doctor doctorListDoctorToAttach : person.getDoctorList()) {
-                doctorListDoctorToAttach = em.getReference(doctorListDoctorToAttach.getClass(), doctorListDoctorToAttach.getIddoctor());
-                attachedDoctorList.add(doctorListDoctorToAttach);
+            Collection<Doctor> attachedDoctorCollection = new ArrayList<Doctor>();
+            for (Doctor doctorCollectionDoctorToAttach : person.getDoctorCollection()) {
+                doctorCollectionDoctorToAttach = em.getReference(doctorCollectionDoctorToAttach.getClass(), doctorCollectionDoctorToAttach.getIddoctor());
+                attachedDoctorCollection.add(doctorCollectionDoctorToAttach);
             }
-            person.setDoctorList(attachedDoctorList);
-            List<Patient> attachedPatientList = new ArrayList<Patient>();
-            for (Patient patientListPatientToAttach : person.getPatientList()) {
-                patientListPatientToAttach = em.getReference(patientListPatientToAttach.getClass(), patientListPatientToAttach.getIdpatient());
-                attachedPatientList.add(patientListPatientToAttach);
+            person.setDoctorCollection(attachedDoctorCollection);
+            Collection<Patient> attachedPatientCollection = new ArrayList<Patient>();
+            for (Patient patientCollectionPatientToAttach : person.getPatientCollection()) {
+                patientCollectionPatientToAttach = em.getReference(patientCollectionPatientToAttach.getClass(), patientCollectionPatientToAttach.getIdpatient());
+                attachedPatientCollection.add(patientCollectionPatientToAttach);
             }
-            person.setPatientList(attachedPatientList);
+            person.setPatientCollection(attachedPatientCollection);
             em.persist(person);
-            for (Doctor doctorListDoctor : person.getDoctorList()) {
-                Person oldIdpersonOfDoctorListDoctor = doctorListDoctor.getIdperson();
-                doctorListDoctor.setIdperson(person);
-                doctorListDoctor = em.merge(doctorListDoctor);
-                if (oldIdpersonOfDoctorListDoctor != null) {
-                    oldIdpersonOfDoctorListDoctor.getDoctorList().remove(doctorListDoctor);
-                    oldIdpersonOfDoctorListDoctor = em.merge(oldIdpersonOfDoctorListDoctor);
+            for (Doctor doctorCollectionDoctor : person.getDoctorCollection()) {
+                Person oldIdpersonOfDoctorCollectionDoctor = doctorCollectionDoctor.getIdperson();
+                doctorCollectionDoctor.setIdperson(person);
+                doctorCollectionDoctor = em.merge(doctorCollectionDoctor);
+                if (oldIdpersonOfDoctorCollectionDoctor != null) {
+                    oldIdpersonOfDoctorCollectionDoctor.getDoctorCollection().remove(doctorCollectionDoctor);
+                    oldIdpersonOfDoctorCollectionDoctor = em.merge(oldIdpersonOfDoctorCollectionDoctor);
                 }
             }
-            for (Patient patientListPatient : person.getPatientList()) {
-                Person oldIdpersonOfPatientListPatient = patientListPatient.getIdperson();
-                patientListPatient.setIdperson(person);
-                patientListPatient = em.merge(patientListPatient);
-                if (oldIdpersonOfPatientListPatient != null) {
-                    oldIdpersonOfPatientListPatient.getPatientList().remove(patientListPatient);
-                    oldIdpersonOfPatientListPatient = em.merge(oldIdpersonOfPatientListPatient);
+            for (Patient patientCollectionPatient : person.getPatientCollection()) {
+                Person oldIdpersonOfPatientCollectionPatient = patientCollectionPatient.getIdperson();
+                patientCollectionPatient.setIdperson(person);
+                patientCollectionPatient = em.merge(patientCollectionPatient);
+                if (oldIdpersonOfPatientCollectionPatient != null) {
+                    oldIdpersonOfPatientCollectionPatient.getPatientCollection().remove(patientCollectionPatient);
+                    oldIdpersonOfPatientCollectionPatient = em.merge(oldIdpersonOfPatientCollectionPatient);
                 }
             }
             em.getTransaction().commit();
@@ -90,64 +89,64 @@ public class PersonJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Person persistentPerson = em.find(Person.class, person.getIdperson());
-            List<Doctor> doctorListOld = persistentPerson.getDoctorList();
-            List<Doctor> doctorListNew = person.getDoctorList();
-            List<Patient> patientListOld = persistentPerson.getPatientList();
-            List<Patient> patientListNew = person.getPatientList();
+            Collection<Doctor> doctorCollectionOld = persistentPerson.getDoctorCollection();
+            Collection<Doctor> doctorCollectionNew = person.getDoctorCollection();
+            Collection<Patient> patientCollectionOld = persistentPerson.getPatientCollection();
+            Collection<Patient> patientCollectionNew = person.getPatientCollection();
             List<String> illegalOrphanMessages = null;
-            for (Doctor doctorListOldDoctor : doctorListOld) {
-                if (!doctorListNew.contains(doctorListOldDoctor)) {
+            for (Doctor doctorCollectionOldDoctor : doctorCollectionOld) {
+                if (!doctorCollectionNew.contains(doctorCollectionOldDoctor)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Doctor " + doctorListOldDoctor + " since its idperson field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Doctor " + doctorCollectionOldDoctor + " since its idperson field is not nullable.");
                 }
             }
-            for (Patient patientListOldPatient : patientListOld) {
-                if (!patientListNew.contains(patientListOldPatient)) {
+            for (Patient patientCollectionOldPatient : patientCollectionOld) {
+                if (!patientCollectionNew.contains(patientCollectionOldPatient)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Patient " + patientListOldPatient + " since its idperson field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Patient " + patientCollectionOldPatient + " since its idperson field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<Doctor> attachedDoctorListNew = new ArrayList<Doctor>();
-            for (Doctor doctorListNewDoctorToAttach : doctorListNew) {
-                doctorListNewDoctorToAttach = em.getReference(doctorListNewDoctorToAttach.getClass(), doctorListNewDoctorToAttach.getIddoctor());
-                attachedDoctorListNew.add(doctorListNewDoctorToAttach);
+            Collection<Doctor> attachedDoctorCollectionNew = new ArrayList<Doctor>();
+            for (Doctor doctorCollectionNewDoctorToAttach : doctorCollectionNew) {
+                doctorCollectionNewDoctorToAttach = em.getReference(doctorCollectionNewDoctorToAttach.getClass(), doctorCollectionNewDoctorToAttach.getIddoctor());
+                attachedDoctorCollectionNew.add(doctorCollectionNewDoctorToAttach);
             }
-            doctorListNew = attachedDoctorListNew;
-            person.setDoctorList(doctorListNew);
-            List<Patient> attachedPatientListNew = new ArrayList<Patient>();
-            for (Patient patientListNewPatientToAttach : patientListNew) {
-                patientListNewPatientToAttach = em.getReference(patientListNewPatientToAttach.getClass(), patientListNewPatientToAttach.getIdpatient());
-                attachedPatientListNew.add(patientListNewPatientToAttach);
+            doctorCollectionNew = attachedDoctorCollectionNew;
+            person.setDoctorCollection(doctorCollectionNew);
+            Collection<Patient> attachedPatientCollectionNew = new ArrayList<Patient>();
+            for (Patient patientCollectionNewPatientToAttach : patientCollectionNew) {
+                patientCollectionNewPatientToAttach = em.getReference(patientCollectionNewPatientToAttach.getClass(), patientCollectionNewPatientToAttach.getIdpatient());
+                attachedPatientCollectionNew.add(patientCollectionNewPatientToAttach);
             }
-            patientListNew = attachedPatientListNew;
-            person.setPatientList(patientListNew);
+            patientCollectionNew = attachedPatientCollectionNew;
+            person.setPatientCollection(patientCollectionNew);
             person = em.merge(person);
-            for (Doctor doctorListNewDoctor : doctorListNew) {
-                if (!doctorListOld.contains(doctorListNewDoctor)) {
-                    Person oldIdpersonOfDoctorListNewDoctor = doctorListNewDoctor.getIdperson();
-                    doctorListNewDoctor.setIdperson(person);
-                    doctorListNewDoctor = em.merge(doctorListNewDoctor);
-                    if (oldIdpersonOfDoctorListNewDoctor != null && !oldIdpersonOfDoctorListNewDoctor.equals(person)) {
-                        oldIdpersonOfDoctorListNewDoctor.getDoctorList().remove(doctorListNewDoctor);
-                        oldIdpersonOfDoctorListNewDoctor = em.merge(oldIdpersonOfDoctorListNewDoctor);
+            for (Doctor doctorCollectionNewDoctor : doctorCollectionNew) {
+                if (!doctorCollectionOld.contains(doctorCollectionNewDoctor)) {
+                    Person oldIdpersonOfDoctorCollectionNewDoctor = doctorCollectionNewDoctor.getIdperson();
+                    doctorCollectionNewDoctor.setIdperson(person);
+                    doctorCollectionNewDoctor = em.merge(doctorCollectionNewDoctor);
+                    if (oldIdpersonOfDoctorCollectionNewDoctor != null && !oldIdpersonOfDoctorCollectionNewDoctor.equals(person)) {
+                        oldIdpersonOfDoctorCollectionNewDoctor.getDoctorCollection().remove(doctorCollectionNewDoctor);
+                        oldIdpersonOfDoctorCollectionNewDoctor = em.merge(oldIdpersonOfDoctorCollectionNewDoctor);
                     }
                 }
             }
-            for (Patient patientListNewPatient : patientListNew) {
-                if (!patientListOld.contains(patientListNewPatient)) {
-                    Person oldIdpersonOfPatientListNewPatient = patientListNewPatient.getIdperson();
-                    patientListNewPatient.setIdperson(person);
-                    patientListNewPatient = em.merge(patientListNewPatient);
-                    if (oldIdpersonOfPatientListNewPatient != null && !oldIdpersonOfPatientListNewPatient.equals(person)) {
-                        oldIdpersonOfPatientListNewPatient.getPatientList().remove(patientListNewPatient);
-                        oldIdpersonOfPatientListNewPatient = em.merge(oldIdpersonOfPatientListNewPatient);
+            for (Patient patientCollectionNewPatient : patientCollectionNew) {
+                if (!patientCollectionOld.contains(patientCollectionNewPatient)) {
+                    Person oldIdpersonOfPatientCollectionNewPatient = patientCollectionNewPatient.getIdperson();
+                    patientCollectionNewPatient.setIdperson(person);
+                    patientCollectionNewPatient = em.merge(patientCollectionNewPatient);
+                    if (oldIdpersonOfPatientCollectionNewPatient != null && !oldIdpersonOfPatientCollectionNewPatient.equals(person)) {
+                        oldIdpersonOfPatientCollectionNewPatient.getPatientCollection().remove(patientCollectionNewPatient);
+                        oldIdpersonOfPatientCollectionNewPatient = em.merge(oldIdpersonOfPatientCollectionNewPatient);
                     }
                 }
             }
@@ -181,19 +180,19 @@ public class PersonJpaController implements Serializable {
                 throw new NonexistentEntityException("The person with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<Doctor> doctorListOrphanCheck = person.getDoctorList();
-            for (Doctor doctorListOrphanCheckDoctor : doctorListOrphanCheck) {
+            Collection<Doctor> doctorCollectionOrphanCheck = person.getDoctorCollection();
+            for (Doctor doctorCollectionOrphanCheckDoctor : doctorCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Person (" + person + ") cannot be destroyed since the Doctor " + doctorListOrphanCheckDoctor + " in its doctorList field has a non-nullable idperson field.");
+                illegalOrphanMessages.add("This Person (" + person + ") cannot be destroyed since the Doctor " + doctorCollectionOrphanCheckDoctor + " in its doctorCollection field has a non-nullable idperson field.");
             }
-            List<Patient> patientListOrphanCheck = person.getPatientList();
-            for (Patient patientListOrphanCheckPatient : patientListOrphanCheck) {
+            Collection<Patient> patientCollectionOrphanCheck = person.getPatientCollection();
+            for (Patient patientCollectionOrphanCheckPatient : patientCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Person (" + person + ") cannot be destroyed since the Patient " + patientListOrphanCheckPatient + " in its patientList field has a non-nullable idperson field.");
+                illegalOrphanMessages.add("This Person (" + person + ") cannot be destroyed since the Patient " + patientCollectionOrphanCheckPatient + " in its patientCollection field has a non-nullable idperson field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

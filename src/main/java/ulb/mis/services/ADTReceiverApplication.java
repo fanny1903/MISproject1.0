@@ -36,7 +36,7 @@ public class ADTReceiverApplication implements ReceivingApplication<Message> {
         p.setDateofbirth(pid.getDateOfBirth().getTimeOfAnEvent().getValueAsDate());
         
         
-        EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+        EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
         PersonJpaController personCtrl = new PersonJpaController(emfac);
         /*Person duplicate = personCtrl.findDuplicate(p);
         if(duplicate == null){

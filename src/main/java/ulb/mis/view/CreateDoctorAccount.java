@@ -9,18 +9,18 @@ import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.DoctorJpaController;
-import ulb.mis.controller.PatientJpaController;
+//import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
-import ulb.mis.model.Patient;
+
 /**
  *
  * @author fanny
  */
 public class CreateDoctorAccount extends javax.swing.JFrame {
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
     private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     

@@ -18,7 +18,7 @@ import ulb.mis.model.Patient;
  * @author Adrien Foucart
  */
 public class DatabaseServices {
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     PatientJpaController patientCtrl = new PatientJpaController(emfac);
     
     public DatabaseServices() {
