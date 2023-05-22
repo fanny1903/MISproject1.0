@@ -180,4 +180,8 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+
+    boolean validateCredentials (String Inami, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
