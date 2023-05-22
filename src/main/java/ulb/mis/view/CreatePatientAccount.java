@@ -132,26 +132,27 @@ public class CreatePatientAccount extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         updatePatient();
-        // Create patient if necessary
-        if( patient.getIdperson().getIdperson() == null ){
-            personCtrl.create(patient.getIdperson());
-            LOGGER.debug("Created new person (id = %d)".formatted(patient.getIdperson().getIdperson()));
-        }
-        // Create patient if necessary
-        if( patient.getIdpatient() == null ){
-            patientCtrl.create(patient);
-            LOGGER.debug("Created new patient (id = %d)".formatted(patient.getIdpatient()));
-        }
         
-        // Save changes
+        //Create person if necessary:
+        if (patient.getIdperson().getIdperson() == null) {
+            personCtrl.create(patient.getIdperson());
+        }
+        // Create patient if necessary:
+        if (patient.getIdpatient() == null) {
+            patientCtrl.create(patient);
+        }
+
+        // Save changes to person & patient.
         try {
             personCtrl.edit(patient.getIdperson());
             patientCtrl.edit(patient);
-            LOGGER.debug("Edited patient (id = %d)".formatted(patient.getIdpatient()));
+            //LOGGER.debug("Edited patient (id = %d)".formatted(patient.getIdpatient()));
         } catch (NonexistentEntityException | IllegalOrphanException ex) {
             LOGGER.error("Couldn't edit patient", ex);
         } catch (Exception ex){
             LOGGER.error("Couldn't edit patient", ex);
+            
+            
         }
         
         this.dispose();   
