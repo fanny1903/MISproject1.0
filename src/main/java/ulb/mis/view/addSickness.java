@@ -9,6 +9,8 @@ import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.SicknessJpaController;
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Sickness;
 
 /**
@@ -54,21 +56,13 @@ public class addSickness extends javax.swing.JFrame {
             sickness = new Sickness();
         }
         
-        //sickness.setNameofsickness(sicknessNameTextField);
-                
-        /*patient.setIdperson(addPersonPanel1.getPerson());
-        List<Doctor> doctors = doctorCtrl.findDoctorEntities();
+        sickness.setNameofsickness(sicknessNameTextField.getText());
         
-        for(int i =0; i < doctors.size(); i++){
-            if((doctors.get(i).getIdperson().getLastname()).equals(iddesignatedDoctorTextField.getText())){
-                patient.setIddesignateddoctor(doctors.get(i));
-                System.out.println("ouiiiii");
-            }
-            else {
-            // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
-            JOptionPane.showMessageDialog(this, "Invalid designated doctor credentials. Please try again.", "Account creation Error", JOptionPane.ERROR_MESSAGE);
-    
-        }   */
+        sickness.setSymptom1(s1TextField.getText());
+        sickness.setSymptom2(s2TextField.getText());
+        sickness.setSymptom3(s3TextField.getText());
+        sickness.setSymptom4(s4TextField.getText());
+        
         }
     
     
@@ -210,7 +204,25 @@ public class addSickness extends javax.swing.JFrame {
     }//GEN-LAST:event_s2TextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
+         updateSickness();
+        
+        //Create person if necessary:
+        if (sickness.getIdsickness() == null) {
+            sicknessCtrl.create(sickness);
+        }
+        // Save changes to person & patient.
+        try {
+            sicknessCtrl.edit(sickness);
+            //LOGGER.debug("Edited patient (id = %d)".formatted(patient.getIdpatient()));
+        } catch (NonexistentEntityException | IllegalOrphanException ex) {
+            LOGGER.error("Couldn't edit patient", ex);
+        } catch (Exception ex){
+            LOGGER.error("Couldn't edit patient", ex);
+            
+            
+        }
+        
+        this.dispose();  
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**

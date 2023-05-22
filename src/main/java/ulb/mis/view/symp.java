@@ -7,6 +7,7 @@ package ulb.mis.view;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -24,7 +25,7 @@ public class symp extends javax.swing.JFrame {
      private ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
 
     
-    /*setTitle("Exemple de Checkbox");
+    setTitle("Exemple de Checkbox");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // Ajout de JCheckBox à la liste
@@ -43,7 +44,7 @@ public class symp extends javax.swing.JFrame {
     }
 
     pack();
-    setVisible(true);*/
+    setVisible(true);
 
     /**
      * This method is called from within the constructor to initialize the form.
