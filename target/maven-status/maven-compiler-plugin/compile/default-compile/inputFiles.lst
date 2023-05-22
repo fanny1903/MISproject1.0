@@ -2,6 +2,7 @@
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/model/Appointment.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/CreateDoctorAccount.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/controller/SicknessJpaController.java
+/Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/addSickness.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/DoctorChoices.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/view/LoginDoctor.java
 /Users/fanny/Documents/Infoh400/MISproject1.0/src/main/java/ulb/mis/model/Doctor.java
