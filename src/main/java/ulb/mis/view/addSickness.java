@@ -203,7 +203,7 @@ public class addSickness extends javax.swing.JFrame {
     }//GEN-LAST:event_s2TextFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        /*updateSickness();
+        updateSickness();
         
         if (sickness.getIdsickness() == null){
             sicknessCtrl.create(sickness);
@@ -220,7 +220,7 @@ public class addSickness extends javax.swing.JFrame {
             
         }
         
-        this.dispose(); */
+        this.dispose(); 
     }//GEN-LAST:event_saveButtonActionPerformed
 
 
