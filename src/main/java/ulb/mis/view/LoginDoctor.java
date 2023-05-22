@@ -176,7 +176,9 @@ public class LoginDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelcreatedoctoraccountMouseClicked
 
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
-    String Inami = InamiTextField.getText();
+        DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
+        doctorChoicesAddPopup.setVisible(true);
+    /*String Inami = InamiTextField.getText();
     String password = PasswordTextField.getText();
     boolean loginSuccessful = validateCredentials(Inami, password);
 
@@ -191,7 +193,7 @@ public class LoginDoctor extends javax.swing.JFrame {
     } else {
         // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
         JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
-    } 
+    } */
     }//GEN-LAST:event_OkButtondoctorActionPerformed
 
 
