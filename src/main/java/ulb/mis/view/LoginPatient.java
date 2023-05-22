@@ -5,6 +5,7 @@
 package ulb.mis.view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -158,7 +159,22 @@ public class LoginPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameTextFieldActionPerformed
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-        // TODO add your handling code here:
+                String firstName = FirstNameTextField.getText();
+        String password = PasswordTextField.getText();
+        boolean loginSuccessful = validateCredentials(firstName, password);
+
+        if (loginSuccessful) {
+            // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
+            PatientChoices PatientChoices = new PatientChoices();
+            PatientChoices.setVisible(true);
+            PatientChoices.pack();
+            PatientChoices.setLocationRelativeTo(null);
+            this.dispose(); // Ferme la fenêtre de connexion
+        } else {
+            // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
+            JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
+    }   
+
     }//GEN-LAST:event_OkButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -186,4 +202,13 @@ public class LoginPatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelcreateaccount;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+private boolean validateCredentials(String firstName, String password) {
+        if (firstName.equals("John") && password.equals("password")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
