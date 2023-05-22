@@ -5,15 +5,31 @@
 package ulb.mis.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Doctor;
+import ulb.mis.model.Patient;
+
 
 /**
  *
  * @author fanny
  */
 public class DoctorChoices extends javax.swing.JFrame {
-
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
+    private final PatientJpaController doctorCtrl = new PatientJpaController(emfac);
+    
+    private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
+    
+    Doctor doctor = null;
     /**
      * Creates new form DoctorChoices
      */
@@ -34,7 +50,7 @@ public class DoctorChoices extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         AddSicknessButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deleteDoctorAccountButton = new javax.swing.JButton();
 
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,11 +74,16 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 153));
-        jButton2.setText("Delete my account");
+        deleteDoctorAccountButton.setBackground(new java.awt.Color(255, 153, 153));
+        deleteDoctorAccountButton.setText("Delete my account");
+        deleteDoctorAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDoctorAccountButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -74,8 +95,8 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(deleteDoctorAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -87,7 +108,7 @@ public class DoctorChoices extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(deleteDoctorAccountButton)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -101,14 +122,31 @@ public class DoctorChoices extends javax.swing.JFrame {
         addSicknessPopup.setVisible(true);
     }//GEN-LAST:event_AddSicknessButtonActionPerformed
 
+    private void refreshDoctorList(){
+        List doctors = doctorCtrl.findPatientEntities();
+        EntityListModel<Patient> model = new EntityListModel(doctors);
+    }
+    
+    private void deleteDoctorAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorAccountButtonActionPerformed
+        this.doctor = doctor;
+        int selectedDoctorId = doctor.getIddoctor();
+        
+         try {
+            LOGGER.debug("Deleting patient with id: " + selectedDoctorId);
+            doctorCtrl.destroy(selectedDoctorId);
+        } catch (IllegalOrphanException | NonexistentEntityException ex) {
+            LOGGER.error("Failed to delete patient", ex);
+        }
+        
+        refreshDoctorList();
+        
+    }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
-    private javax.swing.JButton ApprovalsButton;
+    private javax.swing.JButton deleteDoctorAccountButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 

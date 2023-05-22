@@ -22,7 +22,7 @@ public class PatientChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     
-    private static final Logger LOGGER = LogManager.getLogger(CreatePatientAccount.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(PatientChoices.class.getName());
     
     Patient patient = null;
     /**
