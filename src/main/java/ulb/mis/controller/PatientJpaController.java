@@ -1,27 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.controller;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ulb.mis.model.Person;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
 
 /**
  *
- * @author Adrien Foucart
+ * @author fanny
  */
 public class PatientJpaController implements Serializable {
 
@@ -39,16 +35,7 @@ public class PatientJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Person idperson = patient.getIdperson();
-            if (idperson != null) {
-                idperson = em.getReference(idperson.getClass(), idperson.getIdperson());
-                patient.setIdperson(idperson);
-            }
             em.persist(patient);
-            if (idperson != null) {
-                idperson.getPatientList().add(patient);
-                idperson = em.merge(idperson);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -57,27 +44,12 @@ public class PatientJpaController implements Serializable {
         }
     }
 
-    public void edit(Patient patient) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Patient patient) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Patient persistentPatient = em.find(Patient.class, patient.getIdpatient());
-            Person idpersonOld = persistentPatient.getIdperson();
-            Person idpersonNew = patient.getIdperson();
-            if (idpersonNew != null) {
-                idpersonNew = em.getReference(idpersonNew.getClass(), idpersonNew.getIdperson());
-                patient.setIdperson(idpersonNew);
-            }
             patient = em.merge(patient);
-            if (idpersonOld != null && !idpersonOld.equals(idpersonNew)) {
-                idpersonOld.getPatientList().remove(patient);
-                idpersonOld = em.merge(idpersonOld);
-            }
-            if (idpersonNew != null && !idpersonNew.equals(idpersonOld)) {
-                idpersonNew.getPatientList().add(patient);
-                idpersonNew = em.merge(idpersonNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -95,7 +67,7 @@ public class PatientJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -106,15 +78,6 @@ public class PatientJpaController implements Serializable {
                 patient.getIdpatient();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The patient with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Person idperson = patient.getIdperson();
-            if (idperson != null) {
-                idperson.getPatientList().remove(patient);
-                idperson = em.merge(idperson);
             }
             em.remove(patient);
             em.getTransaction().commit();

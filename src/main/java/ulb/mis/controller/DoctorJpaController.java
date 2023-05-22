@@ -1,27 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.controller;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ulb.mis.model.Person;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
+import ulb.mis.model.Person;
 
 /**
  *
- * @author Adrien Foucart
+ * @author fanny
  */
 public class DoctorJpaController implements Serializable {
 
@@ -57,7 +54,7 @@ public class DoctorJpaController implements Serializable {
         }
     }
 
-    public void edit(Doctor doctor) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Doctor doctor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -95,7 +92,7 @@ public class DoctorJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -106,10 +103,6 @@ public class DoctorJpaController implements Serializable {
                 doctor.getIddoctor();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The doctor with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Person idperson = doctor.getIdperson();
             if (idperson != null) {

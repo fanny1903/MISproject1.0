@@ -38,14 +38,14 @@ public class ADTReceiverApplication implements ReceivingApplication<Message> {
         
         EntityManagerFactory emfac = Persistence.createEntityManagerFactory("infoh400_PU");
         PersonJpaController personCtrl = new PersonJpaController(emfac);
-        Person duplicate = personCtrl.findDuplicate(p);
+        /*Person duplicate = personCtrl.findDuplicate(p);
         if(duplicate == null){
             PatientJpaController patientCtrl = new PatientJpaController(emfac);
             personCtrl.create(p);
             Patient pat = new Patient();
             pat.setIdperson(p);
             patientCtrl.create(pat);
-        }
+        }*/
         
         String encodedMessage = new DefaultHapiContext().getPipeParser().encode(t);
         System.out.println("Received message:\n" + encodedMessage + "\n\n");

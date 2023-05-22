@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ulb.mis.controller;
 
@@ -11,18 +10,18 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ulb.mis.model.Doctor;
-import ulb.mis.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Patient;
 import ulb.mis.model.Person;
 
 /**
  *
- * @author Adrien Foucart
+ * @author fanny
  */
 public class PersonJpaController implements Serializable {
 
@@ -252,14 +251,6 @@ public class PersonJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
-    
-    public Person findDuplicate(Person p){
-        EntityManager em = getEntityManager(); 
-        List<Person> res = em.createNamedQuery("Person.findDuplicate").setParameter("firstname", p.getFirstname()).setParameter("familyname", p.getLastname()).setParameter("dateofbirth", p.getDateofbirth()).getResultList();
-        if (res.isEmpty())
-            return null;
-        return res.get(0);
     }
     
 }

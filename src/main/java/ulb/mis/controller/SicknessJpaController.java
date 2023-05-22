@@ -1,42 +1,35 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ulb.mis.controller;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
-import ulb.mis.controller.exceptions.NonexistentEntityException;
-import ulb.mis.model.Sickness;
-import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ulb.mis.model.Person;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Sickness;
 
 /**
  *
- * @author Liya Rosenstein
+ * @author fanny
  */
 public class SicknessJpaController implements Serializable {
-    
-    private EntityManagerFactory emf = null;
-    
+
     public SicknessJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+    private EntityManagerFactory emf = null;
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     public void create(Sickness sickness) {
         EntityManager em = null;
         try {
@@ -50,8 +43,8 @@ public class SicknessJpaController implements Serializable {
             }
         }
     }
-    
-    public void edit(Sickness sickness) throws NonexistentEntityException {
+
+    public void edit(Sickness sickness) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,14 +59,14 @@ public class SicknessJpaController implements Serializable {
                     throw new NonexistentEntityException("The sickness with id " + id + " no longer exists.");
                 }
             }
-            throw new NonexistentEntityException("The sickness with id " + sickness.getIdsickness() + " could not be updated.", ex);
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
-    
+
     public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -94,30 +87,21 @@ public class SicknessJpaController implements Serializable {
             }
         }
     }
-    
-    public Sickness findSickness(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Sickness.class, id);
-        } finally {
-            em.close();
-        }
-    }
-    
+
     public List<Sickness> findSicknessEntities() {
         return findSicknessEntities(true, -1, -1);
     }
-    
+
     public List<Sickness> findSicknessEntities(int maxResults, int firstResult) {
         return findSicknessEntities(false, maxResults, firstResult);
     }
-    
+
     private List<Sickness> findSicknessEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Sickness.class));
-            javax.persistence.Query q = em.createQuery(cq);
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -127,13 +111,27 @@ public class SicknessJpaController implements Serializable {
             em.close();
         }
     }
-    
-    /*public int getSicknessCount() {
+
+    public Sickness findSickness(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            javax.persistence.criteria.Root<S
-            }
-    }*/
+            return em.find(Sickness.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public int getSicknessCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Sickness> rt = cq.from(Sickness.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
 }

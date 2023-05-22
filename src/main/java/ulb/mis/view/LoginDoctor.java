@@ -40,7 +40,9 @@ public class LoginDoctor extends javax.swing.JFrame {
         CanceldoctorButton = new javax.swing.JButton();
         jLabelcreatedoctoraccount = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setAutoscrolls(true);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
