@@ -4,6 +4,11 @@
  */
 package ulb.mis.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -176,24 +181,23 @@ public class LoginDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelcreatedoctoraccountMouseClicked
 
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
-        DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
-        doctorChoicesAddPopup.setVisible(true);
-    /*String Inami = InamiTextField.getText();
-    String password = PasswordTextField.getText();
-    boolean loginSuccessful = validateCredentials(Inami, password);
 
-    if (loginSuccessful) {
-        // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
-        DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
-        doctorChoicesAddPopup.setVisible(true);
-        doctorChoicesAddPopup.pack();
-        doctorChoicesAddPopup.setLocationRelativeTo(null);
-        doctorChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         // Ferme la fenêtre de connexion
-    } else {
-        // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
-        JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
-    } */
+        String Inami = InamiTextField.getText();
+        String password = PasswordTextField.getText();
+        boolean loginSuccessful = validateCredentials(Inami, password);
+
+        if (loginSuccessful) {
+            // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
+            DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
+            doctorChoicesAddPopup.setVisible(true);
+            doctorChoicesAddPopup.pack();
+            doctorChoicesAddPopup.setLocationRelativeTo(null);
+            doctorChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // Ferme la fenêtre de connexion
+        } else {
+            // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
+            JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_OkButtondoctorActionPerformed
 
 
@@ -209,12 +213,35 @@ public class LoginDoctor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelcreatedoctoraccount;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-private boolean validateCredentials(String Inami, String password) {
-        if (Inami.equals("01234") && password.equals("indrax")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
 
+private boolean validateCredentials(String inami, String password) {
+    // Établir une connexion à la base de données
+    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=CONVERT_TO_NULL", "userproject", "1234");
+         PreparedStatement statement = connection.prepareStatement("SELECT d.inami, p.personpassword FROM doctor d JOIN person p ON d.idperson = p.idperson WHERE d.inami = ?")) {
+
+        statement.setString(1, inami);
+
+        // Exécuter la requête
+        try (ResultSet resultSet = statement.executeQuery()) {
+            // Vérifier si des résultats ont été renvoyés
+            if (resultSet.next()) {
+                // Récupérer les valeurs de l'inami et du mot de passe dans la base de données
+                String dbInami = resultSet.getString("inami");
+                String dbPassword = resultSet.getString("personpassword");
+                
+                // Comparer avec les valeurs entrées dans la fenêtre de connexion
+                if (dbInami.equals(inami) && dbPassword.equals(password)) {
+                    // Les informations d'identification sont valides
+                    return true;
+                }
+            }
+        }
+    } catch (SQLException e) {
+        // Gérer les exceptions
+        e.printStackTrace();
+    }
+
+    // Les informations d'identification sont incorrectes
+    return false;
+}
+}
