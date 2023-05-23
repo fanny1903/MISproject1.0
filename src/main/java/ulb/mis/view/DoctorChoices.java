@@ -59,6 +59,8 @@ public class DoctorChoices extends javax.swing.JFrame {
         itemsList = new javax.swing.JList<>();
         AddSicknessButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jButton1.setText("Approvals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

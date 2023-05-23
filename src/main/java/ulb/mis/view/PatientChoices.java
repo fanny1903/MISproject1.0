@@ -49,7 +49,7 @@ public class PatientChoices extends javax.swing.JFrame {
         messageArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setBackground(new java.awt.Color(255, 204, 102));
         titleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
