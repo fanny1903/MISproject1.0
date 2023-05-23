@@ -4,6 +4,11 @@
  */
 package ulb.mis.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -159,23 +164,22 @@ public class LoginPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameTextFieldActionPerformed
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-        PatientChoices patientChoicesAddPopup = new PatientChoices();
-        patientChoicesAddPopup.setVisible(true);
-            /*String firstName = FirstNameTextField.getText();
+   
+        String firstName = FirstNameTextField.getText();
         String password = PasswordTextField.getText();
         boolean loginSuccessful = validateCredentials(firstName, password);
 
         if (loginSuccessful) {
             // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
-            PatientChoices PatientChoices = new PatientChoices();
-            PatientChoices.setVisible(true);
-            PatientChoices.pack();
-            PatientChoices.setLocationRelativeTo(null);
-            this.dispose(); // Ferme la fenêtre de connexion
+            PatientChoices patientChoicesAddPopup = new PatientChoices();
+            patientChoicesAddPopup.setVisible(true);
+            patientChoicesAddPopup.pack();
+            patientChoicesAddPopup.setLocationRelativeTo(null);
+            patientChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ferme la fenêtre de connexion
         } else {
             // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
             JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
-    }*/
+    }
 
     }//GEN-LAST:event_OkButtonActionPerformed
 
@@ -205,12 +209,36 @@ public class LoginPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-private boolean validateCredentials(String firstName, String password) {
-        if (firstName.equals("John") && password.equals("password")) {
-            return true;
-        } else {
-            return false;
+private boolean validateCredentials(String firstname, String password) {
+    // Établir une connexion à la base de données
+    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=CONVERT_TO_NULL", "userproject", "1234");
+         PreparedStatement statement = connection.prepareStatement("SELECT firstname, personpassword FROM person WHERE firstname = ?")) {
+
+        statement.setString(1, firstname);
+
+        // Exécuter la requête
+        try (ResultSet resultSet = statement.executeQuery()) {
+            // Vérifier si des résultats ont été renvoyés
+            if (resultSet.next()) {
+                // Récupérer les valeurs du firstname et du mot de passe dans la base de données
+                String dbFirstname = resultSet.getString("firstname");
+                String dbPassword = resultSet.getString("personpassword");
+                
+                // Comparer avec les valeurs entrées dans la fenêtre de connexion
+                if (dbFirstname.equals(firstname) && dbPassword.equals(password)) {
+                    // Les informations d'identification sont valides
+                    return true;
+                }
+            }
         }
+    } catch (SQLException e) {
+        // Gérer les exceptions
+        e.printStackTrace();
     }
+
+    // Les informations d'identification sont incorrectes
+    return false;
 }
+}
+
 
