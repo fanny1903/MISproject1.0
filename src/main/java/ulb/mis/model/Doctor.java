@@ -49,8 +49,6 @@ public class Doctor implements Serializable {
     private Person idperson;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddesignateddoctor")
     private Collection<Patient> patientCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddoctor")
-    private Collection<Appointment> appointmentCollection;
 
     public Doctor() {
     }
@@ -97,15 +95,6 @@ public class Doctor implements Serializable {
         this.patientCollection = patientCollection;
     }
 
-    @XmlTransient
-    public Collection<Appointment> getAppointmentCollection() {
-        return appointmentCollection;
-    }
-
-    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
-        this.appointmentCollection = appointmentCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -128,7 +117,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model2.Doctor[ iddoctor=" + iddoctor + " ]";
+        return "ulb.mis.model.Doctor[ iddoctor=" + iddoctor + " ]";
     }
     
 }

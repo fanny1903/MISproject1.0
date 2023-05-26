@@ -4,12 +4,13 @@
  */
 package ulb.mis.controller;
 
-import ulb.mis.model.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ulb.mis.model.Person;
+import ulb.mis.model.Patient;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Doctor;
 
 /**
  *
@@ -37,9 +39,6 @@ public class DoctorJpaController implements Serializable {
         if (doctor.getPatientCollection() == null) {
             doctor.setPatientCollection(new ArrayList<Patient>());
         }
-        if (doctor.getAppointmentCollection() == null) {
-            doctor.setAppointmentCollection(new ArrayList<Appointment>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -55,12 +54,6 @@ public class DoctorJpaController implements Serializable {
                 attachedPatientCollection.add(patientCollectionPatientToAttach);
             }
             doctor.setPatientCollection(attachedPatientCollection);
-            Collection<Appointment> attachedAppointmentCollection = new ArrayList<Appointment>();
-            for (Appointment appointmentCollectionAppointmentToAttach : doctor.getAppointmentCollection()) {
-                appointmentCollectionAppointmentToAttach = em.getReference(appointmentCollectionAppointmentToAttach.getClass(), appointmentCollectionAppointmentToAttach.getIdappointment());
-                attachedAppointmentCollection.add(appointmentCollectionAppointmentToAttach);
-            }
-            doctor.setAppointmentCollection(attachedAppointmentCollection);
             em.persist(doctor);
             if (idperson != null) {
                 idperson.getDoctorCollection().add(doctor);
@@ -73,15 +66,6 @@ public class DoctorJpaController implements Serializable {
                 if (oldIddesignateddoctorOfPatientCollectionPatient != null) {
                     oldIddesignateddoctorOfPatientCollectionPatient.getPatientCollection().remove(patientCollectionPatient);
                     oldIddesignateddoctorOfPatientCollectionPatient = em.merge(oldIddesignateddoctorOfPatientCollectionPatient);
-                }
-            }
-            for (Appointment appointmentCollectionAppointment : doctor.getAppointmentCollection()) {
-                Doctor oldIddoctorOfAppointmentCollectionAppointment = appointmentCollectionAppointment.getIddoctor();
-                appointmentCollectionAppointment.setIddoctor(doctor);
-                appointmentCollectionAppointment = em.merge(appointmentCollectionAppointment);
-                if (oldIddoctorOfAppointmentCollectionAppointment != null) {
-                    oldIddoctorOfAppointmentCollectionAppointment.getAppointmentCollection().remove(appointmentCollectionAppointment);
-                    oldIddoctorOfAppointmentCollectionAppointment = em.merge(oldIddoctorOfAppointmentCollectionAppointment);
                 }
             }
             em.getTransaction().commit();
@@ -102,8 +86,6 @@ public class DoctorJpaController implements Serializable {
             Person idpersonNew = doctor.getIdperson();
             Collection<Patient> patientCollectionOld = persistentDoctor.getPatientCollection();
             Collection<Patient> patientCollectionNew = doctor.getPatientCollection();
-            Collection<Appointment> appointmentCollectionOld = persistentDoctor.getAppointmentCollection();
-            Collection<Appointment> appointmentCollectionNew = doctor.getAppointmentCollection();
             List<String> illegalOrphanMessages = null;
             for (Patient patientCollectionOldPatient : patientCollectionOld) {
                 if (!patientCollectionNew.contains(patientCollectionOldPatient)) {
@@ -111,14 +93,6 @@ public class DoctorJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Patient " + patientCollectionOldPatient + " since its iddesignateddoctor field is not nullable.");
-                }
-            }
-            for (Appointment appointmentCollectionOldAppointment : appointmentCollectionOld) {
-                if (!appointmentCollectionNew.contains(appointmentCollectionOldAppointment)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Appointment " + appointmentCollectionOldAppointment + " since its iddoctor field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -135,13 +109,6 @@ public class DoctorJpaController implements Serializable {
             }
             patientCollectionNew = attachedPatientCollectionNew;
             doctor.setPatientCollection(patientCollectionNew);
-            Collection<Appointment> attachedAppointmentCollectionNew = new ArrayList<Appointment>();
-            for (Appointment appointmentCollectionNewAppointmentToAttach : appointmentCollectionNew) {
-                appointmentCollectionNewAppointmentToAttach = em.getReference(appointmentCollectionNewAppointmentToAttach.getClass(), appointmentCollectionNewAppointmentToAttach.getIdappointment());
-                attachedAppointmentCollectionNew.add(appointmentCollectionNewAppointmentToAttach);
-            }
-            appointmentCollectionNew = attachedAppointmentCollectionNew;
-            doctor.setAppointmentCollection(appointmentCollectionNew);
             doctor = em.merge(doctor);
             if (idpersonOld != null && !idpersonOld.equals(idpersonNew)) {
                 idpersonOld.getDoctorCollection().remove(doctor);
@@ -159,17 +126,6 @@ public class DoctorJpaController implements Serializable {
                     if (oldIddesignateddoctorOfPatientCollectionNewPatient != null && !oldIddesignateddoctorOfPatientCollectionNewPatient.equals(doctor)) {
                         oldIddesignateddoctorOfPatientCollectionNewPatient.getPatientCollection().remove(patientCollectionNewPatient);
                         oldIddesignateddoctorOfPatientCollectionNewPatient = em.merge(oldIddesignateddoctorOfPatientCollectionNewPatient);
-                    }
-                }
-            }
-            for (Appointment appointmentCollectionNewAppointment : appointmentCollectionNew) {
-                if (!appointmentCollectionOld.contains(appointmentCollectionNewAppointment)) {
-                    Doctor oldIddoctorOfAppointmentCollectionNewAppointment = appointmentCollectionNewAppointment.getIddoctor();
-                    appointmentCollectionNewAppointment.setIddoctor(doctor);
-                    appointmentCollectionNewAppointment = em.merge(appointmentCollectionNewAppointment);
-                    if (oldIddoctorOfAppointmentCollectionNewAppointment != null && !oldIddoctorOfAppointmentCollectionNewAppointment.equals(doctor)) {
-                        oldIddoctorOfAppointmentCollectionNewAppointment.getAppointmentCollection().remove(appointmentCollectionNewAppointment);
-                        oldIddoctorOfAppointmentCollectionNewAppointment = em.merge(oldIddoctorOfAppointmentCollectionNewAppointment);
                     }
                 }
             }
@@ -209,13 +165,6 @@ public class DoctorJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This Doctor (" + doctor + ") cannot be destroyed since the Patient " + patientCollectionOrphanCheckPatient + " in its patientCollection field has a non-nullable iddesignateddoctor field.");
-            }
-            Collection<Appointment> appointmentCollectionOrphanCheck = doctor.getAppointmentCollection();
-            for (Appointment appointmentCollectionOrphanCheckAppointment : appointmentCollectionOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Doctor (" + doctor + ") cannot be destroyed since the Appointment " + appointmentCollectionOrphanCheckAppointment + " in its appointmentCollection field has a non-nullable iddoctor field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

@@ -5,22 +5,19 @@
 package ulb.mis.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p"),
-    @NamedQuery(name = "Patient.findByIdpatient", query = "SELECT p FROM Patient p WHERE p.idpatient = :idpatient")})
+    @NamedQuery(name = "Patient.findByIdpatient", query = "SELECT p FROM Patient p WHERE p.idpatient = :idpatient"),
+    @NamedQuery(name = "Patient.findByMsgFileReceived", query = "SELECT p FROM Patient p WHERE p.msgFileReceived = :msgFileReceived"),
+    @NamedQuery(name = "Patient.findByMsg", query = "SELECT p FROM Patient p WHERE p.msg = :msg")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +39,13 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpatient")
     private Integer idpatient;
+    @Lob
+    @Column(name = "file")
+    private byte[] file;
+    @Column(name = "msgFileReceived")
+    private Boolean msgFileReceived;
+    @Column(name = "msg")
+    private Boolean msg;
     @JoinColumn(name = "idperson", referencedColumnName = "idperson")
     @ManyToOne(optional = false)
     private Person idperson;
@@ -49,8 +55,6 @@ public class Patient implements Serializable {
     @JoinColumn(name = "idsickness", referencedColumnName = "idsickness")
     @ManyToOne
     private Sickness idsickness;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpatient")
-    private Collection<Appointment> appointmentCollection;
 
     public Patient() {
     }
@@ -65,6 +69,30 @@ public class Patient implements Serializable {
 
     public void setIdpatient(Integer idpatient) {
         this.idpatient = idpatient;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public Boolean getMsgFileReceived() {
+        return msgFileReceived;
+    }
+
+    public void setMsgFileReceived(Boolean msgFileReceived) {
+        this.msgFileReceived = msgFileReceived;
+    }
+
+    public Boolean getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Boolean msg) {
+        this.msg = msg;
     }
 
     public Person getIdperson() {
@@ -91,15 +119,6 @@ public class Patient implements Serializable {
         this.idsickness = idsickness;
     }
 
-    @XmlTransient
-    public Collection<Appointment> getAppointmentCollection() {
-        return appointmentCollection;
-    }
-
-    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
-        this.appointmentCollection = appointmentCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,12 +141,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        if (idsickness == null){
-            return idperson.toString();
-        }
-        else{
-           return idperson.toString() + " - " + "suffers from : " + idsickness.getNameofsickness(); 
-        }
+        return "ulb.mis.model.Patient[ idpatient=" + idpatient + " ]";
     }
     
 }

@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import ulb.mis.model.Patient;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-22T18:48:10")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-26T17:44:47")
 @StaticMetamodel(Sickness.class)
 public class Sickness_ { 
 

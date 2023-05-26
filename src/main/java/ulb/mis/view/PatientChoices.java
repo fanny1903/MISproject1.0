@@ -157,7 +157,7 @@ public class PatientChoices extends javax.swing.JFrame {
          try {
             LOGGER.debug("Deleting patient with id: " + selectedPatientId);
             patientCtrl.destroy(selectedPatientId);
-        } catch (IllegalOrphanException | NonexistentEntityException ex) {
+        } catch (NonexistentEntityException ex) {
             LOGGER.error("Failed to delete patient", ex);
         }
         

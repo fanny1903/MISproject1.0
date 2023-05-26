@@ -158,7 +158,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model2.Person[ idperson=" + idperson + " ]";
+        return "ulb.mis.model.Person[ idperson=" + idperson + " ]";
     }
     
 }

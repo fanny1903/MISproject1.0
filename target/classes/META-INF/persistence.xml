@@ -3,7 +3,6 @@
   <persistence-unit name="MISproject_PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ulb.mis.model.Sickness</class>
-    <class>ulb.mis.model.Appointment</class>
     <class>ulb.mis.model.Patient</class>
     <class>ulb.mis.model.Person</class>
     <class>ulb.mis.model.Doctor</class>

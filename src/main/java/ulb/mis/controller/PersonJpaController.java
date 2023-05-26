@@ -4,12 +4,12 @@
  */
 package ulb.mis.controller;
 
-import ulb.mis.model.*;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ulb.mis.model.Doctor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +17,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
 
 /**
  *

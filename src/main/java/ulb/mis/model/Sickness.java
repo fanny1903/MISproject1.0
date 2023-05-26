@@ -155,7 +155,7 @@ public class Sickness implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model2.Sickness[ idsickness=" + idsickness + " ]";
+        return "ulb.mis.model.Sickness[ idsickness=" + idsickness + " ]";
     }
     
 }
