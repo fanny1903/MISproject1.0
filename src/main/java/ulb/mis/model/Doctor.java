@@ -117,7 +117,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model.Doctor[ iddoctor=" + iddoctor + " ]";
+         return idperson.toString();
     }
     
 }
