@@ -6,6 +6,9 @@ package ulb.mis.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,7 +38,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
         initComponents();
         
         
-        java.util.List<Sickness> sicknesses = sicknessCtrl.findSicknessEntities();
+        List<Sickness> sicknesses = sicknessCtrl.findSicknessEntities();
         setLayout(null); // Utiliser le null layout
         
         for(int i =0; i < sicknesses.size(); i++){
@@ -93,8 +96,49 @@ public class SymptomsWindow extends javax.swing.JFrame {
         setPreferredSize(getSize()); // Définir la taille préférée pour la fenêtre
         
         pack();
+        
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("coucou");
+                searchBoxes(); 
+            }
+        });
+        
+        
+        
     }
-      
+    
+    public static List<JCheckBox> createCheckBoxList() {
+        List<JCheckBox> checkBoxList;
+        checkBoxList = new ArrayList<>();
+
+        // Ajouter des JCheckBoxes à la liste
+        checkBoxList.add(new JCheckBox("CheckBox 1"));
+        checkBoxList.add(new JCheckBox("CheckBox 2"));
+        checkBoxList.add(new JCheckBox("CheckBox 3"));
+
+        return checkBoxList;
+    }
+    
+    private List<JCheckBox> searchBoxes(){
+        List<JCheckBox> boxesList = new ArrayList<>();
+
+        Component[] components = getContentPane().getComponents();
+        
+        for (Component component : components) {
+            if (component instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) component;
+                if (checkBox.isSelected()){
+                    boxesList.add(checkBox);
+                    System.out.println(checkBox.getText());
+                }              
+            }
+        }
+        return boxesList;
+    }
+     
+   
+    
     
     
     

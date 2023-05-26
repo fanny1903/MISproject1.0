@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-26T17:44:47")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-26T21:49:14")
 @StaticMetamodel(Person.class)
 public class Person_ { 
 
