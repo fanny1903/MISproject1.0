@@ -5,6 +5,7 @@
 package ulb.mis.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -158,7 +159,8 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model.Person[ idperson=" + idperson + " ]";
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        return lastname.toUpperCase() + " " + firstname + " (" + fmt.format(dateofbirth) + ")";
     }
     
 }

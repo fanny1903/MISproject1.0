@@ -141,7 +141,12 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return "ulb.mis.model.Patient[ idpatient=" + idpatient + " ]";
+        if ( idsickness != null){
+            return idperson.toString() + " - suffers from : " + idsickness.getNameofsickness();
+        }
+        else{
+            return null;
+        }
     }
     
 }
