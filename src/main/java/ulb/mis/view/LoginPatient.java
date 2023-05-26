@@ -9,14 +9,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ulb.mis.model.Patient;
 
 /**
  *
  * @author indra
  */
 public class LoginPatient extends javax.swing.JFrame {
+    
+    //Patient patient = null;
 
     /**
      * Creates new form LoginnPatient
@@ -177,6 +181,12 @@ public class LoginPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+   /* private void refreshPatient(){
+         
+         patient.getFile();
+         
+    }*/
+    
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
         String firstName = firstnameTextField.getText();
         String password = jPasswordField.getText();

@@ -5,6 +5,13 @@
 package ulb.mis.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -236,8 +243,55 @@ public class DoctorChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_AddSicknessButtonActionPerformed
 
     private void PathOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PathOkButtonActionPerformed
-        // TODO add your handling code here:
+        String filePath = DoctorPathPdfTextField.getText(); // Path to the PDF file to save
+
+        byte[] pdfData = null;  //create a byte instance
+        try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
+            
+            // Create a byte array with the length equal to the file size
+            pdfData = new byte[fileInputStream.available()];
+
+            // Read the file content into the byte array
+            fileInputStream.read(pdfData);
+        } catch (IOException e) {
+            // Handle any potential errors while reading the file
+            e.printStackTrace();
+            // You might want to display an error message to the user here
+            return;
+        }
+
+        // Take the selected patient
+        if (itemsList.getSelectedIndex() < 0) {
+            return;
+        }
+
+        EntityListModel<Patient> model = (EntityListModel) itemsList.getModel();
+        Patient selected = model.getList().get(itemsList.getSelectedIndex());
+
+        // Set the selected patient's "file" blob attribute to the pdf sent by the doctor
+        selected.setFile(pdfData);
+
+        // Connect to db
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
+            // Prepare the SQL statement
+            String sql = "UPDATE patient SET file = ? WHERE Idpatient = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setBytes(1, pdfData); // Set the PDF file data as a parameter
+                pstmt.setInt(2, selected.getIdpatient());  // Set the patient ID as a parameter
+
+                // update the  statement
+                pstmt.executeUpdate();
+                System.out.print("Prescription has been sent to the patient");
+
+                
+            }
+        } catch (SQLException e) {
+            // Handle any database errors
+            e.printStackTrace();
+            // You might want to display an error message to the user here
+        }
     }//GEN-LAST:event_PathOkButtonActionPerformed
+
 
     private void DoctorPathPdfTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorPathPdfTextFieldActionPerformed
         // TODO add your handling code here:
@@ -248,27 +302,107 @@ public class DoctorChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_notOkButtonActionPerformed
 
     private void itemsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemsListMouseClicked
-        if( itemsList.getSelectedIndex() < 0 ){
+        if (itemsList.getSelectedIndex() < 0) {
             return;
         }
-        
+
         EntityListModel<Patient> model = (EntityListModel) itemsList.getModel();
         Patient selected = model.getList().get(itemsList.getSelectedIndex());
-        
-        if(evt.getClickCount() == 2 ){     
+
+        if (evt.getClickCount() == 2) {
             selected.getIdsickness();
-            sympTextArea.setText(selected.getIdsickness().getSymptom1() + "\n" + selected.getIdsickness().getSymptom2() + "\n" + selected.getIdsickness().getSymptom3() + "\n" + selected.getIdsickness().getSymptom4());
-            
-            
-            /*List sickness = sicknessCtrl.findSicknessEntities();
-            EntityListModel<Sickness> model = new EntityListModel(sickness);
-            
-        
-        SelectedPatientSymptomsList.setModel(model);*/
+            sympTextArea.setText(selected.getIdsickness().getSymptom1()
+                    + "\n" + selected.getIdsickness().getSymptom2() + "\n"
+                    + selected.getIdsickness().getSymptom3() + "\n" + selected.getIdsickness().getSymptom4());
         }
-        
+
     }//GEN-LAST:event_itemsListMouseClicked
 
+   
+    
+    /*public void setPdfData(byte[] pdfData) {
+    // Set the pdfData to the 'file' attribute of the Patient entity
+    this.file = pdfData;
+}
+
+        try {
+            // Read the content of the PDF file as a byte array
+            File file = new File(filePath);
+            FileInputStream inputStream = new FileInputStream(file);
+            byte[] pdfData = new byte[(int) file.length()];
+            inputStream.read(pdfData);
+
+            // Establish a connection to the database
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234");
+
+            // Prepare the SQL statement for inserting the PDF file
+            String sql = selected.setFile(DoctorPathPdfTextField.getText());
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setBytes(1, pdfData);
+
+            // Execute the insertion query
+            pstmt.executeUpdate();
+
+            // Close resources
+            pstmt.close();
+            conn.close();
+
+            System.out.println("The PDF file has been saved in the database.");
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+
+    }*/
+        
+    /*    
+    }
+    
+     public Doctor getDoctor(){
+        updateDoctor();
+                
+        return doctor;
+    }
+    
+    public void updateDoctor(){
+        if( doctor == null ){
+            doctor = new Doctor();
+        }
+        
+        doctor.setIdperson(addPersonPanel1.getPerson());
+        doctor.setInami(inamiTextField.getText());
+    
+    ----------------------------------------------------------------------------
+    
+    String filePath = "path/to/pdf/file.pdf"; // Path to the PDF file to save
+
+        try {
+            // Read the content of the PDF file as a byte array
+            File file = new File(filePath);
+            FileInputStream inputStream = new FileInputStream(file);
+            byte[] pdfData = new byte[(int) file.length()];
+            inputStream.read(pdfData);
+
+            // Establish a connection to the database
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname", "username", "password");
+
+            // Prepare the SQL statement for inserting the PDF file
+            String sql = "INSERT INTO pdf_table (pdf_data) VALUES (?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setBytes(1, pdfData);
+
+            // Execute the insertion query
+            pstmt.executeUpdate();
+
+            // Close resources
+            pstmt.close();
+            conn.close();
+
+            System.out.println("The PDF file has been saved in the database.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
