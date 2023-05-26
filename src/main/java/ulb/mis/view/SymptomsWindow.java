@@ -25,8 +25,8 @@ public class SymptomsWindow extends javax.swing.JFrame {
     
     private static final Logger LOGGER = LogManager.getLogger(CreatePatientAccount.class.getName());
 
-    int a = 0;
-    int b = 0;
+    int a = 1;
+    int b = 1;
     /**
      * Creates new form symp
      */
@@ -40,52 +40,58 @@ public class SymptomsWindow extends javax.swing.JFrame {
         
         for(int i =0; i < sicknesses.size(); i++){
             javax.swing.JCheckBox checkBox = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom1());           
-            checkBox.setBounds(100*a, 50*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
+            checkBox.setBounds(50*a, 25*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
             add(checkBox);
-            if (b!=12){
-                b= b+1;
+            if (b!=25){
+                b= b+2;
             }
             else{
-                b=0;
-                a = a+1;
+                b=1;
+                a = a+3;
             }
             javax.swing.JCheckBox checkBox2 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom2());           
-            checkBox2.setBounds(100*a, 50*b, 100, 25);
+            checkBox2.setBounds(50*a, 25*b, 100, 25);
             add(checkBox2);
-            if (b!=12){
-                b= b+1;
+            if (b!=25){
+                b= b+2;
             }
             else{
-                b=0;
-                a = a+1;
+                b=1;
+                a = a+3;
             }
             javax.swing.JCheckBox checkBox3 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom3());           
-            checkBox3.setBounds(100*a, 50*b, 100, 25);
+            checkBox3.setBounds(50*a, 25*b, 100, 25);
             add(checkBox3);
-            if (b!=12){
-                b= b+1;
+            if (b!=25){
+                b= b+2;
             }
             else{
-                b=0;
-                a = a+1;
+                b=1;
+                a = a+3;
             }
             javax.swing.JCheckBox checkBox4 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom4());           
-            checkBox4.setBounds(100*a, 50*b, 100, 25);
+            checkBox4.setBounds(50*a, 25*b, 100, 25);
             add(checkBox4);
-            if (b!=12){
-                b= b+1;
+            if (b!=25){
+                b= b+2;
             }
             else{
-                b=0;
-                a = a+1;
+                b=1;
+                a = a+3;
             }
         }
         // Ajouter d'autres checkboxes avec des positions personnalisées...
-
-        setSize(500, 600); // Définir la taille souhaitée pour la fenêtre
+        
+        JButton button = new JButton("Confirm");
+        button.setBounds(650, 655, 75, 40); // Position et taille du bouton
+        button.setBackground(new Color(255, 204, 102));
+        add(button);
+        
+        setSize(750, 750); // Définir la taille souhaitée pour la fenêtre
         setResizable(false); // Empêcher le redimensionnement de la fenêtre
-
+        
         setPreferredSize(getSize()); // Définir la taille préférée pour la fenêtre
+        
         pack();
     }
       
@@ -107,11 +113,11 @@ public class SymptomsWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGap(0, 812, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 533, Short.MAX_VALUE)
         );
 
         pack();
