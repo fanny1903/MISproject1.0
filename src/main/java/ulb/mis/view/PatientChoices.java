@@ -25,11 +25,18 @@ public class PatientChoices extends javax.swing.JFrame {
     private static final Logger LOGGER = LogManager.getLogger(PatientChoices.class.getName());
     
     Patient patient = null;
+    Patient patientLog = null;
+    
+        
+        
+        
     /**
      * Creates new form PatientChoices2
      */
-    public PatientChoices() {
+    public PatientChoices(Patient patient) {
         initComponents();
+        patientLog = patient;
+       
     }
 
     /**
@@ -159,7 +166,7 @@ public class PatientChoices extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SickButtonActionPerformed
-        SymptomsWindow symptomAddPopup = new SymptomsWindow();
+        SymptomsWindow symptomAddPopup = new SymptomsWindow(patientLog);
         symptomAddPopup.setVisible(true);
     }//GEN-LAST:event_SickButtonActionPerformed
 
