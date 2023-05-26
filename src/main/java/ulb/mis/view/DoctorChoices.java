@@ -14,10 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.SicknessJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
+import ulb.mis.model.Sickness;
 //import ulb.mis.view.PatientChoices
 
 
@@ -29,6 +31,7 @@ public class DoctorChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
+    private final SicknessJpaController sicknessCtrl = new SicknessJpaController(emfac);
     
     private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
     
@@ -58,11 +61,11 @@ public class DoctorChoices extends javax.swing.JFrame {
         itemsList = new javax.swing.JList<>();
         AddSicknessButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        patientAdditionalRemTextArea = new javax.swing.JTextArea();
         DoctorPathPdfTextField = new javax.swing.JTextField();
         PathOkButton = new javax.swing.JButton();
         notOkButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        sympTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,6 +94,11 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
+        itemsList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                itemsListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(itemsList);
 
         AddSicknessButton.setBackground(new java.awt.Color(255, 204, 102));
@@ -102,10 +110,6 @@ public class DoctorChoices extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Patient's symptoms");
-
-        patientAdditionalRemTextArea.setColumns(20);
-        patientAdditionalRemTextArea.setRows(5);
-        jScrollPane2.setViewportView(patientAdditionalRemTextArea);
 
         DoctorPathPdfTextField.setText("Path to your PDF");
         DoctorPathPdfTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +134,10 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
+        sympTextArea.setColumns(20);
+        sympTextArea.setRows(5);
+        jScrollPane2.setViewportView(sympTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,15 +156,17 @@ public class DoctorChoices extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jScrollPane2)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(DoctorPathPdfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(68, 68, 68)
                                         .addComponent(notOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(38, 38, 38)
-                                        .addComponent(PathOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(26, 26, 26)))
+                                        .addComponent(PathOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(26, 26, 26))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(597, 597, 597)))
                         .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(deleteDoctorAccountButton)
@@ -176,8 +186,8 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DoctorPathPdfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(notOkButton)
@@ -237,6 +247,28 @@ public class DoctorChoices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_notOkButtonActionPerformed
 
+    private void itemsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemsListMouseClicked
+        if( itemsList.getSelectedIndex() < 0 ){
+            return;
+        }
+        
+        EntityListModel<Patient> model = (EntityListModel) itemsList.getModel();
+        Patient selected = model.getList().get(itemsList.getSelectedIndex());
+        
+        if(evt.getClickCount() == 2 ){     
+            selected.getIdsickness();
+            sympTextArea.setText(selected.getIdsickness().getSymptom1() + "\n" + selected.getIdsickness().getSymptom2() + "\n" + selected.getIdsickness().getSymptom3() + "\n" + selected.getIdsickness().getSymptom4());
+            
+            
+            /*List sickness = sicknessCtrl.findSicknessEntities();
+            EntityListModel<Sickness> model = new EntityListModel(sickness);
+            
+        
+        SelectedPatientSymptomsList.setModel(model);*/
+        }
+        
+    }//GEN-LAST:event_itemsListMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
@@ -249,7 +281,7 @@ public class DoctorChoices extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton notOkButton;
-    private javax.swing.JTextArea patientAdditionalRemTextArea;
+    private javax.swing.JTextArea sympTextArea;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
