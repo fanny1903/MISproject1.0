@@ -24,27 +24,36 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="SickButton" min="-2" pref="157" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="FolderPathTextField" min="-2" pref="263" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="PathOkButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="titleLabel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="deletePatientAccountButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="SickButton" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="186" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <Component id="FolderPathTextField" min="-2" pref="263" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="PathOkButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                  <EmptySpace pref="152" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                  <EmptySpace pref="153" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -53,21 +62,30 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="titleLabel" min="-2" pref="75" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="titleLabel" min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="SickButton" min="-2" pref="54" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="SickButton" min="-2" pref="98" max="-2" attributes="0"/>
-              <EmptySpace pref="185" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="102" max="-2" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="FolderPathTextField" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="PathOkButton" alignment="3" pref="34" max="32767" attributes="0"/>
+                  <Component id="PathOkButton" alignment="3" max="32767" attributes="0"/>
+                  <Component id="deletePatientAccountButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <EmptySpace pref="97" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -79,70 +97,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="186" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" alignment="1" pref="353" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="deletePatientAccountButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="deletePatientAccountButton" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="102" max="-2" attributes="0"/>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="307" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="deletePatientAccountButton">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="99" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Delete my account"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletePatientAccountButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextArea" name="messageArea">
-              <Properties>
-                <Property name="columns" type="int" value="20"/>
-                <Property name="rows" type="int" value="5"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Message from your doctor"/>
-          </Properties>
-        </Component>
-      </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="titleLabel">
       <Properties>
@@ -156,7 +119,7 @@
           <Color blue="66" green="66" red="66" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="What do you want?"/>
+        <Property name="text" type="java.lang.String" value="Your patient profile"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
@@ -174,7 +137,7 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cc" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="I am sick"/>
+        <Property name="text" type="java.lang.String" value="Register my symptoms"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SickButtonActionPerformed"/>
@@ -190,6 +153,37 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PathOkButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deletePatientAccountButton">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Delete my account"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletePatientAccountButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="messageArea">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Message from your doctor"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

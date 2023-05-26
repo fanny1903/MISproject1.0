@@ -59,8 +59,8 @@ public class DoctorChoices extends javax.swing.JFrame {
         AddSicknessButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
+        patientAdditionalRemTextArea = new javax.swing.JTextArea();
+        DoctorPathPdfTextField = new javax.swing.JTextField();
         PathOkButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,7 +69,7 @@ public class DoctorChoices extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(102, 102, 102));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Doctor interface");
+        titleLabel.setText("Your doctor's profile");
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
@@ -101,14 +101,14 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         jLabel1.setText("Patient's additionnal remarks");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        patientAdditionalRemTextArea.setColumns(20);
+        patientAdditionalRemTextArea.setRows(5);
+        jScrollPane2.setViewportView(patientAdditionalRemTextArea);
 
-        jTextField1.setText("Path to your PDF");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        DoctorPathPdfTextField.setText("Path to your PDF");
+        DoctorPathPdfTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                DoctorPathPdfTextFieldActionPerformed(evt);
             }
         });
 
@@ -129,43 +129,42 @@ public class DoctorChoices extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(doctorActivePatients, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                            .addComponent(AddSicknessButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deleteDoctorAccountButton)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(AddSicknessButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(doctorActivePatients, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addComponent(deleteDoctorAccountButton)
+                        .addGap(144, 144, 144)
+                        .addComponent(DoctorPathPdfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(PathOkButton)))
-                .addGap(14, 14, 14))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteDoctorAccountButton))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(doctorActivePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(AddSicknessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addGap(59, 59, 59)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PathOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(DoctorPathPdfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PathOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteDoctorAccountButton))
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -211,13 +210,14 @@ public class DoctorChoices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void DoctorPathPdfTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorPathPdfTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_DoctorPathPdfTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;
+    private javax.swing.JTextField DoctorPathPdfTextField;
     private javax.swing.JButton PathOkButton;
     private javax.swing.JButton deleteDoctorAccountButton;
     private javax.swing.JButton doctorActivePatients;
@@ -225,8 +225,7 @@ public class DoctorChoices extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea patientAdditionalRemTextArea;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
