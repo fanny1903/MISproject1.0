@@ -18,9 +18,11 @@ ulb/mis/view/AddPersonPanel.class
 ulb/mis/view/MainWindow$1.class
 ulb/mis/view/CreateDoctorAccount.class
 ulb/mis/view/LoginDoctor$1.class
+ulb/mis/view/LoginPatient$6.class
 ulb/mis/view/CreateDoctorAccount$1.class
 ulb/mis/view/DoctorChoices$4.class
 ulb/mis/view/DoctorChoices$6.class
+ulb/mis/view/SymptomsWindow$1.class
 ulb/mis/model/Patient_.class
 ulb/mis/services/HL7Services.class
 ulb/mis/view/CreatePatientAccount$3.class
@@ -30,6 +32,7 @@ ulb/mis/view/LoginPatient$3.class
 ulb/mis/controller/exceptions/IllegalOrphanException.class
 ulb/mis/model/Patient.class
 ulb/mis/view/addSickness.class
+ulb/mis/view/LoginDoctor$4.class
 ulb/mis/view/MainWindow$2.class
 ulb/mis/view/LoginDoctor$LoginDoctorListener.class
 ulb/mis/controller/PersonJpaController.class
@@ -54,11 +57,13 @@ ulb/mis/view/addSickness$4.class
 ulb/mis/view/PatientChoices$1.class
 ulb/mis/view/LoginPatient$1.class
 ulb/mis/model/Person.class
+ulb/mis/view/AddPersonPanel$2.class
 ulb/mis/view/LoginDoctor$3.class
 ulb/mis/view/CreatePatientAccount$2.class
 ulb/mis/view/DoctorChoices$2.class
 ulb/mis/view/addSickness$3.class
 ulb/mis/view/SymptomsWindow.class
 ulb/mis/view/CreateDoctorAccount$2.class
+ulb/mis/view/LoginPatient$5.class
 ulb/mis/view/PatientChoices$4.class
 ulb/mis/model/Doctor_.class

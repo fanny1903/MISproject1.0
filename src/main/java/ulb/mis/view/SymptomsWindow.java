@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.SicknessJpaController;
+import ulb.mis.model.Patient;
 import ulb.mis.model.Sickness;
 
 /**
@@ -30,11 +31,13 @@ public class SymptomsWindow extends javax.swing.JFrame {
 
     int a = 1;
     int b = 1;
+    Patient patientLog = null;
     /**
      * Creates new form symp
      */
     
-    public SymptomsWindow() {
+    public SymptomsWindow(Patient patient) {
+        patientLog = patient;
         initComponents();
         
         
@@ -108,18 +111,6 @@ public class SymptomsWindow extends javax.swing.JFrame {
         
     }
     
-    public static List<JCheckBox> createCheckBoxList() {
-        List<JCheckBox> checkBoxList;
-        checkBoxList = new ArrayList<>();
-
-        // Ajouter des JCheckBoxes à la liste
-        checkBoxList.add(new JCheckBox("CheckBox 1"));
-        checkBoxList.add(new JCheckBox("CheckBox 2"));
-        checkBoxList.add(new JCheckBox("CheckBox 3"));
-
-        return checkBoxList;
-    }
-    
     private List<JCheckBox> searchBoxes(){
         List<JCheckBox> boxesList = new ArrayList<>();
 
@@ -129,11 +120,11 @@ public class SymptomsWindow extends javax.swing.JFrame {
             if (component instanceof JCheckBox) {
                 JCheckBox checkBox = (JCheckBox) component;
                 if (checkBox.isSelected()){
-                    boxesList.add(checkBox);
                     System.out.println(checkBox.getText());
                 }              
             }
         }
+        System.out.println(patientLog.getIdpatient());
         return boxesList;
     }
      

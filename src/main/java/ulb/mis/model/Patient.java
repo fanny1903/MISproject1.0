@@ -118,6 +118,7 @@ public class Patient implements Serializable {
     public void setIdsickness(Sickness idsickness) {
         this.idsickness = idsickness;
     }
+    
 
     @Override
     public int hashCode() {

@@ -9,10 +9,20 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ulb.mis.model.Patient;
+import java.util.List;
+import java.util.ArrayList;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.PersonJpaController;
+import ulb.mis.controller.SicknessJpaController;
+import ulb.mis.controller.exceptions.IllegalOrphanException;
+import ulb.mis.controller.exceptions.NonexistentEntityException;
+import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
 
 /**
  *
@@ -20,7 +30,15 @@ import ulb.mis.model.Patient;
  */
 public class LoginPatient extends javax.swing.JFrame {
     
-    //Patient patient = null;
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
+    private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
+    Patient patient = null;
+    Person person = null;
+    List<Patient> patientList = patientCtrl.findPatientEntities();
+    List<Person> personList = personCtrl.findPersonEntities();
+    int id = 0;
+    boolean a;
 
     /**
      * Creates new form LoginnPatient
@@ -48,9 +66,9 @@ public class LoginPatient extends javax.swing.JFrame {
         OkButtondoctor = new javax.swing.JButton();
         CanceldoctorButton = new javax.swing.JButton();
         jLabelcreatedoctoraccount = new javax.swing.JLabel();
-        jPasswordField = new javax.swing.JPasswordField();
+        PasswordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setAutoscrolls(true);
 
@@ -95,10 +113,10 @@ public class LoginPatient extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField.setText("jPasswordField1");
-        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
+        PasswordField.setText("jPasswordField1");
+        PasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordFieldActionPerformed(evt);
+                PasswordFieldActionPerformed(evt);
             }
         });
 
@@ -120,7 +138,7 @@ public class LoginPatient extends javax.swing.JFrame {
                         .addGap(89, 89, 89)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(firstnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(jPasswordField)))
+                            .addComponent(PasswordField)))
                     .addComponent(jLabelcreatedoctoraccount, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -158,7 +176,7 @@ public class LoginPatient extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -181,24 +199,17 @@ public class LoginPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   /* private void refreshPatient(){
-         
-         patient.getFile();
-         
-    }*/
-    
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
-        String firstName = firstnameTextField.getText();
-        String password = jPasswordField.getText();
-        boolean loginSuccessful = validateCredentials(firstName, password);
-
+        
+        boolean loginSuccessful = validateLogin();
         if (loginSuccessful) {
             // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
-            PatientChoices patientChoicesAddPopup = new PatientChoices();
+            PatientChoices patientChoicesAddPopup = new PatientChoices(patient);
+            //System.out.println("coucou");
+            //System.out.println(patient.getIdpatient());
             patientChoicesAddPopup.setVisible(true);
             patientChoicesAddPopup.pack();
             patientChoicesAddPopup.setLocationRelativeTo(null);
-            patientChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ferme la fenêtre de connexion
         } else {
             // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
             JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
@@ -214,7 +225,6 @@ public class LoginPatient extends javax.swing.JFrame {
         patientAddPopup.setVisible(true);
         patientAddPopup.pack();
         patientAddPopup.setLocationRelativeTo(null);
-        patientAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabelcreatedoctoraccountMouseClicked
 
@@ -222,9 +232,9 @@ public class LoginPatient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_firstnameTextFieldActionPerformed
 
-    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
+    private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldActionPerformed
+    }//GEN-LAST:event_PasswordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +274,7 @@ public class LoginPatient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CanceldoctorButton;
     private javax.swing.JButton OkButtondoctor;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JTextField firstnameTextField;
     private javax.swing.JLabel jLabel1;
@@ -271,13 +282,34 @@ public class LoginPatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelcreatedoctoraccount;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validateCredentials(String firstname, String password) {
+    private boolean validateLogin(){
+        for (int i =0; i < personList.size(); i++){
+            if (firstnameTextField.getText().equals(personList.get(i).getFirstname()) && PasswordField.getText().equals(personList.get(i).getPersonpassword()) ){
+                person = personList.get(i);
+                for(int x=0; x<patientList.size(); x++){
+                    if(patientList.get(x).getIdperson().equals(person)){
+                        patient = patientList.get(x);
+                    }
+                }
+                a = true;
+                break;
+                
+            }
+            else{
+              a = false;  
+            }
+        }
+        return a;
+    }
+
+
+    
+    /*private boolean validateCredentials(String firstname, String password) {
      // Établir une connexion à la base de données
     try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=CONVERT_TO_NULL", "userproject", "1234");
-         PreparedStatement statement = connection.prepareStatement("SELECT firstname, personpassword FROM person WHERE firstname = ?")) {
+        PreparedStatement statement = connection.prepareStatement("SELECT firstname, personpassword FROM person WHERE firstname = ?")) {
 
         statement.setString(1, firstname);
 
@@ -303,5 +335,5 @@ public class LoginPatient extends javax.swing.JFrame {
 
     // Les informations d'identification sont incorrectes
     return false;
-}
+    }*/
 }
