@@ -62,9 +62,9 @@
                               <Component id="jLabel2" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="firstnameTextField" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
-                              <Component id="PasswordTextField" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="firstnameTextField" pref="123" max="32767" attributes="0"/>
+                              <Component id="jPasswordField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabelcreatedoctoraccount" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -100,8 +100,7 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="PasswordTextField" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" pref="45" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="CanceldoctorButton" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="OkButtondoctor" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
@@ -111,7 +110,10 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -146,8 +148,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstnameTextFieldActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="PasswordTextField">
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler1">
         </Component>
@@ -188,6 +188,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelcreatedoctoraccountMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jPasswordField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
