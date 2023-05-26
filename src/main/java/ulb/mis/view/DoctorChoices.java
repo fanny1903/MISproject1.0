@@ -145,7 +145,7 @@ public class DoctorChoices extends javax.swing.JFrame {
 
     private void refreshDoctorList(){
         List doctors = doctorCtrl.findDoctorEntities();
-        EntityListModel<Patient> model = new EntityListModel(doctors);
+        EntityListModel<Doctor> model = new EntityListModel(doctors);
     }
     
     private void deleteDoctorAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorAccountButtonActionPerformed
@@ -163,21 +163,16 @@ public class DoctorChoices extends javax.swing.JFrame {
         
     }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
 
+    private void refreshPatientList(){
+        List patients = patientCtrl.findPatientEntities();
+        EntityListModel<Patient> model = new EntityListModel(patients);
+        
+        itemsList.setModel(model);
+    }
+    
     private void doctorActivePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActivePatientsActionPerformed
+        refreshPatientList();
         
-        List<Patient> Patients = patientCtrl.findPatientEntities();
-        List<Patient> activePatients = null ; 
-        
-        //List patients = patientCtrl.findPatientEntities();
-        EntityListModel<Patient> model = new EntityListModel(activePatients);
-        
-        for(int i =0; i < Patients.size(); i++){
-            if((Patients.get(i).getIdsickness()) != null) {
-                activePatients.add(Patients.get(i));  
-                itemsList.setModel(model);
-            } 
-            
-        }
     }//GEN-LAST:event_doctorActivePatientsActionPerformed
 
     private void AddSicknessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSicknessButtonActionPerformed
