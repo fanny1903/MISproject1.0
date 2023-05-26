@@ -18,9 +18,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
-import ulb.mis.controller.SicknessJpaController;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
-import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
 import ulb.mis.model.Person;
 
@@ -37,7 +34,6 @@ public class LoginPatient extends javax.swing.JFrame {
     Person person = null;
     List<Patient> patientList = patientCtrl.findPatientEntities();
     List<Person> personList = personCtrl.findPersonEntities();
-    int id = 0;
     boolean a;
 
     /**
@@ -205,8 +201,6 @@ public class LoginPatient extends javax.swing.JFrame {
         if (loginSuccessful) {
             // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
             PatientChoices patientChoicesAddPopup = new PatientChoices(patient);
-            //System.out.println("coucou");
-            //System.out.println(patient.getIdpatient());
             patientChoicesAddPopup.setVisible(true);
             patientChoicesAddPopup.pack();
             patientChoicesAddPopup.setLocationRelativeTo(null);
@@ -294,8 +288,7 @@ public class LoginPatient extends javax.swing.JFrame {
                     }
                 }
                 a = true;
-                break;
-                
+                break;    
             }
             else{
               a = false;  
