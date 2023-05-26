@@ -168,7 +168,7 @@ public class LoginDoctor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CanceldoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanceldoctorButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_CanceldoctorButtonActionPerformed
 
     private void jLabelcreatedoctoraccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelcreatedoctoraccountMouseClicked

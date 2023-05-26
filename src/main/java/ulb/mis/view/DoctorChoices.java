@@ -69,7 +69,7 @@ public class DoctorChoices extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(102, 102, 102));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Your doctor's profile");
+        titleLabel.setText("Your doctor profile");
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
