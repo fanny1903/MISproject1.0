@@ -81,6 +81,12 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
 
         jLabel2.setText("INAMI");
 
+        inamiTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inamiTextFieldActionPerformed(evt);
+            }
+        });
+
         saveButton.setBackground(new java.awt.Color(255, 204, 102));
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +176,10 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void inamiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inamiTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inamiTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
