@@ -44,7 +44,7 @@
                           </Group>
                           <Component id="PathTextField" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="fileNameTextField" min="-2" pref="371" max="-2" attributes="0"/>

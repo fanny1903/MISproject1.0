@@ -111,6 +111,7 @@ public class DoctorChoices extends javax.swing.JFrame {
             }
         });
 
+        itemsList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         itemsList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 itemsListMouseClicked(evt);
@@ -152,6 +153,7 @@ public class DoctorChoices extends javax.swing.JFrame {
         });
 
         sympTextArea.setColumns(20);
+        sympTextArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         sympTextArea.setRows(5);
         jScrollPane2.setViewportView(sympTextArea);
 
@@ -330,11 +332,14 @@ public class DoctorChoices extends javax.swing.JFrame {
         EntityListModel<Patient> model = (EntityListModel) itemsList.getModel();
         Patient selected = model.getList().get(itemsList.getSelectedIndex());
 
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2 && selected.getIdsickness() != null ) {
             selected.getIdsickness();
             sympTextArea.setText(selected.getIdsickness().getSymptom1()
                     + "\n" + selected.getIdsickness().getSymptom2() + "\n"
                     + selected.getIdsickness().getSymptom3() + "\n" + selected.getIdsickness().getSymptom4());
+        }
+        else if(evt.getClickCount() == 2 && selected.getIdsickness() == null){
+            sympTextArea.setText("This patient has unclear symptoms. \n Please disapprouve their request for online treatment.");
         }
 
     }//GEN-LAST:event_itemsListMouseClicked
