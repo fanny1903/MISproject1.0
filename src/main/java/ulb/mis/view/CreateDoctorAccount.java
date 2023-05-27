@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.DoctorJpaController;
-//import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
@@ -191,7 +190,5 @@ public class CreateDoctorAccount extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-    boolean validateCredentials (String Inami, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

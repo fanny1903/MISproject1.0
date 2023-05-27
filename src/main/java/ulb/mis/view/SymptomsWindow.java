@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JCheckBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.SicknessJpaController;
 import ulb.mis.model.Patient;
@@ -31,14 +29,13 @@ public class SymptomsWindow extends javax.swing.JFrame {
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     List<Sickness> sicknesses = sicknessCtrl.findSicknessEntities();
     
-
-    int a = 1;
-    int b = 1;
-    boolean checkString = true;
     Patient patientLog = null;
     Sickness sickness = null;
     
-    List<String> stringBoxes = new ArrayList<>();
+    int a = 1;
+    int b = 1;
+    boolean checkString = true;
+    
     /**
      * Creates new form symp
      */
@@ -53,59 +50,10 @@ public class SymptomsWindow extends javax.swing.JFrame {
         
         for(int i =0; i < sicknesses.size(); i++){
             
-            stringBoxes = searchStringBoxes();
-            for (int x = 0; x < stringBoxes.size(); x++){
-                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom1())){
-                    checkString = false;
-                    break;
-                }
-            }
-            if(checkString){
-                JCheckBox checkBox1 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom1());           
-                addBoxPannel(checkBox1);
-            }
-            checkString = true;
-            
-            stringBoxes = searchStringBoxes();
-            for (int x = 0; x < stringBoxes.size(); x++){
-                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom2())){
-                    checkString = false;
-                    break;
-                }
-            }
-            if(checkString){
-                JCheckBox checkBox2 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom2());           
-                addBoxPannel(checkBox2);
-            }
-            checkString = true;
-            
-            stringBoxes = searchStringBoxes();
-            for (int x = 0; x < stringBoxes.size(); x++){
-                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom3())){
-                    checkString = false;
-                    break;
-                }
-            }
-            if(checkString){
-                JCheckBox checkBox3 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom3());           
-                addBoxPannel(checkBox3);
-            }
-            checkString = true;
-            
-            stringBoxes = searchStringBoxes();
-            for (int x = 0; x < stringBoxes.size(); x++){
-                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom4())){
-                    checkString = false;
-                    break;
-                }
-            }
-            if(checkString){
-                JCheckBox checkBox4 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom4());           
-                addBoxPannel(checkBox4);
-            }
-            checkString = true;
-            
-            
+            addBoxPannel(sicknesses.get(i).getSymptom1());
+            addBoxPannel(sicknesses.get(i).getSymptom2());
+            addBoxPannel(sicknesses.get(i).getSymptom3());
+            addBoxPannel(sicknesses.get(i).getSymptom4());
         }
         
         JButton button = new JButton("Confirm");
@@ -191,7 +139,8 @@ public class SymptomsWindow extends javax.swing.JFrame {
         return sick;
     }
     
-    private void addBoxPannel(JCheckBox box){
+    private void addBox(JCheckBox box){
+        
         box.setBounds(50*a, 25*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
             add(box);
             if (b!=25){
@@ -201,6 +150,25 @@ public class SymptomsWindow extends javax.swing.JFrame {
                 b=1;
                 a = a+3;
             }
+    }
+    
+    private void addBoxPannel(String symptom){
+        
+        List<String> stringBoxes;
+        
+        stringBoxes = searchStringBoxes();
+            for (int x = 0; x < stringBoxes.size(); x++){
+                if (stringBoxes.get(x).equals(symptom)){
+                    checkString = false;
+                    break;
+                }
+            }
+            if(checkString){
+                JCheckBox checkBox1 = new javax.swing.JCheckBox(symptom);           
+                addBox(checkBox1);
+            }
+            checkString = true;
+        
     }
      
    

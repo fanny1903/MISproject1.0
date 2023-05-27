@@ -5,18 +5,14 @@
  */
 package ulb.mis.view;
 
-import java.text.ParseException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
-import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;

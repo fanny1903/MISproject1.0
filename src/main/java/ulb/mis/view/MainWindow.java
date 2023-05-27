@@ -4,33 +4,15 @@
  * and open the template in the editor.
  */
 package ulb.mis.view;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ulb.mis.controller.DoctorJpaController;
-import ulb.mis.controller.PatientJpaController;
-import ulb.mis.controller.exceptions.IllegalOrphanException;
-import ulb.mis.controller.exceptions.NonexistentEntityException;
-import ulb.mis.model.Doctor;
-import ulb.mis.model.Patient;
-import ulb.mis.services.HL7Services;
 
 /**
  *
- * @author Adrien Foucart
+ * @authors Fanny Dehoux, Indrani Marchal, Liya rossenstein
  */
 public class MainWindow extends javax.swing.JFrame {
-    
-    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
-    private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
-    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
-    
     private static final Logger LOGGER = LogManager.getLogger(MainWindow.class.getName());
-    String selectedList = "";
     
     /**
      * Creates new form MainWindow
@@ -156,8 +138,6 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void disableButtons(){
-    }
     
     private void loginPatientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPatientsButtonActionPerformed
         LoginPatient loginPatientAddPopup = new LoginPatient();
