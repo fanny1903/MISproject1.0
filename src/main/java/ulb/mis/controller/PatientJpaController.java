@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
@@ -221,5 +223,22 @@ public class PatientJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Patient> findPatientByDoctor(Doctor doctor) {
+    EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Patient> cq = cb.createQuery(Patient.class);
+        Root<Patient> root = cq.from(Patient.class);
+        
+        // Add a condition to select patients associated with the given doctor
+        cq.where(cb.equal(root.get("iddesignateddoctor"), doctor));
+        
+        TypedQuery<Patient> query = em.createQuery(cq);
+        return query.getResultList();
+    } finally {
+        em.close();
+    }
+}
     
 }

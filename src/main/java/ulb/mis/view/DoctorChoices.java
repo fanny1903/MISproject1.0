@@ -244,7 +244,7 @@ public class DoctorChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
 
     private void refreshPatientList(){
-        List patients = patientCtrl.findPatientEntities();
+        List patients = patientCtrl.findPatientByDoctor(doctorLog);
         EntityListModel<Patient> model = new EntityListModel(patients);
         
         itemsList.setModel(model);
@@ -252,6 +252,8 @@ public class DoctorChoices extends javax.swing.JFrame {
     
     private void doctorActivePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActivePatientsActionPerformed
         refreshPatientList();
+        
+        
         
     }//GEN-LAST:event_doctorActivePatientsActionPerformed
 
