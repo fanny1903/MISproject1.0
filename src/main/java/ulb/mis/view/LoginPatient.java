@@ -108,7 +108,6 @@ public class LoginPatient extends javax.swing.JFrame {
             }
         });
 
-        PasswordField.setText("jPasswordField1");
         PasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordFieldActionPerformed(evt);
