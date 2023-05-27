@@ -31,12 +31,14 @@ public class SymptomsWindow extends javax.swing.JFrame {
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     List<Sickness> sicknesses = sicknessCtrl.findSicknessEntities();
     
-    private static final Logger LOGGER = LogManager.getLogger(CreatePatientAccount.class.getName());
 
     int a = 1;
     int b = 1;
+    boolean checkString = true;
     Patient patientLog = null;
     Sickness sickness = null;
+    
+    List<String> stringBoxes = new ArrayList<>();
     /**
      * Creates new form symp
      */
@@ -50,55 +52,68 @@ public class SymptomsWindow extends javax.swing.JFrame {
         setLayout(null); // Utiliser le null layout
         
         for(int i =0; i < sicknesses.size(); i++){
-            javax.swing.JCheckBox checkBox = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom1());           
-            checkBox.setBounds(50*a, 25*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
-            add(checkBox);
-            if (b!=25){
-                b= b+2;
+            
+            stringBoxes = searchStringBoxes();
+            for (int x = 0; x < stringBoxes.size(); x++){
+                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom1())){
+                    checkString = false;
+                    break;
+                }
             }
-            else{
-                b=1;
-                a = a+3;
+            if(checkString){
+                JCheckBox checkBox1 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom1());           
+                addBoxPannel(checkBox1);
             }
-            javax.swing.JCheckBox checkBox2 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom2());           
-            checkBox2.setBounds(50*a, 25*b, 100, 25);
-            add(checkBox2);
-            if (b!=25){
-                b= b+2;
+            checkString = true;
+            
+            stringBoxes = searchStringBoxes();
+            for (int x = 0; x < stringBoxes.size(); x++){
+                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom2())){
+                    checkString = false;
+                    break;
+                }
             }
-            else{
-                b=1;
-                a = a+3;
+            if(checkString){
+                JCheckBox checkBox2 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom2());           
+                addBoxPannel(checkBox2);
             }
-            javax.swing.JCheckBox checkBox3 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom3());           
-            checkBox3.setBounds(50*a, 25*b, 100, 25);
-            add(checkBox3);
-            if (b!=25){
-                b= b+2;
+            checkString = true;
+            
+            stringBoxes = searchStringBoxes();
+            for (int x = 0; x < stringBoxes.size(); x++){
+                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom3())){
+                    checkString = false;
+                    break;
+                }
             }
-            else{
-                b=1;
-                a = a+3;
+            if(checkString){
+                JCheckBox checkBox3 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom3());           
+                addBoxPannel(checkBox3);
             }
-            javax.swing.JCheckBox checkBox4 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom4());           
-            checkBox4.setBounds(50*a, 25*b, 100, 25);
-            add(checkBox4);
-            if (b!=25){
-                b= b+2;
+            checkString = true;
+            
+            stringBoxes = searchStringBoxes();
+            for (int x = 0; x < stringBoxes.size(); x++){
+                if (stringBoxes.get(x).equals(sicknesses.get(i).getSymptom4())){
+                    checkString = false;
+                    break;
+                }
             }
-            else{
-                b=1;
-                a = a+3;
+            if(checkString){
+                JCheckBox checkBox4 = new javax.swing.JCheckBox(sicknesses.get(i).getSymptom4());           
+                addBoxPannel(checkBox4);
             }
+            checkString = true;
+            
+            
         }
-        // Ajouter d'autres checkboxes avec des positions personnalisées...
         
         JButton button = new JButton("Confirm");
-        button.setBounds(450, 455, 75, 40); // Position et taille du bouton
+        button.setBounds(650, 655, 75, 40); // Position et taille du bouton
         button.setBackground(new Color(255, 204, 102));
         add(button);
         
-        setSize(550, 550); // Définir la taille souhaitée pour la fenêtre
+        setSize(750, 750); // Définir la taille souhaitée pour la fenêtre
         setResizable(false); // Empêcher le redimensionnement de la fenêtre
         
         setPreferredSize(getSize()); // Définir la taille préférée pour la fenêtre
@@ -106,24 +121,36 @@ public class SymptomsWindow extends javax.swing.JFrame {
         pack();
         
         button.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 List<JCheckBox> listBoxes = searchBoxes(); 
-                /*for (int i = 0; i<listBoxes.size();i++){
-                    System.out.println(listBoxes.get(i).getText());
-                }*/
                 sickness = findSickness(listBoxes);
                 System.out.println(sickness);
-                patientLog.setIdsickness(sickness);
                 try {
                     patientCtrl.edit(patientLog);
                 } catch (Exception ex) {
                     java.util.logging.Logger.getLogger(SymptomsWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                dispose();
             }
         });
         
         
         
+    }
+    
+    private List<String> searchStringBoxes(){
+        List<String> nameBoxesList = new ArrayList<>();
+        
+        Component[] components = getContentPane().getComponents();
+        
+        for (Component component : components) {
+            if (component instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) component;
+                nameBoxesList.add(checkBox.getText());             
+            }
+        }
+        return nameBoxesList;
     }
     
     private List<JCheckBox> searchBoxes(){
@@ -144,7 +171,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
     }
     
     private Sickness findSickness(List<JCheckBox> listBoxes){
-        Sickness sickness = null;
+        Sickness sick = null;
         String strBox1 = listBoxes.get(0).getText();
         String strBox2 = listBoxes.get(1).getText();
         String strBox3 = listBoxes.get(2).getText();
@@ -154,14 +181,26 @@ public class SymptomsWindow extends javax.swing.JFrame {
                 if (strBox2.equals(sicknesses.get(i).getSymptom1())||strBox2.equals(sicknesses.get(i).getSymptom2())||strBox2.equals(sicknesses.get(i).getSymptom3())||strBox2.equals(sicknesses.get(i).getSymptom4())){
                    if (strBox3.equals(sicknesses.get(i).getSymptom1())||strBox3.equals(sicknesses.get(i).getSymptom2())||strBox3.equals(sicknesses.get(i).getSymptom3())||strBox3.equals(sicknesses.get(i).getSymptom4())){
                        if (strBox4.equals(sicknesses.get(i).getSymptom1())||strBox4.equals(sicknesses.get(i).getSymptom2())||strBox4.equals(sicknesses.get(i).getSymptom3())||strBox4.equals(sicknesses.get(i).getSymptom4())){
-                           sickness = sicknesses.get(i);
+                           sick = sicknesses.get(i);
                        }
                     } 
                 }
             }
         }
         
-        return sickness;
+        return sick;
+    }
+    
+    private void addBoxPannel(JCheckBox box){
+        box.setBounds(50*a, 25*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
+            add(box);
+            if (b!=25){
+                b= b+2;
+            }
+            else{
+                b=1;
+                a = a+3;
+            }
     }
      
    
