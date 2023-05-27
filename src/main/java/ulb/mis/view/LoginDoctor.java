@@ -94,7 +94,6 @@ public class LoginDoctor extends javax.swing.JFrame {
             }
         });
 
-        PasswordTextField.setText("jPasswordField1");
         PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordTextFieldActionPerformed(evt);
