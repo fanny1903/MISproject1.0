@@ -288,25 +288,11 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         // Set the selected patient's "file" blob attribute to the pdf sent by the doctor
         selected.setFile(pdfData);
-
-        // Connect to db
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
-            // Prepare the SQL statement
-            String sql = "UPDATE patient SET file = ? WHERE Idpatient = ?";
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                pstmt.setBytes(1, pdfData); // Set the PDF file data as a parameter
-                pstmt.setInt(2, selected.getIdpatient());  // Set the patient ID as a parameter
-
-                // update the  statement
-                pstmt.executeUpdate();
-                System.out.print("Prescription has been sent to the patient");
-
-                
-            }
-        } catch (SQLException e) {
-            // Handle any database errors
-            e.printStackTrace();
-            // You might want to display an error message to the user here
+        try {
+            patientCtrl.edit(selected);
+            System.out.print("Prescription has been sent to the patient");
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
@@ -335,92 +321,6 @@ public class DoctorChoices extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_itemsListMouseClicked
-
-   
-    
-    /*public void setPdfData(byte[] pdfData) {
-    // Set the pdfData to the 'file' attribute of the Patient entity
-    this.file = pdfData;
-}
-
-        try {
-            // Read the content of the PDF file as a byte array
-            File file = new File(filePath);
-            FileInputStream inputStream = new FileInputStream(file);
-            byte[] pdfData = new byte[(int) file.length()];
-            inputStream.read(pdfData);
-
-            // Establish a connection to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234");
-
-            // Prepare the SQL statement for inserting the PDF file
-            String sql = selected.setFile(DoctorPathPdfTextField.getText());
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setBytes(1, pdfData);
-
-            // Execute the insertion query
-            pstmt.executeUpdate();
-
-            // Close resources
-            pstmt.close();
-            conn.close();
-
-            System.out.println("The PDF file has been saved in the database.");
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
-
-    }*/
-        
-    /*    
-    }
-    
-     public Doctor getDoctor(){
-        updateDoctor();
-                
-        return doctor;
-    }
-    
-    public void updateDoctor(){
-        if( doctor == null ){
-            doctor = new Doctor();
-        }
-        
-        doctor.setIdperson(addPersonPanel1.getPerson());
-        doctor.setInami(inamiTextField.getText());
-    
-    ----------------------------------------------------------------------------
-    
-    String filePath = "path/to/pdf/file.pdf"; // Path to the PDF file to save
-
-        try {
-            // Read the content of the PDF file as a byte array
-            File file = new File(filePath);
-            FileInputStream inputStream = new FileInputStream(file);
-            byte[] pdfData = new byte[(int) file.length()];
-            inputStream.read(pdfData);
-
-            // Establish a connection to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname", "username", "password");
-
-            // Prepare the SQL statement for inserting the PDF file
-            String sql = "INSERT INTO pdf_table (pdf_data) VALUES (?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setBytes(1, pdfData);
-
-            // Execute the insertion query
-            pstmt.executeUpdate();
-
-            // Close resources
-            pstmt.close();
-            conn.close();
-
-            System.out.println("The PDF file has been saved in the database.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSicknessButton;

@@ -53,6 +53,7 @@ public class PatientChoices extends javax.swing.JFrame {
     public PatientChoices(Patient patient) {
         initComponents();
         patientLog = patient;
+        
        
     }
 
@@ -248,6 +249,7 @@ public class PatientChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_PathTextFieldActionPerformed
 
     private void PathOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PathOkButtonActionPerformed
+    
         
         
     // Assuming you have a database connection established
