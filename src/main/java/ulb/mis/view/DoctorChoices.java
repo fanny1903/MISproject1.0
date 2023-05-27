@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ulb.mis.view;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -43,6 +45,23 @@ public class DoctorChoices extends javax.swing.JFrame {
     public DoctorChoices(Doctor doctor) {
         initComponents();
         doctorLog = doctor;
+        DoctorPathPdfTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (DoctorPathPdfTextField.getText().equals("Path to your PDF")) {
+                    DoctorPathPdfTextField.setText("");
+                }
+            }
+        });
+
+        DoctorPathPdfTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (DoctorPathPdfTextField.getText().isEmpty()) {
+                    DoctorPathPdfTextField.setText("Path to your PDF");
+                }
+            }
+        });
     }
 
 
@@ -285,7 +304,7 @@ public class DoctorChoices extends javax.swing.JFrame {
 
 
     private void DoctorPathPdfTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorPathPdfTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_DoctorPathPdfTextFieldActionPerformed
 
     private void notOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notOkButtonActionPerformed

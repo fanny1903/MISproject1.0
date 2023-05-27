@@ -109,11 +109,11 @@ public class SymptomsWindow extends javax.swing.JFrame {
         }
         
         JButton button = new JButton("Confirm");
-        button.setBounds(650, 655, 75, 40); // Position et taille du bouton
+        button.setBounds(550, 555, 75, 40); // Position et taille du bouton
         button.setBackground(new Color(255, 204, 102));
         add(button);
         
-        setSize(750, 750); // Définir la taille souhaitée pour la fenêtre
+        setSize(650, 650); // Définir la taille souhaitée pour la fenêtre
         setResizable(false); // Empêcher le redimensionnement de la fenêtre
         
         setPreferredSize(getSize()); // Définir la taille préférée pour la fenêtre
