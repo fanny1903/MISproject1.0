@@ -4,21 +4,14 @@
  */
 package ulb.mis.view;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ulb.mis.controller.DoctorJpaController;
-import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.model.Doctor;
-import ulb.mis.model.Patient;
 import ulb.mis.model.Person;
 
 /**
@@ -41,11 +34,6 @@ public class LoginDoctor extends javax.swing.JFrame {
     public LoginDoctor() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
-        private class LoginDoctorListener {
-
-        public LoginDoctorListener() {
-        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
