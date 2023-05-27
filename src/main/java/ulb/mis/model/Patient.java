@@ -57,6 +57,8 @@ public class Patient implements Serializable {
     private Sickness idsickness;
 
     public Patient() {
+        this.msgFileReceived = false;
+        this.msg = false;
     }
 
     public Patient(Integer idpatient) {
