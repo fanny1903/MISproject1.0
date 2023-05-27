@@ -4,7 +4,6 @@
  */
 package ulb.mis.view;
 
-<<<<<<< HEAD
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -13,8 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFrame;
-=======
->>>>>>> b8903ebfb5a135a0c087965c3974c5b005d80d3c
+
 import javax.swing.JOptionPane;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +41,7 @@ public class LoginPatient extends javax.swing.JFrame {
      */
    public LoginPatient() {
         initComponents();
-<<<<<<< HEAD
+
         this.setLocationRelativeTo(null);
         firstnameTextField.addFocusListener(new FocusAdapter() {
             @Override
@@ -62,8 +60,7 @@ public class LoginPatient extends javax.swing.JFrame {
                 }
             }
         });
-=======
->>>>>>> b8903ebfb5a135a0c087965c3974c5b005d80d3c
+
     }
 
     /**

@@ -5,12 +5,12 @@
  */
 package ulb.mis.view;
 
-<<<<<<< HEAD
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
-=======
->>>>>>> b8903ebfb5a135a0c087965c3974c5b005d80d3c
+
+
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,6 +24,11 @@ import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
 //import static ulb.mis.model.Patient_.iddesignateddoctor;
+
+import java.awt.event.FocusAdapter;
+
+import java.awt.event.FocusAdapter;
+
 
 /**
  *
