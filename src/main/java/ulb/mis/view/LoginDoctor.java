@@ -9,14 +9,31 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ulb.mis.controller.DoctorJpaController;
+import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.PersonJpaController;
+import ulb.mis.model.Doctor;
+import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
 
 /**
  *
  * @author fanny
  */
 public class LoginDoctor extends javax.swing.JFrame {
+    
+    private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
+    private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
+    Doctor doctor = null;
+    Person person = null;
+    List<Doctor> doctorList = doctorCtrl.findDoctorEntities();
+    List<Person> personList = personCtrl.findPersonEntities();
 
     /**
      * Creates new form LoginDoctor
@@ -189,19 +206,14 @@ public class LoginDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelcreatedoctoraccountMouseClicked
 
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
-
-        String Inami = InamiTextField.getText();
-        String password = PasswordTextField.getText();
-        boolean loginSuccessful = validateCredentials(Inami, password);
-
-        if (loginSuccessful) {
+        validateLogin();
+        
+        if (doctor != null) {
             // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
-            DoctorChoices doctorChoicesAddPopup = new DoctorChoices();
+            DoctorChoices doctorChoicesAddPopup = new DoctorChoices(doctor);
             doctorChoicesAddPopup.setVisible(true);
             doctorChoicesAddPopup.pack();
             doctorChoicesAddPopup.setLocationRelativeTo(null);
-            doctorChoicesAddPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            // Ferme la fenêtre de connexion
         } else {
             // Les informations d'identification sont incorrectes, affichez un message d'erreur ou effectuez une action appropriée
             JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
@@ -226,34 +238,17 @@ public class LoginDoctor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-private boolean validateCredentials(String inami, String password) {
-    // Établir une connexion à la base de données
-    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=CONVERT_TO_NULL", "userproject", "1234");
-         PreparedStatement statement = connection.prepareStatement("SELECT d.inami, p.personpassword FROM doctor d JOIN person p ON d.idperson = p.idperson WHERE d.inami = ?")) {
-
-        statement.setString(1, inami);
-
-        // Exécuter la requête
-        try (ResultSet resultSet = statement.executeQuery()) {
-            // Vérifier si des résultats ont été renvoyés
-            if (resultSet.next()) {
-                // Récupérer les valeurs de l'inami et du mot de passe dans la base de données
-                String dbInami = resultSet.getString("inami");
-                String dbPassword = resultSet.getString("personpassword");
-                
-                // Comparer avec les valeurs entrées dans la fenêtre de connexion
-                if (dbInami.equals(inami) && dbPassword.equals(password)) {
-                    // Les informations d'identification sont valides
-                    return true;
+private void validateLogin(){
+        for (int i =0; i < personList.size(); i++){
+            if (PasswordTextField.getText().equals(personList.get(i).getPersonpassword()) ){
+                person = personList.get(i);
+                for(int x=0; x<doctorList.size(); x++){
+                    if(doctorList.get(x).getIdperson().equals(person) && doctorList.get(x).getInami().equals(InamiTextField.getText()) ){
+                        doctor = doctorList.get(x);
+                    }
                 }
+                break;    
             }
         }
-    } catch (SQLException e) {
-        // Gérer les exceptions
-        e.printStackTrace();
     }
-
-    // Les informations d'identification sont incorrectes
-    return false;
-}
 }

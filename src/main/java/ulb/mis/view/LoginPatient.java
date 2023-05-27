@@ -34,7 +34,6 @@ public class LoginPatient extends javax.swing.JFrame {
     Person person = null;
     List<Patient> patientList = patientCtrl.findPatientEntities();
     List<Person> personList = personCtrl.findPersonEntities();
-    boolean a;
 
     /**
      * Creates new form LoginnPatient
@@ -196,9 +195,8 @@ public class LoginPatient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OkButtondoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtondoctorActionPerformed
-        
-        boolean loginSuccessful = validateLogin();
-        if (loginSuccessful) {
+        validateLogin();
+        if (patient != null) {
             // Les informations d'identification sont valides, vous pouvez ouvrir la page d'accueil ou effectuer d'autres actions nécessaires
             PatientChoices patientChoicesAddPopup = new PatientChoices(patient);
             patientChoicesAddPopup.setVisible(true);
@@ -278,7 +276,7 @@ public class LoginPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validateLogin(){
+    private void validateLogin(){
         for (int i =0; i < personList.size(); i++){
             if (firstnameTextField.getText().equals(personList.get(i).getFirstname()) && PasswordField.getText().equals(personList.get(i).getPersonpassword()) ){
                 person = personList.get(i);
@@ -287,46 +285,8 @@ public class LoginPatient extends javax.swing.JFrame {
                         patient = patientList.get(x);
                     }
                 }
-                a = true;
                 break;    
             }
-            else{
-              a = false;  
-            }
         }
-        return a;
     }
-
-
-    
-    /*private boolean validateCredentials(String firstname, String password) {
-     // Établir une connexion à la base de données
-    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject?zeroDateTimeBehavior=CONVERT_TO_NULL", "userproject", "1234");
-        PreparedStatement statement = connection.prepareStatement("SELECT firstname, personpassword FROM person WHERE firstname = ?")) {
-
-        statement.setString(1, firstname);
-
-        // Exécuter la requête
-        try (ResultSet resultSet = statement.executeQuery()) {
-            // Vérifier si des résultats ont été renvoyés
-            if (resultSet.next()) {
-                // Récupérer les valeurs du firstname et du mot de passe dans la base de données
-                String dbFirstname = resultSet.getString("firstname");
-                String dbPassword = resultSet.getString("personpassword");
-                
-                // Comparer avec les valeurs entrées dans la fenêtre de connexion
-                if (dbFirstname.equals(firstname) && dbPassword.equals(password)) {
-                    // Les informations d'identification sont valides
-                    return true;
-                }
-            }
-        }
-    } catch (SQLException e) {
-        // Gérer les exceptions
-        e.printStackTrace();
-    }
-
-    // Les informations d'identification sont incorrectes
-    return false;
-    }*/
 }

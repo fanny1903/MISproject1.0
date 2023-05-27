@@ -43,12 +43,14 @@ public class DoctorChoices extends javax.swing.JFrame {
     private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
     
     Doctor doctor = null;
+    Doctor doctorLog = null;
     //Patient patient = null;
     /**
      * Creates new form DoctorChoices
      */
-    public DoctorChoices() {
+    public DoctorChoices(Doctor doctor) {
         initComponents();
+        doctorLog = doctor;
     }
 
 
