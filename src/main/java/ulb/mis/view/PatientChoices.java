@@ -4,15 +4,27 @@
  */
 package ulb.mis.view;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
+import ulb.mis.view.LoginPatient;
 
 /**
  *
@@ -21,11 +33,16 @@ import ulb.mis.model.Patient;
 public class PatientChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     
     private static final Logger LOGGER = LogManager.getLogger(PatientChoices.class.getName());
     
     Patient patient = null;
-    Patient patientLog = null;
+    Person person = null;
+    // À l'endroit où vous créez une instance de PatientChoices
+    Patient patientLog = new Patient(); // Initialisation d'un objet Patient
+
+
     
         
         
@@ -49,7 +66,7 @@ public class PatientChoices extends javax.swing.JFrame {
     private void initComponents() {
 
         titleLabel = new javax.swing.JLabel();
-        FolderPathTextField = new javax.swing.JTextField();
+        PathTextField = new javax.swing.JTextField();
         SickButton = new javax.swing.JButton();
         PathOkButton = new javax.swing.JButton();
         deletePatientAccountButton = new javax.swing.JButton();
@@ -57,6 +74,9 @@ public class PatientChoices extends javax.swing.JFrame {
         messageArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        fileNameTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,10 +88,9 @@ public class PatientChoices extends javax.swing.JFrame {
         titleLabel.setToolTipText("");
         titleLabel.setOpaque(true);
 
-        FolderPathTextField.setText("Path to your folder");
-        FolderPathTextField.addActionListener(new java.awt.event.ActionListener() {
+        PathTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FolderPathTextFieldActionPerformed(evt);
+                PathTextFieldActionPerformed(evt);
             }
         });
 
@@ -84,7 +103,7 @@ public class PatientChoices extends javax.swing.JFrame {
         });
 
         PathOkButton.setBackground(new java.awt.Color(255, 204, 102));
-        PathOkButton.setText("OK");
+        PathOkButton.setText("Download my prescription");
         PathOkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PathOkButtonActionPerformed(evt);
@@ -108,106 +127,185 @@ public class PatientChoices extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("/!\\ please select 4 symptoms or you will not get an accurate result");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deletePatientAccountButton)
-                            .addComponent(SickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                                .addComponent(FolderPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(PathOkButton)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(SickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FolderPathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PathOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deletePatientAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
-        );
+        fileNameTextField.setText("\\");
+            fileNameTextField.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    fileNameTextFieldActionPerformed(evt);
+                }
+            });
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            jLabel3.setText("Please fill-in the path where you want to save your prescription");
+
+            jLabel4.setText("Please fill-in the name that you want to give this file preceded by \\ ");
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1)
+                            .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(deletePatientAccountButton)
+                                        .addComponent(SickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(66, 66, 66)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(PathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap(43, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PathOkButton)
+                            .addGap(35, 35, 35))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3))
+                            .addGap(0, 0, Short.MAX_VALUE))))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(74, 74, 74))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(40, 40, 40)
+                    .addComponent(jLabel1)
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(PathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PathOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(29, 29, 29)
+                    .addComponent(deletePatientAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())
+            );
+
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void SickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SickButtonActionPerformed
         SymptomsWindow symptomAddPopup = new SymptomsWindow(patientLog);
         symptomAddPopup.setVisible(true);
     }//GEN-LAST:event_SickButtonActionPerformed
 
-    private void refreshPatientList(){
-        List patients = patientCtrl.findPatientEntities();
-        EntityListModel<Patient> model = new EntityListModel(patients);
-    }
+
     
     private void deletePatientAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientAccountButtonActionPerformed
-        this.patient = patient;
-        int selectedPatientId = patient.getIdpatient();
-        
-         try {
-            LOGGER.debug("Deleting patient with id: " + selectedPatientId);
-            patientCtrl.destroy(selectedPatientId);
+    int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your account?", "Confirm Account Deletion", JOptionPane.YES_NO_OPTION);
+    
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            // Delete the patient record from the database
+            patientCtrl.destroy(patientLog.getIdpatient());
+             personCtrl.destroy(patientLog.getIdperson().getIdperson());
+
+            // Display a success message
+            JOptionPane.showMessageDialog(this, "Account deleted successfully.");
+            
+            // Close the current window
+            this.dispose();
+            
+            // Optionally, perform any additional actions after deleting the account
+            
         } catch (NonexistentEntityException ex) {
-            LOGGER.error("Failed to delete patient", ex);
+            // Handle exceptions if necessary
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while deleting the account.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalOrphanException ex) {
+            java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        refreshPatientList();
+    }
+
         
     }//GEN-LAST:event_deletePatientAccountButtonActionPerformed
 
-    private void FolderPathTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FolderPathTextFieldActionPerformed
+    private void PathTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PathTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FolderPathTextFieldActionPerformed
+    }//GEN-LAST:event_PathTextFieldActionPerformed
 
     private void PathOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PathOkButtonActionPerformed
-        // TODO add your handling code here:
+        
+        
+    // Assuming you have a database connection established
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
+            // Prepare the SQL statement
+            String sql = "SELECT file FROM patient WHERE Idpatient = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                // Set the patient ID as a parameter
+                pstmt.setInt(1, patientLog.getIdpatient());
+
+                // Execute the query
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        // Retrieve the PDF file data as a byte array
+                        byte[] pdfData = rs.getBytes("file");
+
+                        // Specify the path where you want to save the PDF file
+                        String savePath = PathTextField.getText() + fileNameTextField.getText() +".pdf";
+
+                        // Save the PDF file to disk
+                        try (FileOutputStream fileOutputStream = new FileOutputStream(savePath)) {
+                            fileOutputStream.write(pdfData);
+                            System.out.print("File downloaded!");
+                        }
+
+                        // Optionally, you can display a success message to the user here
+                    } else {
+                        // Handle the case where no PDF file is found for the patient
+                        System.out.print("Unable to download file");
+                    }
+                }
+            }
+        } catch (SQLException | IOException e) {
+            // Handle any database or IO errors
+            e.printStackTrace();
+            // You might want to display an error message to the user here
+        }
+
     }//GEN-LAST:event_PathOkButtonActionPerformed
+
+    private void fileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileNameTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField FolderPathTextField;
     private javax.swing.JButton PathOkButton;
+    private javax.swing.JTextField PathTextField;
     private javax.swing.JButton SickButton;
     private javax.swing.JButton deletePatientAccountButton;
+    private javax.swing.JTextField fileNameTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea messageArea;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
 }
