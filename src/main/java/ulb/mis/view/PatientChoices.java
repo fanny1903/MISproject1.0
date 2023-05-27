@@ -12,14 +12,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
+import ulb.mis.view.LoginPatient;
 
 /**
  *
@@ -28,11 +33,16 @@ import ulb.mis.model.Patient;
 public class PatientChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     
     private static final Logger LOGGER = LogManager.getLogger(PatientChoices.class.getName());
     
     Patient patient = null;
-    Patient patientLog = null;
+    Person person = null;
+    // À l'endroit où vous créez une instance de PatientChoices
+    Patient patientLog = new Patient(); // Initialisation d'un objet Patient
+
+
     
         
         
@@ -202,23 +212,34 @@ public class PatientChoices extends javax.swing.JFrame {
         symptomAddPopup.setVisible(true);
     }//GEN-LAST:event_SickButtonActionPerformed
 
-    private void refreshPatientList(){
-        List patients = patientCtrl.findPatientEntities();
-        EntityListModel<Patient> model = new EntityListModel(patients);
-    }
+
     
     private void deletePatientAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientAccountButtonActionPerformed
-        this.patient = patient;
-        int selectedPatientId = patient.getIdpatient();
-        
-         try {
-            LOGGER.debug("Deleting patient with id: " + selectedPatientId);
-            patientCtrl.destroy(selectedPatientId);
+    int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your account?", "Confirm Account Deletion", JOptionPane.YES_NO_OPTION);
+    
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            // Delete the patient record from the database
+            patientCtrl.destroy(patientLog.getIdpatient());
+             personCtrl.destroy(patientLog.getIdperson().getIdperson());
+
+            // Display a success message
+            JOptionPane.showMessageDialog(this, "Account deleted successfully.");
+            
+            // Close the current window
+            this.dispose();
+            
+            // Optionally, perform any additional actions after deleting the account
+            
         } catch (NonexistentEntityException ex) {
-            LOGGER.error("Failed to delete patient", ex);
+            // Handle exceptions if necessary
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while deleting the account.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalOrphanException ex) {
+            java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        refreshPatientList();
+    }
+
         
     }//GEN-LAST:event_deletePatientAccountButtonActionPerformed
 
@@ -286,4 +307,5 @@ public class PatientChoices extends javax.swing.JFrame {
     private javax.swing.JTextArea messageArea;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
 }
