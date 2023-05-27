@@ -3,21 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ulb.mis.view;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,8 +20,6 @@ import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
-import ulb.mis.model.Person;
-import ulb.mis.model.Sickness;
 //import ulb.mis.view.PatientChoices
 
 
@@ -42,14 +31,10 @@ public class DoctorChoices extends javax.swing.JFrame {
     private final EntityManagerFactory emfac = Persistence.createEntityManagerFactory("MISproject_PU");
     private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
-    private final SicknessJpaController sicknessCtrl = new SicknessJpaController(emfac);
     private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     
-    private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
-    
-    Doctor doctor = null;
     Doctor doctorLog = new Doctor();
-    Patient patient = null;
+    
 
 
     /**
@@ -290,9 +275,9 @@ public class DoctorChoices extends javax.swing.JFrame {
 
         // Set the selected patient's "file" blob attribute to the pdf sent by the doctor
         selected.setFile(pdfData);
+        selected.setMsgFileReceived(true);
         try {
             patientCtrl.edit(selected);
-            System.out.print("Prescription has been sent to the patient");
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -304,7 +289,21 @@ public class DoctorChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_DoctorPathPdfTextFieldActionPerformed
 
     private void notOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notOkButtonActionPerformed
-        // TODO add your handling code here:
+        // Take the selected patient
+        if (itemsList.getSelectedIndex() < 0) {
+            return;
+        }
+
+        EntityListModel<Patient> model = (EntityListModel) itemsList.getModel();
+        Patient selected = model.getList().get(itemsList.getSelectedIndex());
+        
+        selected.setMsg(true);
+        selected.setIdsickness(null);
+        try {
+            patientCtrl.edit(selected);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_notOkButtonActionPerformed
 
     private void itemsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemsListMouseClicked

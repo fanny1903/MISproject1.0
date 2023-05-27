@@ -121,11 +121,11 @@ public class SymptomsWindow extends javax.swing.JFrame {
         pack();
         
         button.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 List<JCheckBox> listBoxes = searchBoxes(); 
                 sickness = findSickness(listBoxes);
                 System.out.println(sickness);
+                patient.setIdsickness(sickness);
                 try {
                     patientCtrl.edit(patientLog);
                 } catch (Exception ex) {

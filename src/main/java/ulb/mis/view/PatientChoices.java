@@ -42,7 +42,7 @@ public class PatientChoices extends javax.swing.JFrame {
         
         if (patientLog.getMsg() == true){
             messageArea.setText("Your sickness has not been approved.\n" +
-            "Please make an appointment with your doctor.");
+            "Please make an appointment with your doctor and click on ok.");
         }
         if (patientLog.getMsg() == false && patientLog.getIdsickness() != null){
             messageArea.setText("Your doctor has not yet approved your sickness.");
@@ -78,6 +78,7 @@ public class PatientChoices extends javax.swing.JFrame {
         fileNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,6 +140,14 @@ public class PatientChoices extends javax.swing.JFrame {
 
             jLabel4.setText("Please fill-in the name that you want to give this file preceded by \\ ");
 
+            okButton.setBackground(new java.awt.Color(255, 204, 102));
+            okButton.setText("Ok");
+            okButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    okButtonActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
@@ -151,9 +160,6 @@ public class PatientChoices extends javax.swing.JFrame {
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1)
-                            .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +169,7 @@ public class PatientChoices extends javax.swing.JFrame {
                                     .addGap(66, 66, 66)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(PathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(43, Short.MAX_VALUE))
+                            .addContainerGap(48, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,7 +178,11 @@ public class PatientChoices extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
-                                .addComponent(jLabel3))
+                                .addComponent(jLabel3)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(okButton)))
                             .addGap(0, 0, Short.MAX_VALUE))))
             );
             layout.setVerticalGroup(
@@ -189,8 +199,13 @@ public class PatientChoices extends javax.swing.JFrame {
                     .addGap(40, 40, 40)
                     .addComponent(jLabel1)
                     .addGap(18, 18, 18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(okButton)
+                            .addGap(52, 52, 52)))
                     .addComponent(jLabel3)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(PathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,12 +278,29 @@ public class PatientChoices extends javax.swing.JFrame {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
+        patientLog.setMsgFileReceived(false);
+        patientLog.setFile(null);
+        patientLog.setIdsickness(null);
+        try {
+            patientCtrl.edit(patientLog);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
     private void fileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fileNameTextFieldActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        patientLog.setMsg(false);
+        try {
+            patientCtrl.edit(patientLog);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,6 +315,7 @@ public class PatientChoices extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea messageArea;
+    private javax.swing.JButton okButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
