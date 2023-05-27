@@ -4,6 +4,15 @@
  */
 package ulb.mis.view;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -32,6 +41,26 @@ public class LoginPatient extends javax.swing.JFrame {
      */
    public LoginPatient() {
         initComponents();
+
+        this.setLocationRelativeTo(null);
+        firstnameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (firstnameTextField.getText().equals("Name")) {
+                    firstnameTextField.setText("");
+                }
+            }
+        });
+
+        firstnameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (firstnameTextField.getText().isEmpty()) {
+                    firstnameTextField.setText("Name");
+                }
+            }
+        });
+
     }
 
     /**
@@ -67,6 +96,7 @@ public class LoginPatient extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        firstnameTextField.setText("Name");
         firstnameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstnameTextFieldActionPerformed(evt);
@@ -176,9 +206,10 @@ public class LoginPatient extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
