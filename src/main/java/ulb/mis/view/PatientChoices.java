@@ -55,6 +55,20 @@ public class PatientChoices extends javax.swing.JFrame {
         initComponents();
         patientLog = patient;
         
+        /*if (patientLog.getMsg() == true){
+            messageArea.setText("Your sickness has not been approved.\n" +
+            "Please make an appointment with your doctor.");
+        }
+        if (patientLog.getMsg() == false && patientLog.getIdsickness() != null){
+            messageArea.setText("Your doctor has not yet approved your sicness.");
+        }
+        if (patientLog.getMsgFileReceived()== true){
+            messageArea.setText("Please download your prescription.");
+        }*/
+        
+        
+        
+        
        
     }
 
