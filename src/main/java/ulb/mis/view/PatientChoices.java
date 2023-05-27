@@ -4,6 +4,7 @@
  */
 package ulb.mis.view;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -249,11 +250,24 @@ public class PatientChoices extends javax.swing.JFrame {
     }//GEN-LAST:event_PathTextFieldActionPerformed
 
     private void PathOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PathOkButtonActionPerformed
-    
-        
+        byte[] pdfData = patientLog.getFile();
+
+        // Specify the path where you want to save the PDF file
+        String savePath = PathTextField.getText() + fileNameTextField.getText() +".pdf";
+
+        // Save the PDF file to disk
+        try (FileOutputStream fileOutputStream = new FileOutputStream(savePath)) {
+            fileOutputStream.write(pdfData);
+            System.out.print("File downloaded!");
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
     // Assuming you have a database connection established
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
+        /*try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
             // Prepare the SQL statement
             String sql = "SELECT file FROM patient WHERE Idpatient = ?";
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -264,7 +278,7 @@ public class PatientChoices extends javax.swing.JFrame {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         // Retrieve the PDF file data as a byte array
-                        byte[] pdfData = rs.getBytes("file");
+                        byte[] pdfData = patientLog.getFile();
 
                         // Specify the path where you want to save the PDF file
                         String savePath = PathTextField.getText() + fileNameTextField.getText() +".pdf";
@@ -286,7 +300,7 @@ public class PatientChoices extends javax.swing.JFrame {
             // Handle any database or IO errors
             e.printStackTrace();
             // You might want to display an error message to the user here
-        }
+        }*/
 
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
