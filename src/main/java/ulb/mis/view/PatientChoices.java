@@ -7,25 +7,15 @@ package ulb.mis.view;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.PatientJpaController;
 import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Patient;
-import ulb.mis.model.Person;
-import ulb.mis.view.LoginPatient;
 
 /**
  *
@@ -36,12 +26,7 @@ public class PatientChoices extends javax.swing.JFrame {
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     
-    private static final Logger LOGGER = LogManager.getLogger(PatientChoices.class.getName());
-    
-    Patient patient = null;
-    Person person = null;
-    // À l'endroit où vous créez une instance de PatientChoices
-    Patient patientLog = new Patient(); // Initialisation d'un objet Patient
+    Patient patientLog = null ; // Initialisation d'un objet Patient
 
 
     
@@ -278,43 +263,6 @@ public class PatientChoices extends javax.swing.JFrame {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
-    // Assuming you have a database connection established
-        /*try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misproject", "userproject", "1234")) {
-            // Prepare the SQL statement
-            String sql = "SELECT file FROM patient WHERE Idpatient = ?";
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-                // Set the patient ID as a parameter
-                pstmt.setInt(1, patientLog.getIdpatient());
-
-                // Execute the query
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        // Retrieve the PDF file data as a byte array
-                        byte[] pdfData = patientLog.getFile();
-
-                        // Specify the path where you want to save the PDF file
-                        String savePath = PathTextField.getText() + fileNameTextField.getText() +".pdf";
-
-                        // Save the PDF file to disk
-                        try (FileOutputStream fileOutputStream = new FileOutputStream(savePath)) {
-                            fileOutputStream.write(pdfData);
-                            System.out.print("File downloaded!");
-                        }
-
-                        // Optionally, you can display a success message to the user here
-                    } else {
-                        // Handle the case where no PDF file is found for the patient
-                        System.out.print("Unable to download file");
-                    }
-                }
-            }
-        } catch (SQLException | IOException e) {
-            // Handle any database or IO errors
-            e.printStackTrace();
-            // You might want to display an error message to the user here
-        }*/
 
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
