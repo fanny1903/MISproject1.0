@@ -13,19 +13,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ulb.mis.controller.DoctorJpaController;
 import ulb.mis.controller.PatientJpaController;
+import ulb.mis.controller.PersonJpaController;
 import ulb.mis.controller.SicknessJpaController;
 import ulb.mis.controller.exceptions.IllegalOrphanException;
 import ulb.mis.controller.exceptions.NonexistentEntityException;
 import ulb.mis.model.Doctor;
 import ulb.mis.model.Patient;
+import ulb.mis.model.Person;
 import ulb.mis.model.Sickness;
 //import ulb.mis.view.PatientChoices
 
@@ -39,12 +43,15 @@ public class DoctorChoices extends javax.swing.JFrame {
     private final DoctorJpaController doctorCtrl = new DoctorJpaController(emfac);
     private final PatientJpaController patientCtrl = new PatientJpaController(emfac);
     private final SicknessJpaController sicknessCtrl = new SicknessJpaController(emfac);
+    private final PersonJpaController personCtrl = new PersonJpaController(emfac);
     
     private static final Logger LOGGER = LogManager.getLogger(DoctorChoices.class.getName());
     
     Doctor doctor = null;
-    Doctor doctorLog = null;
-    //Patient patient = null;
+    Doctor doctorLog = new Doctor();
+    Patient patient = null;
+
+
     /**
      * Creates new form DoctorChoices
      */
@@ -207,24 +214,33 @@ public class DoctorChoices extends javax.swing.JFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshDoctorList(){
-        List doctors = doctorCtrl.findDoctorEntities();
-        EntityListModel<Doctor> model = new EntityListModel(doctors);
-    }
+
     
     private void deleteDoctorAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorAccountButtonActionPerformed
-        this.doctor = doctor;
-        int selectedDoctorId = doctor.getIddoctor();
-        
-         try {
-            LOGGER.debug("Deleting patient with id: " + selectedDoctorId);
-            doctorCtrl.destroy(selectedDoctorId);
-        } catch (IllegalOrphanException | NonexistentEntityException ex) {
-            LOGGER.error("Failed to delete patient", ex);
+         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your account?", "Confirm Account Deletion", JOptionPane.YES_NO_OPTION);
+    
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            // Delete the patient record from the database
+            doctorCtrl.destroy(doctorLog.getIddoctor());
+            personCtrl.destroy(doctorLog.getIdperson().getIdperson());
+
+            // Display a success message
+            JOptionPane.showMessageDialog(this, "Account deleted successfully.");
+            
+            // Close the current window
+            this.dispose();
+            
+            // Optionally, perform any additional actions after deleting the account
+            
+        } catch (NonexistentEntityException ex) {
+            // Handle exceptions if necessary
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while deleting the account.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalOrphanException ex) {
+            java.util.logging.Logger.getLogger(PatientChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        refreshDoctorList();
-        
+    }        
     }//GEN-LAST:event_deleteDoctorAccountButtonActionPerformed
 
     private void refreshPatientList(){
