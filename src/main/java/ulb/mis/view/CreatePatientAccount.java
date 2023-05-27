@@ -5,6 +5,8 @@
  */
 package ulb.mis.view;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.text.ParseException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -46,6 +48,23 @@ public class CreatePatientAccount extends javax.swing.JFrame {
      */
     public CreatePatientAccount() {
         initComponents();
+        iddesignatedDoctorTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (iddesignatedDoctorTextField.getText().equals("FAMILY NAME OF DOCTOR")) {
+                    iddesignatedDoctorTextField.setText("");
+                }
+            }
+        });
+
+        iddesignatedDoctorTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (iddesignatedDoctorTextField.getText().isEmpty()) {
+                    iddesignatedDoctorTextField.setText("FAMILY NAME OF DOCTOR");
+                }
+            }
+        });
     }
     
     public void setPatient(Patient patient){
@@ -129,6 +148,7 @@ public class CreatePatientAccount extends javax.swing.JFrame {
 
         jLabel2.setText("Designated Doctor");
 
+        iddesignatedDoctorTextField.setText("FAMILY NAME OF DOCTOR");
         iddesignatedDoctorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iddesignatedDoctorTextFieldActionPerformed(evt);
@@ -141,20 +161,20 @@ public class CreatePatientAccount extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(jLabel2)
-                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
                                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(iddesignatedDoctorTextField))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(iddesignatedDoctorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

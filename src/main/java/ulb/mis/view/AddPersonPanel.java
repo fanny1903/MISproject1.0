@@ -5,6 +5,8 @@
  */
 package ulb.mis.view;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +29,40 @@ public class AddPersonPanel extends javax.swing.JPanel {
      */
     public AddPersonPanel() {
         initComponents();
+        familynameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (familynameTextField.getText().equals("NAME")) {
+                    familynameTextField.setText("");
+                }
+            }
+        });
+
+        familynameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (familynameTextField.getText().isEmpty()) {
+                    familynameTextField.setText("NAME");
+                }
+            }
+        });
+        firstnameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (firstnameTextField.getText().equals("Name")) {
+                    firstnameTextField.setText("");
+                }
+            }
+        });
+
+        firstnameTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (firstnameTextField.getText().isEmpty()) {
+                    firstnameTextField.setText("Name");
+                }
+            }
+        });
     }
     
     public void setPerson(Person person){
@@ -87,6 +123,10 @@ public class AddPersonPanel extends javax.swing.JPanel {
         jLabel2.setText("First Name:");
 
         jLabel3.setText("Date of Birth:");
+
+        familynameTextField.setText("NAME");
+
+        firstnameTextField.setText("Name");
 
         dateofbirthTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
