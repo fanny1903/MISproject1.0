@@ -295,6 +295,8 @@ public class PatientChoices extends javax.swing.JFrame {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         patientLog.setMsg(false);
+        messageArea.setText("");
+        
         try {
             patientCtrl.edit(patientLog);
         } catch (Exception ex) {
