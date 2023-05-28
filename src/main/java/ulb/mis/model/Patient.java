@@ -148,7 +148,7 @@ public class Patient implements Serializable {
             return idperson.toString() + " - suffers from : " + idsickness.getNameofsickness();
         }
         else{
-            return idperson.toString();
+            return null;
         }
     }
     
