@@ -32,6 +32,8 @@ public class SymptomsWindow extends javax.swing.JFrame {
     Patient patientLog = null;
     Sickness sickness = null;
     
+    JTextArea textArea = new JTextArea();
+    
     int a = 1;
     int b = 1;
     boolean checkString = true;
@@ -56,12 +58,16 @@ public class SymptomsWindow extends javax.swing.JFrame {
             addBoxPannel(sicknesses.get(i).getSymptom4());
         }
         
+        textArea.setBounds(50, 600, 475, 100); // Définir la position et la taille de la JTextArea
+        textArea.setText("/!\\ please select 4 symptoms or you will not get an accurate result"); 
+        add(textArea);
+        
         JButton button = new JButton("Confirm");
-        button.setBounds(550, 555, 75, 40); // Position et taille du bouton
+        button.setBounds(550, 600, 75, 40); // Position et taille du bouton
         button.setBackground(new Color(255, 204, 102));
         add(button);
         
-        setSize(650, 650); // Définir la taille souhaitée pour la fenêtre
+        setSize(650, 750); // Définir la taille souhaitée pour la fenêtre
         setResizable(false); // Empêcher le redimensionnement de la fenêtre
         
         setPreferredSize(getSize()); // Définir la taille préférée pour la fenêtre
@@ -79,7 +85,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     java.util.logging.Logger.getLogger(SymptomsWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                dispose();
+                //dispose();
             }
         });
         
@@ -135,6 +141,13 @@ public class SymptomsWindow extends javax.swing.JFrame {
                 }
             }
         }
+        if (sick == null){
+            textArea.setText("Your symptoms do not correspond to a sickness in our database.\n" +
+            "Please make an appointment with your doctor. ");   
+        }
+        if (sick != null){
+            textArea.setText("Wait for your doctor to approve your sickness");   
+        }
         
         return sick;
     }
@@ -143,7 +156,7 @@ public class SymptomsWindow extends javax.swing.JFrame {
         
         box.setBounds(50*a, 25*b, 100, 25); // Définissez les coordonnées et la taille de la checkbox
             add(box);
-            if (b!=25){
+            if (b!=23){
                 b= b+2;
             }
             else{

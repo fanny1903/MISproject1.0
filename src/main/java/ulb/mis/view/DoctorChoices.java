@@ -299,6 +299,7 @@ public class DoctorChoices extends javax.swing.JFrame {
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DoctorPathPdfTextField.setText("");
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
 

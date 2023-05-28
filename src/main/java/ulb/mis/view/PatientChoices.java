@@ -286,6 +286,9 @@ public class PatientChoices extends javax.swing.JFrame {
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(DoctorChoices.class.getName()).log(Level.SEVERE, null, ex);
         }
+        messageArea.setText("");
+        PathTextField.setText("");
+        fileNameTextField.setText("");
 
     }//GEN-LAST:event_PathOkButtonActionPerformed
 
